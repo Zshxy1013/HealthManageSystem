@@ -57,17 +57,23 @@ public class DBHelp {
 	    	ResultSet rs=ps.executeQuery();;
 	    	while(rs.next()){
 	    		int id=rs.getInt(1);
+	    		// 电话
 	    	    String tel=rs.getString("tel");
-	    	    String username=rs.getString(3);
+	    	    // 姓名
+	    	    String name=rs.getString(3);
+	    	    // 身份证
 	    	    String idNumber=rs.getString(4);
+	    	    // 密码
 	    	    String pwd=rs.getString(5);
+	    	    // 性别
 	    	    String sex=rs.getString(6);
+	    	    // 住址
 	    	    String address=rs.getString(7);
 
 
 	    	    System.out.print(id+"\t");
 	    	    System.out.print(tel+"\t");	
-	    	    System.out.print(username+"\t");
+	    	    System.out.print(name+"\t");
 	    	    System.out.print(idNumber+"\t");
 	    	    System.out.print(pwd+"\t");
 	    	    System.out.print(sex+"\t\n");
