@@ -59,15 +59,16 @@ public class DBHelp {
 	    		int id=rs.getInt(1);
 	    	    String tel=rs.getString("tel");
 	    	    String username=rs.getString(3);
-	    	    String email=rs.getString(4);
+	    	    String idNumber=rs.getString(4);
 	    	    String pwd=rs.getString(5);
 	    	    String sex=rs.getString(6);
+	    	    String address=rs.getString(7);
 
 
 	    	    System.out.print(id+"\t");
 	    	    System.out.print(tel+"\t");	
 	    	    System.out.print(username+"\t");
-	    	    System.out.print(email+"\t");
+	    	    System.out.print(idNumber+"\t");
 	    	    System.out.print(pwd+"\t");
 	    	    System.out.print(sex+"\t\n");
     	
