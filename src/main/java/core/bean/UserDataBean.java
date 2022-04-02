@@ -7,7 +7,9 @@ public class UserDataBean {
 	 * dbOperateStatusCode 查询定义码
 	 * - 200 成功
 	 * - 400 重复插入
+	 * - 403 无权限
 	 * - 404 未找到数据
+	 * - 503 数据库连接异常
 	 ***/
 	int dbIDCode;
 	int dbOperateStatusCode;
