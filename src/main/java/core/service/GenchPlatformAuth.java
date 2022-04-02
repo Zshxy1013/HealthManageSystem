@@ -250,8 +250,6 @@ public class GenchPlatformAuth {
 				}
 				System.out.println(new String(all, "utf-8"));
 				
-			
-				/*
 				loginURL = "http://ihealth.hq.gench.edu.cn/api/GDaily/pageusertoday";
 				httpURLConnection = (HttpURLConnection) (new URL(loginURL).openConnection());
 				httpURLConnection.setInstanceFollowRedirects(false);
@@ -281,7 +279,6 @@ public class GenchPlatformAuth {
 					}
 					//printCookie(manager.getCookieStore());
 					System.out.println(new String(all, "utf-8"));
-					*/
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
