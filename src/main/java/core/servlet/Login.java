@@ -1,4 +1,4 @@
-package healthManageSystem.servlet;
+package core.servlet;
 
 import jakarta.servlet.http.HttpServlet;
 import java.io.IOException;

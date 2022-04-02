@@ -1,4 +1,4 @@
-package healthManageSystem.util;
+package core.util;
 
 import java.sql.*;
 import org.junit.Test;

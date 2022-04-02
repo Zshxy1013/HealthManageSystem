@@ -1,4 +1,4 @@
-package healthManageSystem.bean;
+package core.bean;
 
 public class UserDataBean {
 	/***

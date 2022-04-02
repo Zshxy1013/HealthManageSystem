@@ -1,4 +1,4 @@
-package healthManageSystem.service;
+package core.service;
 
 public class UserDataUpdate {
 

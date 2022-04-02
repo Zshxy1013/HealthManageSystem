@@ -1,4 +1,4 @@
-package healthManageSystem.dao;
+package core.dao;
 
 public class UserDataDao {
 
