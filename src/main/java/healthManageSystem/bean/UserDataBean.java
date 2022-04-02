@@ -1,8 +1,6 @@
-package healthManageSystem.Dao;
+package healthManageSystem.bean;
 
-import org.eclipse.jdt.internal.compiler.lookup.AnnotationBinding;
-
-public class UserData {
+public class UserDataBean {
 	/***
 	 * 数据库相关
 	 * dbIDCode 数据库序列号
@@ -43,10 +41,19 @@ public class UserData {
 	private String counsellorName;
 	private String counsellorPhone;
 	
-	public UserData(int stuSchoolID, String stuPasswd) {
+	public UserDataBean(int stuSchoolID, String stuPasswd) {
 		super();
 		this.stuSchoolID = Integer.toString(stuSchoolID);
 		this.stuPasswd = stuPasswd;
+		this.updateData();
+	}
+	
+	private void updateData() {
+		// Demo
+		this.setStuName("沈嘉乐");
+		this.setStuSex("M");
+		this.setStuTelephone("13918062552");
+		// 请在数据库里拿取这些信息
 	}
 	
 	public int getDbIDCode() {
@@ -147,8 +154,8 @@ public class UserData {
 				);
 	}
 
-	public static void main() {
-		UserData userData = new UserData(1922518, "沈嘉乐");
+	public static void main(String args[]) {
+		UserDataBean userData = new UserDataBean(1922518, "leo123");
 		userData.debugPrintObject();
 	}
 }
