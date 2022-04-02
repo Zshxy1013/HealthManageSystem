@@ -20,7 +20,7 @@ public class DBHelp {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("数据库连接出现了问题");
+			//System.out.println("数据库连接出现了问题");
 			e.printStackTrace();
 		}
 		return connection;
