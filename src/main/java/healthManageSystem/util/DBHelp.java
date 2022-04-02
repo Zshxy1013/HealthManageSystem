@@ -6,17 +6,17 @@ import org.junit.Test;
 public class DBHelp {
 	
 	public static Connection getConn(){
-		String DBDirverName = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-		String DBUrl = "jdbc:sqlserver://localhost:1433;DatabaseName=healthManage";
-		String DBUser = "sa";
-		String DBPwd = "leo123";
+		String DBDirverName = "com.mysql.jdbc.Driver";
+		String DBUrl = "jdbc:mysql://193.123.249.239:3306/ihealthManage";
+		String DBUser = "ihealthManage";
+		String DBPwd = "fbkpBpPjnD7Gc5WT";
 		Connection connection = null;
 		try {
 			Class.forName(DBDirverName);
 			connection = DriverManager.getConnection(DBUrl, DBUser, DBPwd);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
-			System.out.println("SQLServerDriver没有找到，驱动包加载了吗");
+			System.out.println("MySQL Driver驱动类不存在，请检查驱动jar包是否已经正确放置在lib中");
 			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -56,26 +56,30 @@ public class DBHelp {
 			ps = conn.prepareStatement(sql);
 	    	ResultSet rs=ps.executeQuery();;
 	    	while(rs.next()){
-	    		int id=rs.getInt(1);
-	    		// 电话
-	    	    String tel=rs.getString("tel");
+	    		// 记录编号
+	    		int id=rs.getInt("id");
+	    		//学工号
+	    		String staffID = rs.getString("staffID");
 	    	    // 姓名
-	    	    String name=rs.getString(3);
+	    	    String stuName=rs.getString("name");
+	    		// 电话
+	    	    String tel=rs.getString("telephone");
 	    	    // 身份证
-	    	    String idNumber=rs.getString(4);
+	    	    String idNumber=rs.getString("idcard");
 	    	    // 密码
-	    	    String pwd=rs.getString(5);
+	    	    String pwd=rs.getString("passwd");
 	    	    // 性别
-	    	    String sex=rs.getString(6);
+	    	    String sex=rs.getString("sex");
 	    	    // 住址
-	    	    String address=rs.getString(7);
+	    	    String address=rs.getString("address");
 
 
 	    	    System.out.print(id+"\t");
-	    	    System.out.print(tel+"\t");	
-	    	    System.out.print(name+"\t");
-	    	    System.out.print(idNumber+"\t");
+	    	    System.out.print(staffID+"\t");
+	    	    System.out.print(stuName+"\t");
 	    	    System.out.print(pwd+"\t");
+	    	    System.out.print(tel+"\t");	
+	    	    System.out.print(idNumber+"\t");
 	    	    System.out.print(sex+"\t\n");
     	
 	    	}
