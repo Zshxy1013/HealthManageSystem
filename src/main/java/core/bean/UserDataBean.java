@@ -2,31 +2,31 @@ package core.bean;
 
 public class UserDataBean {
 	/***
-	 * Êı¾İ¿âÏà¹Ø
-	 * dbIDCode Êı¾İ¿âĞòÁĞºÅ
-	 * dbOperateStatusCode ²éÑ¯¶¨ÒåÂë
-	 * - 200 ³É¹¦
-	 * - 400 ÖØ¸´²åÈë
-	 * - 404 Î´ÕÒµ½Êı¾İ
+	 * æ•°æ®åº“ç›¸å…³
+	 * dbIDCode æ•°æ®åº“åºåˆ—å·
+	 * dbOperateStatusCode æŸ¥è¯¢å®šä¹‰ç 
+	 * - 200 æˆåŠŸ
+	 * - 400 é‡å¤æ’å…¥
+	 * - 404 æœªæ‰¾åˆ°æ•°æ®
 	 ***/
 	int dbIDCode;
 	int dbOperateStatusCode;
 	
 	/***
-	 * Ñ§ÉúÊı¾İĞÅÏ¢Ïà¹Ø
-	 * stuSchoolID Ñ§ÉúÑ§ºÅ
-	 * stuName Ñ§ÉúĞÕÃû
-	 * stuPasswd Ñ§ÉúÃÜÂë
-	 * stuTelephone Ñ§ÉúÊÖ»úºÅÂë
-	 * stuSex Ñ§ÉúĞÔ±ğ
-	 * === ÒÔÏÂÎªÊı¾İ¿âÑİÊ¾²¿·Ö²»»ñÈ¡£¬Ê¹ÓÃFakeDataÉú³ÉµÄ¼ÙÊı¾İ ===
-	 * stuIDCard Ñ§ÉúÉí·İÖ¤
-	 * stuAddress Ñ§Éú¼ÒÍ¥×¡Ö·
-	 * parentName ¼Ò³¤ĞÕÃû
-	 * parentPhone ¼Ò³¤µç»°
-	 * counsellorID ¸¨µ¼Ô±¹¤ºÅ
-	 * counsellorName ¸¨µ¼Ô±ĞÕÃû
-	 * counsellorPhone ¸¨µ¼Ô±µç»°
+	 * å­¦ç”Ÿæ•°æ®ä¿¡æ¯ç›¸å…³
+	 * stuSchoolID å­¦ç”Ÿå­¦å·
+	 * stuName å­¦ç”Ÿå§“å
+	 * stuPasswd å­¦ç”Ÿå¯†ç 
+	 * stuTelephone å­¦ç”Ÿæ‰‹æœºå·ç 
+	 * stuSex å­¦ç”Ÿæ€§åˆ«
+	 * === ä»¥ä¸‹ä¸ºæ•°æ®åº“æ¼”ç¤ºéƒ¨åˆ†ä¸è·å–ï¼Œä½¿ç”¨FakeDataç”Ÿæˆçš„å‡æ•°æ® ===
+	 * stuIDCard å­¦ç”Ÿèº«ä»½è¯
+	 * stuAddress å­¦ç”Ÿå®¶åº­ä½å€
+	 * parentName å®¶é•¿å§“å
+	 * parentPhone å®¶é•¿ç”µè¯
+	 * counsellorID è¾…å¯¼å‘˜å·¥å·
+	 * counsellorName è¾…å¯¼å‘˜å§“å
+	 * counsellorPhone è¾…å¯¼å‘˜ç”µè¯
 	 ***/
 	private String stuSchoolID;
 	private String stuName;
@@ -50,10 +50,10 @@ public class UserDataBean {
 	
 	private void updateData() {
 		// Demo
-		this.setStuName("Éò¼ÎÀÖ");
+		this.setStuName("æ²ˆå˜‰ä¹");
 		this.setStuSex("M");
 		this.setStuTelephone("13918062552");
-		// ÇëÔÚÊı¾İ¿âÀïÄÃÈ¡ÕâĞ©ĞÅÏ¢
+		// è¯·åœ¨æ•°æ®åº“é‡Œæ‹¿å–è¿™äº›ä¿¡æ¯
 	}
 	
 	public int getDbIDCode() {
@@ -143,14 +143,14 @@ public class UserDataBean {
 	
 	public void debugPrintObject() {
 		System.out.println(
-				"Êı¾İ¿â²Ù×÷×´Ì¬Âë£º"+ this.dbIDCode + "\n"+
-				"Êı¾İĞòºÅ¡¸½öSelect×´Ì¬ÏÂÓĞĞ§¡¹£º" + this.dbIDCode + "\n"+
-				"¡ºÑ§ÉúĞÅÏ¢ ¡»" + "\n"+
-				"Ñ§ÉúÑ§ºÅ£º" + this.stuSchoolID + "\n"+
-				"Ñ§ÉúĞÕÃû£º" + this.stuName + "\n"+
-				"Ñ§ÉúĞÔ±ğ£º" + this.stuSex + "\n" +
-				"Ñ§ÉúÃÜÂë£º" + this.stuPasswd + "\n" +
-				"Ñ§ÉúÊÖ»úºÅ£º" + this.stuTelephone + "\n"
+				"æ•°æ®åº“æ“ä½œçŠ¶æ€ç ï¼š"+ this.dbIDCode + "\n"+
+				"æ•°æ®åºå·ã€Œä»…SelectçŠ¶æ€ä¸‹æœ‰æ•ˆã€ï¼š" + this.dbIDCode + "\n"+
+				"ã€å­¦ç”Ÿä¿¡æ¯ ã€" + "\n"+
+				"å­¦ç”Ÿå­¦å·ï¼š" + this.stuSchoolID + "\n"+
+				"å­¦ç”Ÿå§“åï¼š" + this.stuName + "\n"+
+				"å­¦ç”Ÿæ€§åˆ«ï¼š" + this.stuSex + "\n" +
+				"å­¦ç”Ÿå¯†ç ï¼š" + this.stuPasswd + "\n" +
+				"å­¦ç”Ÿæ‰‹æœºå·ï¼š" + this.stuTelephone + "\n"
 				);
 	}
 

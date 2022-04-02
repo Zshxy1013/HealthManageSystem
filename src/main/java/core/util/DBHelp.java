@@ -16,11 +16,11 @@ public class DBHelp {
 			connection = DriverManager.getConnection(DBUrl, DBUser, DBPwd);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
-			System.out.println("MySQL DriverÇı¶¯Àà²»´æÔÚ£¬Çë¼ì²éÇı¶¯jar°üÊÇ·ñÒÑ¾­ÕıÈ··ÅÖÃÔÚlibÖĞ");
+			System.out.println("MySQL Driveré©±åŠ¨ç±»ä¸å­˜åœ¨ï¼Œè¯·æ£€æŸ¥é©±åŠ¨jaråŒ…æ˜¯å¦å·²ç»æ­£ç¡®æ”¾ç½®åœ¨libä¸­");
 			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			//System.out.println("Êı¾İ¿âÁ¬½Ó³öÏÖÁËÎÊÌâ");
+			//System.out.println("æ•°æ®åº“è¿æ¥å‡ºç°äº†é—®é¢˜");
 			e.printStackTrace();
 		}
 		return connection;
@@ -42,7 +42,7 @@ public class DBHelp {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("¹Ø±ÕÊı¾İ¿â³öÏÖÁËÎÊÌâ");
+			System.out.println("å…³é—­æ•°æ®åº“å‡ºç°äº†é—®é¢˜");
 			e.printStackTrace();
 		}
 
@@ -56,21 +56,21 @@ public class DBHelp {
 			ps = conn.prepareStatement(sql);
 	    	ResultSet rs=ps.executeQuery();;
 	    	while(rs.next()){
-	    		// ¼ÇÂ¼±àºÅ
+	    		// è®°å½•ç¼–å·
 	    		int id=rs.getInt("id");
-	    		//Ñ§¹¤ºÅ
+	    		//å­¦å·¥å·
 	    		String staffID = rs.getString("staffID");
-	    	    // ĞÕÃû
+	    	    // å§“å
 	    	    String stuName=rs.getString("name");
-	    		// µç»°
+	    		// ç”µè¯
 	    	    String tel=rs.getString("telephone");
-	    	    // Éí·İÖ¤
+	    	    // èº«ä»½è¯
 	    	    String idNumber=rs.getString("idcard");
-	    	    // ÃÜÂë
+	    	    // å¯†ç 
 	    	    String pwd=rs.getString("passwd");
-	    	    // ĞÔ±ğ
+	    	    // æ€§åˆ«
 	    	    String sex=rs.getString("sex");
-	    	    // ×¡Ö·
+	    	    // ä½å€
 	    	    String address=rs.getString("address");
 
 
