@@ -36,7 +36,7 @@ public class UserDataDao {
 					 ps.executeUpdate();
 				}
 			} else {
-				sql = "select name, passwd from users where staffID = ?";
+				//sql = "insert (";
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

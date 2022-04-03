@@ -17,6 +17,7 @@ import core.bean.UserDataBean;
 public class GenchPlatformAuth {
 	final String headerAgent = "User-Agent";
 	final String headerAgentArg = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:98.0) Gecko/20100101 Firefox/98.0";
+	String genchInformationSystemUrl = null;
 	UserDataBean uDataBean = null;
 	CookieManager manager = new CookieManager();
 
@@ -64,7 +65,7 @@ public class GenchPlatformAuth {
 					byteLength.remove(0);
 				}
 				execution = new String(all, "UTF-8").split("name=\"execution\" value=\"")[1].split("\" />")[0];
-				System.out.println("获取execution成功！execution=" + execution);
+				System.out.println("[Log] Auth.casAuthInterface->getExecution Success");
 				formData = formData + "username=" + uDataBean.getStuSchoolID() + "&password=" + uDataBean.getStuPasswd()
 						+ "&execution=" + execution + "&encrypted=true&_eventId=submit&loginType=1";
 				// printCookie(manager.getCookieStore());
@@ -98,21 +99,12 @@ public class GenchPlatformAuth {
 					byteList.remove(0);
 					byteLength.remove(0);
 				}
-				// System.out.print(new String(all, "UTF-8"));
 				if (httpURLConnection.getResponseCode() != 302) {
 					// 模拟登录失败
 					return -1;
 				} 
-				/*
-				System.out.println(httpURLConnection.getHeaderField("Location"));
-
-				// 第三次请求
-				String url = httpURLConnection.getHeaderField("Location");
-				httpURLConnection = (HttpURLConnection) (new URL(url).openConnection());
-				httpURLConnection.setRequestMethod("GET");
-				httpURLConnection.setRequestProperty(headerAgent, headerAgentArg);
-				httpURLConnection.connect();
-			*/
+				System.out.println("[Log] Auth.casAuthInterface->cookieTry Success");
+				this.genchInformationSystemUrl = httpURLConnection.getHeaderField("Location");
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -120,6 +112,11 @@ public class GenchPlatformAuth {
 			return -3;
 		}
 		return 1;
+	}
+	
+	public void genchInformationLogin() {
+		this.getApiResponse(this.genchInformationSystemUrl);
+		System.out.println("[Log] Auth.genchInfoLoginInterface->cookieTry Success");
 	}
 
 	public void iHealthLogin() {
@@ -135,6 +132,7 @@ public class GenchPlatformAuth {
 			httpURLConnection.setRequestProperty(headerAgent, headerAgentArg);
 			httpURLConnection.connect();
 			httpURLConnection.getInputStream();
+			System.out.println("[Log] Auth.iHealth->getCookie(ssohq_jump_703) Success");
 			
 			String cookieVal = httpURLConnection.getHeaderField("Set-Cookie");
 
@@ -147,7 +145,7 @@ public class GenchPlatformAuth {
 			httpURLConnection.setRequestProperty(headerAgent, headerAgentArg);
 			httpURLConnection.connect();
 			httpURLConnection.disconnect();
-			System.out.println(httpURLConnection.getHeaderField("Location"));
+			//System.out.println(httpURLConnection.getHeaderField("Location"));
 
 			loginURL = httpURLConnection.getHeaderField("Location");
 			httpURLConnection = (HttpURLConnection) (new URL(loginURL).openConnection());
@@ -158,7 +156,7 @@ public class GenchPlatformAuth {
 			httpURLConnection.setRequestProperty(headerAgent, headerAgentArg);
 			httpURLConnection.connect();
 			httpURLConnection.disconnect();
-			System.out.println(httpURLConnection.getHeaderField("Location"));
+			//System.out.println(httpURLConnection.getHeaderField("Location"));
 
 			loginURL = httpURLConnection.getHeaderField("Location");
 			httpURLConnection = (HttpURLConnection) (new URL(loginURL).openConnection());
@@ -169,7 +167,7 @@ public class GenchPlatformAuth {
 			httpURLConnection.setRequestProperty(headerAgent, headerAgentArg);
 			httpURLConnection.connect();
 			httpURLConnection.disconnect();
-			System.out.println(httpURLConnection.getHeaderField("Location"));
+			//System.out.println(httpURLConnection.getHeaderField("Location"));
 
 			loginURL = httpURLConnection.getHeaderField("Location");
 			httpURLConnection = (HttpURLConnection) (new URL(loginURL).openConnection());
@@ -179,8 +177,9 @@ public class GenchPlatformAuth {
 			httpURLConnection.setRequestProperty(headerAgent, headerAgentArg);
 			httpURLConnection.connect();
 			cookieVal = httpURLConnection.getHeaderField("Set-Cookie");
-			System.out.println("Cookie：" + cookieVal);
-			System.out.println("建桥i健康登录成功！");
+			//System.out.println("Cookie：" + cookieVal);
+			System.out.println("[Log] Auth.iHealth->getCookie(ssohq_703) Success");
+			System.out.println("[Log] Auth.iHealth->cookieTry Success");
 			// httpURLConnection.getOutputStream().write(formData.getBytes("UTF-8"));
 			httpURLConnection.disconnect();
 		} catch (Exception e) {
@@ -257,16 +256,17 @@ public class GenchPlatformAuth {
 		uDataBean.setStuClass(jsonObject.getString("classname"));
 		// 学生专业
 		uDataBean.setStuMajor(jsonObject.getString("majorname"));
+		System.out.println("[Log] Auth.iHealth->getStudentInformation Success");
 	}
 
 	public static void main(String args[]) {
 		UserDataBean uDataBean = new UserDataBean("1922518", "leo$123456");
 		GenchPlatformAuth auth = new GenchPlatformAuth(uDataBean);
 		if (auth.webAuth() == 1) {
-			System.out.println("建桥信息门户登录成功！");
+			auth.genchInformationLogin();
 			auth.iHealthLogin();
 			auth.getStuData();
-			uDataBean.debugPrintObject();
+			//uDataBean.debugPrintObject();
 		}
 	}
 }
