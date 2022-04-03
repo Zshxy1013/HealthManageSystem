@@ -260,13 +260,13 @@ public class GenchPlatformAuth {
 	}
 
 	public static void main(String args[]) {
-		UserDataBean uDataBean = new UserDataBean("1922518", "leo$123456");
+		UserDataBean uDataBean = new UserDataBean("1922557", "wyw20082009");
 		GenchPlatformAuth auth = new GenchPlatformAuth(uDataBean);
 		if (auth.webAuth() == 1) {
 			auth.genchInformationLogin();
 			auth.iHealthLogin();
 			auth.getStuData();
-			//uDataBean.debugPrintObject();
+			uDataBean.debugPrintObject();
 		}
 	}
 }
