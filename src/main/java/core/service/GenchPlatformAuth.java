@@ -5,13 +5,12 @@ import java.io.InputStream;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
-import java.net.CookieStore;
-import java.net.HttpCookie;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
+
+import com.alibaba.fastjson.JSONObject;
 
 import core.bean.UserDataBean;
 
@@ -103,7 +102,8 @@ public class GenchPlatformAuth {
 				if (httpURLConnection.getResponseCode() != 302) {
 					// 模拟登录失败
 					return -1;
-				}
+				} 
+				/*
 				System.out.println(httpURLConnection.getHeaderField("Location"));
 
 				// 第三次请求
@@ -112,10 +112,7 @@ public class GenchPlatformAuth {
 				httpURLConnection.setRequestMethod("GET");
 				httpURLConnection.setRequestProperty(headerAgent, headerAgentArg);
 				httpURLConnection.connect();
-
-				if (httpURLConnection.getResponseCode() != 200) {
-					return -2;
-				}
+			*/
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -125,33 +122,7 @@ public class GenchPlatformAuth {
 		return 1;
 	}
 
-	public static byte[] hexStringToByte(String hex) {
-		int len = (hex.length() / 2);
-		byte[] result = new byte[len];
-		char[] achar = hex.toCharArray();
-		for (int i = 0; i < len; i++) {
-			int pos = i * 2;
-			result[i] = (byte) (toByte(achar[pos]) << 4 | toByte(achar[pos + 1]));
-		}
-		return result;
-	}
-
-	private static byte toByte(char c) {
-		byte b = (byte) "0123456789abcdef".indexOf(c);
-		return b;
-	}
-
-	/**
-	 * byte数组中取int数值，本方法适用于(低位在后，高位在前)的顺序。和intToBytes2（）配套使用
-	 */
-	public static int bytesToInt2(byte[] src, int offset) {
-		int value;
-		value = (int) (((src[offset] & 0xFF) << 24) | ((src[offset + 1] & 0xFF) << 16) | ((src[offset + 2] & 0xFF) << 8)
-				| (src[offset + 3] & 0xFF));
-		return value;
-	}
-
-	public void loginiHealth() {
+	public void iHealthLogin() {
 		try {
 			// 访问跳转接口
 			String loginURL = "https://ssohq.gench.edu.cn/sso/step?url=https%3A%2F%2Fihealth.hq.gench.edu.cn%2Fmp%2Findex";
@@ -164,21 +135,10 @@ public class GenchPlatformAuth {
 			httpURLConnection.setRequestProperty(headerAgent, headerAgentArg);
 			httpURLConnection.connect();
 			httpURLConnection.getInputStream();
-			// 获得加密Cookie
+			
 			String cookieVal = httpURLConnection.getHeaderField("Set-Cookie");
-			// 解密Cookie
-			// System.out.println(cookieVal);
-			String encrptKey = cookieVal.split("ssohg_703_jump=")[1].split(";")[0];
-			byte[] encrptKeyByte = hexStringToByte(encrptKey);
 
-			// 向左移位 2位与0x0111011做异或运算
-			int decryptKey = bytesToInt2(encrptKeyByte, 0) << 2 ^ 0x0111011;
-			String gToken = Integer.toHexString(decryptKey);
-			httpURLConnection.disconnect();
-			System.out.println("解密后的gToken=" + gToken);
-
-			// 拼装已经解密的gToken并加入参数中
-			loginURL = "https://ssohq.gench.edu.cn/cas/login?gToken=" + gToken;
+			loginURL = "https://ssohq.gench.edu.cn/cas/login";
 			httpURLConnection = (HttpURLConnection) (new URL(loginURL).openConnection());
 			httpURLConnection.setInstanceFollowRedirects(false);
 			httpURLConnection.setDoOutput(true);
@@ -220,7 +180,7 @@ public class GenchPlatformAuth {
 			httpURLConnection.connect();
 			cookieVal = httpURLConnection.getHeaderField("Set-Cookie");
 			System.out.println("Cookie：" + cookieVal);
-			System.out.println("i健康系统登录成功！");
+			System.out.println("建桥i健康登录成功！");
 			// httpURLConnection.getOutputStream().write(formData.getBytes("UTF-8"));
 			httpURLConnection.disconnect();
 		} catch (Exception e) {
@@ -229,7 +189,7 @@ public class GenchPlatformAuth {
 		}
 	}
 	
-	public String getStuDailyHealthRecord(){
+	private String getApiResponse(String apiUrl){
 		byte[] buffer;
 		byte[] all;
 		String res = null;
@@ -237,67 +197,11 @@ public class GenchPlatformAuth {
 		ArrayList<byte[]> byteList;
 		ArrayList<Integer> byteLength;
 		int totalLength = 0;
-		String loginURL = "http://ihealth.hq.gench.edu.cn/api/login/clearSession";
 		HttpURLConnection httpURLConnection;
 		try {
-			httpURLConnection = (HttpURLConnection) (new URL(loginURL).openConnection());
+			httpURLConnection = (HttpURLConnection) (new URL(apiUrl).openConnection());
 			httpURLConnection.setInstanceFollowRedirects(false);
 			httpURLConnection.setDoOutput(true);
-			// httpURLConnection.setRequestProperty("Cookie", cookieVal);
-			httpURLConnection.setRequestMethod("GET");
-			httpURLConnection.setRequestProperty(headerAgent, headerAgentArg);
-			httpURLConnection.connect();
-			httpURLConnection.disconnect();
-	
-			if (httpURLConnection.getResponseCode() == 200) {
-				InputStream inputStream = httpURLConnection.getInputStream();
-				buffer = new byte[1024];
-				byteList = new ArrayList<>();
-				byteLength = new ArrayList<>();
-				while ((length = inputStream.read(buffer)) != -1) {
-					byteList.add(buffer);
-					byteLength.add(length);
-					totalLength += length;
-					buffer = new byte[1024];
-				}
-				httpURLConnection.disconnect();
-				all = new byte[totalLength];
-				totalLength = 0;
-				while (byteList.size() != 0) {
-					System.arraycopy(byteList.get(0), 0, all, totalLength, byteLength.get(0));
-					totalLength += byteLength.get(0);
-					byteList.remove(0);
-					byteLength.remove(0);
-				}
-				System.out.println();
-				res = new String(all, "utf-8");
-			}
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return res;
-	}
-
-	public String getStuData(){
-		byte[] buffer;
-		byte[] all;
-		String res = null;
-		int length;
-		ArrayList<byte[]> byteList;
-		ArrayList<Integer> byteLength;
-		int totalLength = 0;
-		String loginURL = "http://ihealth.hq.gench.edu.cn/api/login/clearSession";
-		HttpURLConnection httpURLConnection;
-		try {
-			httpURLConnection = (HttpURLConnection) (new URL(loginURL).openConnection());
-
-			httpURLConnection.setInstanceFollowRedirects(false);
-			httpURLConnection.setDoOutput(true);
-			// httpURLConnection.setRequestProperty("Cookie", cookieVal);
 			httpURLConnection.setRequestMethod("GET");
 			httpURLConnection.setRequestProperty(headerAgent, headerAgentArg);
 			httpURLConnection.connect();
@@ -335,16 +239,24 @@ public class GenchPlatformAuth {
 		return res;
 	}
 
-	public static boolean checkCookie(CookieStore cookieStore) {
-		List<HttpCookie> listCookie = cookieStore.getCookies();
-		for (HttpCookie httpCookie : listCookie) {
-			// System.out.println("httpCookie : "+httpCookie);
-			String cookieName = httpCookie.getName();
-			if (cookieName == "ssohg_703") {
-				return true;
-			}
-		}
-		return false;
+	public void getStuData(){
+		String url = "http://ihealth.hq.gench.edu.cn/api/login/clearSession";
+		JSONObject jsonObject = JSONObject.parseObject(this.getApiResponse(url));
+		jsonObject = jsonObject.getJSONObject("data").getJSONObject("userInfo");
+		// 学生姓名
+		uDataBean.setStuName(jsonObject.getString("username"));
+		// 学生住址
+		uDataBean.setStuAddress(jsonObject.getString("address"));
+		// 学生电话
+		uDataBean.setStuTelephone(jsonObject.getString("phone"));
+		// 学生身份证
+		uDataBean.setStuIDCard(jsonObject.getString("idcard"));
+		// 学生性别
+		uDataBean.setStuSex(jsonObject.getString("gender"));
+		// 学生班级
+		uDataBean.setStuClass(jsonObject.getString("classname"));
+		// 学生专业
+		uDataBean.setStuMajor(jsonObject.getString("majorname"));
 	}
 
 	public static void main(String args[]) {
@@ -352,8 +264,9 @@ public class GenchPlatformAuth {
 		GenchPlatformAuth auth = new GenchPlatformAuth(uDataBean);
 		if (auth.webAuth() == 1) {
 			System.out.println("建桥信息门户登录成功！");
-			auth.loginiHealth();
-			System.out.println(auth.getStuData());
+			auth.iHealthLogin();
+			auth.getStuData();
+			uDataBean.debugPrintObject();
 		}
 	}
 }

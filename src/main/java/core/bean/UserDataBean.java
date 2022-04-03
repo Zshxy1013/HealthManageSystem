@@ -33,6 +33,8 @@ public class UserDataBean {
 	private String stuSchoolID;
 	private String stuName;
 	private String stuPasswd;
+	private String stuClass;
+	private String stuMajor;
 	private String stuTelephone;
 	private String stuSex;
 	private String stuIDCard;
@@ -42,7 +44,7 @@ public class UserDataBean {
 	private String counsellorID;
 	private String counsellorName;
 	private String counsellorPhone;
-	
+
 	public UserDataBean(String stuSchoolID, String stuPasswd) {
 		super();
 		this.stuSchoolID = stuSchoolID;
@@ -81,6 +83,18 @@ public class UserDataBean {
 	}
 	public void setStuName(String stuName) {
 		this.stuName = stuName;
+	}
+	public String getStuClass() {
+		return stuClass;
+	}
+	public void setStuClass(String stuClass) {
+		this.stuClass = stuClass;
+	}
+	public String getStuMajor() {
+		return stuMajor;
+	}
+	public void setStuMajor(String stuMajor) {
+		this.stuMajor = stuMajor;
 	}
 	public String getStuPasswd() {
 		return stuPasswd;
@@ -149,10 +163,13 @@ public class UserDataBean {
 				"数据序号「仅Select状态下有效」：" + this.dbIDCode + "\n"+
 				"『学生信息 』" + "\n"+
 				"学生学号：" + this.stuSchoolID + "\n"+
-				"学生姓名：" + this.stuName + "\n"+
+				"学生姓名：" + this.stuName + "\n" +
+				"学生专业：" + this.stuMajor + "\n" +
+				"学生班级：" + this.stuClass + "\n" +
 				"学生性别：" + this.stuSex + "\n" +
 				"学生密码：" + this.stuPasswd + "\n" +
-				"学生手机号：" + this.stuTelephone + "\n"
+				"学生手机号：" + this.stuTelephone + "\n" +
+				"学生身份证：" + this.stuIDCard + "\n"
 				);
 	}
 

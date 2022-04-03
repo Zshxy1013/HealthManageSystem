@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
 		GenchPlatformAuth genchPlatformAuth = new GenchPlatformAuth(uData);
 		if (genchPlatformAuth.webAuth() == 1) {
 			// 登录成功
-			UserDataService.updateUserData(uData);
+			UserDataService.updateUserData(genchPlatformAuth, uData);
 		} else {
 			// 登录失败
 			System.out.println("登录失败");
