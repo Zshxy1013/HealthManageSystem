@@ -43,9 +43,9 @@ public class UserDataBean {
 	private String counsellorName;
 	private String counsellorPhone;
 	
-	public UserDataBean(int stuSchoolID, String stuPasswd) {
+	public UserDataBean(String stuSchoolID, String stuPasswd) {
 		super();
-		this.stuSchoolID = Integer.toString(stuSchoolID);
+		this.stuSchoolID = stuSchoolID;
 		this.stuPasswd = stuPasswd;
 		this.updateData();
 	}
@@ -157,7 +157,7 @@ public class UserDataBean {
 	}
 
 	public static void main(String args[]) {
-		UserDataBean userData = new UserDataBean(1922518, "leo123");
+		UserDataBean userData = new UserDataBean("1922518", "leo123");
 		userData.debugPrintObject();
 	}
 }

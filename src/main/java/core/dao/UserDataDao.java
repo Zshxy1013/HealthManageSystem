@@ -9,7 +9,8 @@ import core.bean.UserDataBean;
 import core.util.DBHelp;
 
 public class UserDataDao {
-	public void checkUserData(UserDataBean udata) throws SQLException {
+	
+	public static void checkUserData(UserDataBean udata) {
 		Connection conn = DBHelp.getConn();
 		PreparedStatement ps;
 		if (conn == null) {
@@ -17,13 +18,29 @@ public class UserDataDao {
 			return ;
 		}
 		String sql = "select name, passwd from users where staffID = ?";
-		ps = conn.prepareStatement(sql);
-		ps.setString(1, udata.getStuSchoolID());
-		ResultSet rs = ps.executeQuery();
-		if (rs.next()) {
-			// 存在
-			if (udata.getStuPasswd() != rs.getString("passwd"))
-				System.out.println("密码需要更新");
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, udata.getStuSchoolID());
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				// 存在
+				if (udata.getStuPasswd().equals(rs.getString("passwd")))
+					System.out.println("密码已经是最新");
+				else {
+					System.out.println("密码需要更新"+ udata.getStuPasswd());
+					
+					 sql = "update users set passwd=? where staffID=?";
+					 ps = conn.prepareStatement(sql);
+					 ps.setString(1, udata.getStuPasswd());
+					 ps.setString(2, udata.getStuSchoolID());
+					 ps.executeUpdate();
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
+		
 	}
 }

@@ -70,10 +70,6 @@ public class DBHelp {
 	    	    String pwd=rs.getString("passwd");
 	    	    // 性别
 	    	    String sex=rs.getString("sex");
-	    	    // 住址
-	    	    String address=rs.getString("address");
-
-
 	    	    System.out.print(id+"\t");
 	    	    System.out.print(staffID+"\t");
 	    	    System.out.print(stuName+"\t");
