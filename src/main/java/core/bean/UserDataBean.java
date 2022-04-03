@@ -39,14 +39,11 @@ public class UserDataBean {
 	private String stuSex;
 	private String stuIDCard;
 	private String stuAddress;
-	private String parentName;
-	private String parentPhone;
 	private String counsellorID;
 	private String counsellorName;
 	private String counsellorPhone;
 
 	public UserDataBean(String stuSchoolID, String stuPasswd) {
-		super();
 		this.stuSchoolID = stuSchoolID;
 		this.stuPasswd = stuPasswd;
 		this.updateData();
@@ -125,18 +122,6 @@ public class UserDataBean {
 	}
 	public void setStuAddress(String stuAddress) {
 		this.stuAddress = stuAddress;
-	}
-	public String getParentName() {
-		return parentName;
-	}
-	public void setParentName(String parentName) {
-		this.parentName = parentName;
-	}
-	public String getParentPhone() {
-		return parentPhone;
-	}
-	public void setParentPhone(String parentPhone) {
-		this.parentPhone = parentPhone;
 	}
 	public String getCounsellorID() {
 		return counsellorID;

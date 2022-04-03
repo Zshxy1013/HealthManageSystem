@@ -256,6 +256,10 @@ public class GenchPlatformAuth {
 		uDataBean.setStuClass(jsonObject.getString("classname"));
 		// 学生专业
 		uDataBean.setStuMajor(jsonObject.getString("majorname"));
+		// 辅导员工号
+		uDataBean.setCounsellorID(jsonObject.getString("teacherid"));
+		// 辅导员姓名
+		uDataBean.setCounsellorName(jsonObject.getString("teachername"));
 		System.out.println("[Log] Auth.iHealth->getStudentInformation Success");
 	}
 
