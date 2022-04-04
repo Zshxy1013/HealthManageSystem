@@ -31,6 +31,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		response.setContentType("text/html; charset=UTF-8");
 		String stuID = request.getParameter("stuID");
 		String stuPwd = request.getParameter("stuPwd");
 		UserDataBean uData = new UserDataBean(stuID, stuPwd);
@@ -38,9 +39,10 @@ public class LoginServlet extends HttpServlet {
 		if (genchPlatformAuth.webAuth() == 1) {
 			// 登录成功
 			UserDataService.updateUserData(genchPlatformAuth, uData);
+			response.getWriter().append("登录成功");
 		} else {
 			// 登录失败
-			System.out.println("登录失败");
+			response.getWriter().append("学号或密码错误");
 		}
 	}
 
