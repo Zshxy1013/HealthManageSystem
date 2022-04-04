@@ -13,15 +13,19 @@
 │      └─core
 │          ├─bean
 │          │      UserDataBean.class
+│          │      CookieBean.class
+│          │      AdminBean.class
 │          │      
 │          ├─dao
 │          │      UserDataDao.class
+│          │      CookieCacheDao.class
 │          │      
 │          ├─service
 │          │      UserDataUpdate.class
+│          │      GenchPlatformAuth.class
 │          │      
-│          ├─servlet
-│          │      Login.class
+│          ├─contoller
+│          │      LoginServlet.class
 │          │      
 │          └─util
 │                  DBHelp.class
@@ -32,15 +36,19 @@
         │  └─core
         │      ├─bean
         │      │      UserDataBean.java
+        │      │      CookieBean.java
+        │      │      AdminBean.java
         │      │      
         │      ├─dao
         │      │      UserDataDao.java
+        │      │      CookieCacheDao.java
         │      │      
         │      ├─service
         │      │      UserDataUpdate.java
+        │      │      GenchPlatformAuth.java
         │      │      
-        │      ├─servlet
-        │      │      Login.java
+        │      ├─contoller
+        │      │      LoginServlet.java
         │      │      
         │      └─util
         │              DBHelp.java
