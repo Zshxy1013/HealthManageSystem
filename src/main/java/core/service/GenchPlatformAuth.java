@@ -131,9 +131,22 @@ public class GenchPlatformAuth {
 		// 如果存在Cookie缓存，那么直接试图使用Cookie获取请求
 		if (cookieBean.getStatusCode() == 200) {
 			String res = getApiResponse(url, cookieBean.getSsohqCookie());
+			// 
 			if(res.indexOf("\"suc\":false") != -1) {
 				// Cookie已经失效
 				cookieBean.setCookieValidStatus(-1);
+			}
+			
+			// 建桥i健康防爬虫及DDOS检测，一般会在晚上8点左右启用，8点10分左右结束，只对ssohq来访的用户起效
+			// 这种防爬策略的启用也和页面访问压力有关系，在服务器后端压力很大的时候也会不定期启用，具体的页面样式可以参考下面
+			// <meta http-equiv="refresh" content="0;url=http://ihealth.hq.gench.edu.cn/api/login/clearSession?cbaimohdjmglfkng">
+			if (res.indexOf("0;url=") != -1) {
+				// 提取跳转的URL
+				url = res.split("0;url=")[1].split("\">")[0];
+				System.out.println("检测到反爬虫页面，302跳转的URL=" + url);
+				// 对特殊的302跳转页面请求一次，让系统误以为你是真的浏览器客户端，对你的IP加白，有效期24小时
+				// 需要注意的是，判断你是否应该跳转不是通过Cookie，而是仅根据IP，如果同一IP之前已经加白过，后续换其他账号的Cookie也不会再遇到跳转
+				this.getApiResponse(url, ssohqCookie);
 			}
 		} else {
 			// 没有找到缓存
