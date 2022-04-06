@@ -23,16 +23,19 @@
 	input {
 		margin: 5px;
 	}
+	
 </style>
+<script type="text/javascript" src="js/auth.js"></script>
 </head>
 <body>
 	<h2>登录</h2>
 	<div class="loginForm">
 		<form action="login" method="POST">
-			<input type="text" name="stuID">
-			<input type="password" name="stuPwd">
-			<input type="submit" value="登录">
+			<input type="text" id="stuID" name="stuID">
+			<input type="password" id="stuPwd" name="stuPwd">
+			<input type="submit" onclick="return isLogin()" value="登录">
 		</form>
 	</div>
+	
 </body>
 </html>
