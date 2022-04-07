@@ -42,7 +42,7 @@ public class UserDataDao {
 				ps.close();
 				
 				//插入学生的信息
-				sql="INSERT INTO `ihealthManage`.`users` (`staffID`, `name`, `passwd`, `sex`, `majorName`, `className`, `telephone`, `idcard`, `address`, `counsellorID`, `counsellorName`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+				sql="INSERT INTO `ihealthManage`.`users` (`stuSchoolID`, `stuName`, `stuPasswd`, `stuSex`, `stuMajor`, `stuClass`, `stuTelephone`, `stuIDCard`, `stuAddress`, `counsellorID`, `counsellorName`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 				//登陆i健康
 				genchPlatformAuth.iHealthLogin();
 				//取用户数据都封装在这个方法中了
