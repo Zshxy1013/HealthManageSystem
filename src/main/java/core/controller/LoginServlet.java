@@ -6,10 +6,8 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.alibaba.fastjson.JSON;
-
-import core.bean.AuthData;
 import core.bean.UserDataBean;
 import core.service.GenchPlatformAuth;
 import core.service.UserDataService;
@@ -35,13 +33,12 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("application/json; charset=utf-8");
+		response.setContentType("text/html;charset=utf-8");
 		String stuID = request.getParameter("stuID");
 		String stuPwd = request.getParameter("stuPwd");
 		
-		if (stuID == null || stuPwd ==null || stuID.equals("") || stuPwd.equals("")) {
-			AuthData authData = new AuthData(false, "学号或密码不能为空");
-			response.getWriter().append(JSON.toJSONString(authData));
+		if (stuID==null||stuPwd==null||("").equals(stuID)||("").equals(stuPwd)) {
+			response.getWriter().print("<script>alert(\"用户名或密码不能为空\")</script>");
 			return ;
 		}
 		
@@ -50,13 +47,18 @@ public class LoginServlet extends HttpServlet {
 		if (genchPlatformAuth.webAuth() == 1) {
 			// 登录成功
 			UserDataService.updateUserData(genchPlatformAuth, uData);
-			AuthData authData = new AuthData(true, "登录成功");
+			response.getWriter().print("<script>alert(\"登陆成功\")</script>");
 			
-			response.getWriter().append(JSON.toJSONString(authData));
+			//添加session
+			HttpSession session= request.getSession();
+			session.setAttribute("user", uData);
+			
+			//跳转回主页
 		} else {
 			// 登录失败
-			AuthData authData = new AuthData(false, "学号或密码错误");
-			response.getWriter().append(JSON.toJSONString(authData));
+			response.getWriter().print("<script>alert(\"用户名或密码错误\")</script>");
+			
+			//跳转回登陆界面
 		}
 	}
 

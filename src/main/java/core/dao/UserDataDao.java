@@ -17,7 +17,7 @@ public class UserDataDao {
 			udata.setDbOperateStatusCode(503);
 			return ;
 		}
-		String sql = "select name, passwd from users where staffID = ?";
+		String sql = "select stuName, stuPasswd from users where stuSchoolID = ?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, udata.getStuSchoolID());
@@ -31,7 +31,7 @@ public class UserDataDao {
 				else {
 					// 与数据库不匹配，更新数据库的密码
 					System.out.println("密码需要更新"+ udata.getStuPasswd());
-					 sql = "update users set passwd=? where staffID=?";
+					 sql = "update users set stuPasswd=? where stuSchoolID=?";
 					 ps = conn.prepareStatement(sql);
 					 ps.setString(1, udata.getStuPasswd());
 					 ps.setString(2, udata.getStuSchoolID());

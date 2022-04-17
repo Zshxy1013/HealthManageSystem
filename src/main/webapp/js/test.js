@@ -1,9 +1,9 @@
-function isEmpty() {
- //   var url = "login"
+function isLogin() {
+    var url = "login"
     var stuID = document.getElementById("stuID").value
     var stuPwd = document.getElementById("stuPwd").value
 
-  /*  var postData = "stuID=" + stuID + "&stuPwd=" + stuPwd
+    var postData = "stuID=" + stuID + "&stuPwd=" + stuPwd
 
     fetch(url, {method: "POST", body: new URLSearchParams(postData)})
     .then((response) => response.json())
@@ -18,13 +18,5 @@ function isEmpty() {
             alert(data.msg)
         }
     })
-    return false */
-
-	if(stuID.length==0||stuPwd==0){
-		alert("用户名和密码都不能为空!");
-		return false;
-		}
-	else{
-		return true;
-	}
+    return false
 }

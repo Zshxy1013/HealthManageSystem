@@ -33,7 +33,7 @@
 		<form action="login" method="POST">
 			<input type="text" id="stuID" name="stuID">
 			<input type="password" id="stuPwd" name="stuPwd">
-			<input type="submit" onclick="return isLogin()" value="登录">
+			<input type="submit" onclick="return isEmpty()" value="登录">
 		</form>
 	</div>
 	
