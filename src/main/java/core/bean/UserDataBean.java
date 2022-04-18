@@ -31,6 +31,7 @@ public class UserDataBean {
 	 * counsellorPhone 辅导员电话
 	 ***/
 	private String stuSchoolID;
+	private String stuUuid;
 	private String stuName;
 	private String stuPasswd;
 	private String stuClass;
@@ -60,6 +61,14 @@ public class UserDataBean {
 	public int getDbIDCode() {
 		return dbIDCode;
 	}
+	public String getStuUuid() {
+		return stuUuid;
+	}
+
+	public void setStuUuid(String stuUuid) {
+		this.stuUuid = stuUuid;
+	}
+
 	public void setDbIDCode(int dbIDCode) {
 		this.dbIDCode = dbIDCode;
 	}
@@ -147,6 +156,7 @@ public class UserDataBean {
 				"数据库操作状态码："+ this.dbIDCode + "\n"+
 				"数据序号「仅Select状态下有效」：" + this.dbIDCode + "\n"+
 				"『学生信息 』" + "\n"+
+				"学生uid：" + this.stuUuid + "\n"+
 				"学生学号：" + this.stuSchoolID + "\n"+
 				"学生姓名：" + this.stuName + "\n" +
 				"学生专业：" + this.stuMajor + "\n" +

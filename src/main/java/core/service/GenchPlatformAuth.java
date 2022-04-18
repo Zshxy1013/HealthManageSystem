@@ -350,6 +350,8 @@ public class GenchPlatformAuth {
 		String url = "http://ihealth.hq.gench.edu.cn/api/login/clearSession";
 		JSONObject jsonObject = JSONObject.parseObject(this.getApiResponse(url));
 		jsonObject = jsonObject.getJSONObject("data").getJSONObject("userInfo");
+		//uuid
+		uDataBean.setStuUuid(jsonObject.getString("uuid"));
 		// 学生姓名
 		uDataBean.setStuName(jsonObject.getString("username"));
 		// 学生住址
@@ -362,12 +364,11 @@ public class GenchPlatformAuth {
 		uDataBean.setStuSex(jsonObject.getString("gender"));
 		// 学生班级
 		uDataBean.setStuClass(jsonObject.getString("classname"));
-		// 学生专业
-		uDataBean.setStuMajor(jsonObject.getString("majorname"));
+		// 学生专业 字符串使用split时，对于 ( , | 需要使用 \\| , \\(
+		uDataBean.setStuMajor(jsonObject.getString("majorname").split("\\（")[0]);
 		// 辅导员工号
 		uDataBean.setCounsellorID(jsonObject.getString("teacherid"));
 		// 辅导员姓名
-		uDataBean.setCounsellorName(jsonObject.getString("teachername"));
 		System.out.println("[Log] Auth.iHealth->getStudentInformation Success");
 	}
 

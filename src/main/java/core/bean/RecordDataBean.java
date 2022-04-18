@@ -10,20 +10,18 @@ public class RecordDataBean {
 	private String phone;
 	private String slocationcode;
 	private String slocation;
-	private String xlocationcode;
 	private String locationcode;
 	private String location;
+	private String xlocationcode;
+	private String xlocation;
 	private String fever;
 	private String symptomids;
 	private String diagnosis;
 	private String touchquezhen;
 	private String inschool;
-	
-	
-	
 	public RecordDataBean(String type, String uuid, String userid, String username, String collegename,
-			String classname, String phone, String slocationcode, String slocation, String xlocationcode,
-			String locationcode, String location, String fever, String symptomids, String diagnosis,
+			String classname, String phone, String slocationcode, String slocation, String locationcode,
+			String location, String xlocationcode, String xlocation, String fever, String symptomids, String diagnosis,
 			String touchquezhen, String inschool) {
 		super();
 		this.type = type;
@@ -35,16 +33,16 @@ public class RecordDataBean {
 		this.phone = phone;
 		this.slocationcode = slocationcode;
 		this.slocation = slocation;
-		this.xlocationcode = xlocationcode;
 		this.locationcode = locationcode;
 		this.location = location;
+		this.xlocationcode = xlocationcode;
+		this.xlocation = xlocation;
 		this.fever = fever;
 		this.symptomids = symptomids;
 		this.diagnosis = diagnosis;
 		this.touchquezhen = touchquezhen;
 		this.inschool = inschool;
 	}
-	
 	public String getType() {
 		return type;
 	}
@@ -99,12 +97,6 @@ public class RecordDataBean {
 	public void setSlocation(String slocation) {
 		this.slocation = slocation;
 	}
-	public String getXlocationcode() {
-		return xlocationcode;
-	}
-	public void setXlocationcode(String xlocationcode) {
-		this.xlocationcode = xlocationcode;
-	}
 	public String getLocationcode() {
 		return locationcode;
 	}
@@ -116,6 +108,18 @@ public class RecordDataBean {
 	}
 	public void setLocation(String location) {
 		this.location = location;
+	}
+	public String getXlocationcode() {
+		return xlocationcode;
+	}
+	public void setXlocationcode(String xlocationcode) {
+		this.xlocationcode = xlocationcode;
+	}
+	public String getXlocation() {
+		return xlocation;
+	}
+	public void setXlocation(String xlocation) {
+		this.xlocation = xlocation;
 	}
 	public String getFever() {
 		return fever;
@@ -147,15 +151,7 @@ public class RecordDataBean {
 	public void setInschool(String inschool) {
 		this.inschool = inschool;
 	}
-
-	@Override
-	public String toString() {
-		return "RecordDataBean [type=" + type + ", uuid=" + uuid + ", userid=" + userid + ", username=" + username
-				+ ", collegename=" + collegename + ", classname=" + classname + ", phone=" + phone + ", slocationcode="
-				+ slocationcode + ", slocation=" + slocation + ", xlocationcode=" + xlocationcode + ", locationcode="
-				+ locationcode + ", location=" + location + ", fever=" + fever + ", symptomids=" + symptomids
-				+ ", diagnosis=" + diagnosis + ", touchquezhen=" + touchquezhen + ", inschool=" + inschool + "]";
-	}
+	
 	
 	
 }
