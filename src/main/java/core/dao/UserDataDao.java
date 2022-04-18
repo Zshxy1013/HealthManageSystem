@@ -12,12 +12,13 @@ import core.util.DBHelp;
 public class UserDataDao {
 	
 	public static void checkUserData(GenchPlatformAuth genchPlatformAuth, UserDataBean udata) {
+
 		Connection conn = DBHelp.getConn();
 		if (conn == null) {
 			udata.setDbOperateStatusCode(503);
 			return ;
 		}
-		String sql = "select stuName, stuPasswd from users where stuSchoolID = ?";
+		String sql = "select * from users where stuSchoolID = ?";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, udata.getStuSchoolID());
@@ -25,9 +26,11 @@ public class UserDataDao {
 			// 如果存在用户名，即数据已经入库
 			if (rs.next()) {
 				// 查询用户是否有更新过信息门户的密码
-				if (udata.getStuPasswd().equals(rs.getString("stuPasswd")))
+				if (udata.getStuPasswd().equals(rs.getString("stuPasswd"))) {
 					// 与数据库的匹配，不需要做什么事情
 					System.out.println("密码已经是最新");
+					getUserData(udata, rs);
+				}
 				else {
 					// 与数据库不匹配，更新数据库的密码
 					System.out.println("密码需要更新"+ udata.getStuPasswd());
@@ -84,4 +87,33 @@ public class UserDataDao {
 		
 		
 	}
+
+	public static void getUserData(UserDataBean udata,ResultSet rs) {
+		
+		try {
+			udata.setStuSchoolID(rs.getString(2));
+			udata.setStuName(rs.getString(3));
+			udata.setStuPasswd(rs.getString(4));
+			udata.setStuSex(rs.getString(5));
+			udata.setStuMajor(rs.getString(6));
+			udata.setStuClass(rs.getString(7));
+			udata.setStuTelephone(rs.getString(8));
+			udata.setStuIDCard(rs.getString(9));
+			udata.setStuAddress(rs.getString(10));
+			udata.setCounsellorID(rs.getString(11));
+			udata.setCounsellorName(rs.getString(12));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void main(String args[]) {
+		UserDataBean uData = new UserDataBean("1922557", "wyw20082009");
+		GenchPlatformAuth genchPlatformAuth = new GenchPlatformAuth(uData);
+		checkUserData(genchPlatformAuth, uData);
+	}
 }
+
+

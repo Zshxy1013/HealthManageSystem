@@ -55,10 +55,6 @@ public class LoginServlet extends HttpServlet {
 				return;
 			}
 			
-			//给uData添加相应的数据
-			genchPlatformAuth.iHealthLogin();
-			genchPlatformAuth.getStuData();
-			
 			response.getWriter().print("<script>alert(\"登陆成功\")</script>");
 			
 			//添加session
