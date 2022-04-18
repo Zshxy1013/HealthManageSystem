@@ -46,16 +46,16 @@ public class UserDataBean {
 	public UserDataBean(String stuSchoolID, String stuPasswd) {
 		this.stuSchoolID = stuSchoolID;
 		this.stuPasswd = stuPasswd;
-		this.updateData();
+//		this.updateData();
 	}
 	
-	private void updateData() {
-		// Demo
-		this.setStuName("沈嘉乐");
-		this.setStuSex("M");
-		this.setStuTelephone("13918062552");
-		// 请在数据库里拿取这些信息
-	}
+//	private void updateData() {
+//		// Demo
+//		this.setStuName("沈嘉乐");
+//		this.setStuSex("M");
+//		this.setStuTelephone("13918062552");
+//		// 请在数据库里拿取这些信息
+//	}
 	
 	public int getDbIDCode() {
 		return dbIDCode;

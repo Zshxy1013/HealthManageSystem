@@ -25,7 +25,7 @@ public class UserDataDao {
 			// 如果存在用户名，即数据已经入库
 			if (rs.next()) {
 				// 查询用户是否有更新过信息门户的密码
-				if (udata.getStuPasswd().equals(rs.getString("passwd")))
+				if (udata.getStuPasswd().equals(rs.getString("stuPasswd")))
 					// 与数据库的匹配，不需要做什么事情
 					System.out.println("密码已经是最新");
 				else {

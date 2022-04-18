@@ -25,14 +25,16 @@
 	}
 	
 </style>
-<script type="text/javascript" src="js/auth.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
 </head>
 <body>
 	<h2>登录</h2>
 	<div class="loginForm">
 		<form action="login" method="POST">
-			<input type="text" id="stuID" name="stuID">
-			<input type="password" id="stuPwd" name="stuPwd">
+			<input type="text" id="stuID" name="stuID" onblur="stuIDEmpty()">
+			<div id="stuID_err" style="display:none;color:#FF0000">用户名不能为空</div>
+			<input type="password" id="stuPwd" name="stuPwd" onblur="stuPwdEmpty()">
+				<div id="stuPwd_err" style="display:none;color:#FF0000">密码不能为空</div>
 			<input type="submit" onclick="return isEmpty()" value="登录">
 		</form>
 	</div>

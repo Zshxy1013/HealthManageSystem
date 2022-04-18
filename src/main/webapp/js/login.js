@@ -21,10 +21,37 @@ function isEmpty() {
     return false */
 
 	if(stuID.length==0||stuPwd==0){
-		alert("用户名和密码都不能为空!");
+        alert("用户名和密码都不能为空!");
+        window.location.href="login.jsp"
 		return false;
 		}
 	else{
 		return true;
 	}
+}
+
+function stuIDEmpty(){
+    var stuID = document.getElementById("stuID")
+     var stuID_err = document.getElementById("stuID_err");
+     if(stuID.value.length==0){
+         stuID_err.style.display='';
+     }
+     else{
+         stuID_err.style.display='none';
+     }
+}
+
+function stuPwdEmpty(){
+        var stuPwd_err = document.getElementById("stuPwd_err");
+    var stuPwd = document.getElementById("stuPwd")
+     if(stuPwd.value.length==0){
+         stuPwd_err.style.display='';
+     }
+     else{
+          stuPwd_err.style.display='none';
+     }
+}
+
+function returnStudentIndex(){
+    location.href="studentindex.jsp";
 }

@@ -37,8 +37,10 @@ public class LoginServlet extends HttpServlet {
 		String stuID = request.getParameter("stuID");
 		String stuPwd = request.getParameter("stuPwd");
 		
+	
+		
 		if (stuID==null||stuPwd==null||("").equals(stuID)||("").equals(stuPwd)) {
-			response.getWriter().print("<script>alert(\"用户名或密码不能为空\")</script>");
+			response.getWriter().print("<script>alert(\"用户名或密码不能为空\");window.location.href= \"login.jsp\";</script>");
 			return ;
 		}
 		
@@ -47,6 +49,16 @@ public class LoginServlet extends HttpServlet {
 		if (genchPlatformAuth.webAuth() == 1) {
 			// 登录成功
 			UserDataService.updateUserData(genchPlatformAuth, uData);
+			//数据库连接失败
+			if(uData.getDbOperateStatusCode()==503) {
+				response.getWriter().print("<script>alert(\"数据库连接失败\")</script>");
+				return;
+			}
+			
+			//给uData添加相应的数据
+			genchPlatformAuth.iHealthLogin();
+			genchPlatformAuth.getStuData();
+			
 			response.getWriter().print("<script>alert(\"登陆成功\")</script>");
 			
 			//添加session
@@ -54,11 +66,12 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("user", uData);
 			
 			//跳转回主页
+			response.sendRedirect("studentindex.jsp");
+			
 		} else {
 			// 登录失败
-			response.getWriter().print("<script>alert(\"用户名或密码错误\")</script>");
+			response.getWriter().print("<script>alert(\"用户名或密码错误\");window.location.href = \"login.jsp\";</script>");
 			
-			//跳转回登陆界面
 		}
 	}
 
