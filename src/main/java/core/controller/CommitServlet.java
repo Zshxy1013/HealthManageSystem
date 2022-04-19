@@ -20,7 +20,6 @@ import core.bean.RecordDataBean;
 import core.bean.UserDataBean;
 import core.service.CommitDataService;
 import core.service.GenchPlatformAuth;
-import core.service.test;
 
 /**
  * Servlet implementation class CommitServlet
@@ -71,48 +70,48 @@ public class CommitServlet extends HttpServlet {
 
 		// 向提交接口提交数据
 		String url = "http://ihealth.hq.gench.edu.cn/api/GDaily/add";
-        Map<String,String> map = new HashMap<>();
-        map.put("type", "学生");
-        map.put("uuid", uuid);
-        map.put("userid", userid);
-        map.put("username", username);
-        map.put("phone", phone);
-        map.put("collegename", collegename);
-        map.put("classname", classname);
-        map.put("slocationcode", slocationcode);
-        map.put("slocation", slocation);
-        map.put("locationcode", locationcode);
-        map.put("location", location);
-        map.put("xlocationcode", xlocationcode);
-        map.put("xlocation", xlocation);
-        map.put("fever", fever);
-        map.put("symptomids", symptomids);
-        map.put("diagnosis", diagnosis);
-        map.put("touchquezhen", touchquezhen);
-        map.put("inschool", inschool);
-        
+		Map<String, String> map = new HashMap<>();
+		map.put("type", "学生");
+		map.put("uuid", uuid);
+		map.put("userid", userid);
+		map.put("username", username);
+		map.put("phone", phone);
+		map.put("collegename", collegename);
+		map.put("classname", classname);
+		map.put("slocationcode", slocationcode);
+		map.put("slocation", slocation);
+		map.put("locationcode", locationcode);
+		map.put("location", location);
+		map.put("xlocationcode", xlocationcode);
+		map.put("xlocation", xlocation);
+		map.put("fever", fever);
+		map.put("symptomids", symptomids);
+		map.put("diagnosis", diagnosis);
+		map.put("touchquezhen", touchquezhen);
+		map.put("inschool", inschool);
+
 		HttpSession session = request.getSession();
-		UserDataBean uDataBean = (UserDataBean)session.getAttribute("user");
-        uDataBean = new UserDataBean(uDataBean.getStuSchoolID(), uDataBean.getStuPasswd());
+		UserDataBean uDataBean = (UserDataBean) session.getAttribute("user");
+		uDataBean = new UserDataBean(uDataBean.getStuSchoolID(), uDataBean.getStuPasswd());
 
 		GenchPlatformAuth auth = new GenchPlatformAuth(uDataBean);
 		auth.webAuth();
 		auth.iHealthLogin();
-        String formResult = test.doPostForm(url, map);
-        JSONObject jsonObject = JSONObject.parseObject(formResult);
-        //{"suc":true,"msg":"添加成功","emsg":null,"code":100,"data":"","ct":1650373756}
-        String flag = jsonObject.getString("msg");
+		String formResult = GenchPlatformAuth.doPostForm(url, map);
+		JSONObject jsonObject = JSONObject.parseObject(formResult);
+		// {"suc":true,"msg":"添加成功","emsg":null,"code":100,"data":"","ct":1650373756}
+		String flag = jsonObject.getString("msg");
 
 		// 若成功提交 则插入数据到数据库的record中
-        if("添加成功".equals(flag)) {
-		CommitDataService.UpdateCommitData(recorddatabean);
-		if (recorddatabean.getDbIDCode() == 503) {
-			response.getWriter().print("<script>alert(\"数据库出错了\");window.location.href= \"commit.jsp\";</script>");
-		} else {
-			response.getWriter()
-					.print("<script>alert(\"插入数据库成功\");window.location.href= \"studentindex.jsp\";</script>");
+		if ("添加成功".equals(flag)) {
+			CommitDataService.UpdateCommitData(recorddatabean);
+			if (recorddatabean.getDbIDCode() == 503) {
+				response.getWriter().print("<script>alert(\"数据库出错了\");window.location.href= \"commit.jsp\";</script>");
+			} else {
+				response.getWriter()
+						.print("<script>alert(\"插入数据库成功\");window.location.href= \"studentindex.jsp\";</script>");
+			}
 		}
-        }
 	}
 
 	/**
