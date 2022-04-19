@@ -10,17 +10,23 @@
 <body>
  <div class="container">
 <form action="commit" method="post">
+
 <input type="hidden"  id="uuid" name="uuid" value="${user.stuUuid}"/>
+  <input  type="hidden"  type="text" class="form-control" id="uid" name="uid" value="${user.stuSchoolID}" />
+  <input  type="hidden"  type="text" class="form-control" id="name" name="name" value="${user.stuName}" />
+  	<input type="hidden" class="form-control" name="collegename" id="collegename" value="${user.stuMajor}">
+  	<input type="hidden" class="form-control" id="classname" name="classname" value="${user.stuClass}"/>
+  	
 <label for="uid">学号:</label>
-        <input type="text" class="form-control" id="uid" name="uid" value="${user.stuSchoolID}" disabled/><br>
+        <input type="text"  value="${user.stuSchoolID}" disabled/><br>
         <label for="name">姓名:</label>
-        <input type="text" class="form-control" id="name" name="name" value="${user.stuName}" disabled/><br>
+        <input type="text"  value="${user.stuName}" disabled/><br>
         <label for="mobile">手机号:</label>
         <input type="text" class="form-control" id="mobile" name="mobile" value="${user.stuTelephone}"/><br>
         <label for="collegename">学院：</label>
-		<input class="form-control" name="collegename" id="collegename" value="${user.stuMajor}"disabled><br>
+		<input  value="${user.stuMajor}"disabled><br>
 		<label for="classname">班级：</label>
-		<input type="text" class="form-control" id="classname" name="classname" value="${user.stuClass}"disabled/><br>
+		<input type="text" value="${user.stuClass}"disabled/><br>
 		<label for="classname">辅导员姓名和工号：</label>
 		<input type="text" class="form-control" id="teachername" name="teachername" value="${user.counsellorName}${user.counsellorID}" disabled/><br>
 			<input type="radio" name="status" value="1" onclick="inschool(1)" checked>在校<input

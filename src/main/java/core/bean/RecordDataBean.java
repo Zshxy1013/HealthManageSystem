@@ -1,6 +1,7 @@
 package core.bean;
 
 public class RecordDataBean {
+	int dbIDCode;
 	private String type;
 	private String uuid;
 	private String userid;
@@ -151,6 +152,23 @@ public class RecordDataBean {
 	public void setInschool(String inschool) {
 		this.inschool = inschool;
 	}
+	public int getDbIDCode() {
+		return dbIDCode;
+	}
+	public void setDbIDCode(int dbIDCode) {
+		this.dbIDCode = dbIDCode;
+	}
+	@Override
+	public String toString() {
+		return "RecordDataBean [dbIDCode=" + dbIDCode + ", type=" + type + ", uuid=" + uuid + ", userid=" + userid
+				+ ", username=" + username + ", collegename=" + collegename + ", classname=" + classname + ", phone="
+				+ phone + ", slocationcode=" + slocationcode + ", slocation=" + slocation + ", locationcode="
+				+ locationcode + ", location=" + location + ", xlocationcode=" + xlocationcode + ", xlocation="
+				+ xlocation + ", fever=" + fever + ", symptomids=" + symptomids + ", diagnosis=" + diagnosis
+				+ ", touchquezhen=" + touchquezhen + ", inschool=" + inschool + "]";
+	}
+
+	
 	
 	
 	

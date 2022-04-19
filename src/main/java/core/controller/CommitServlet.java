@@ -1,6 +1,9 @@
 package core.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSON;
 
 import core.bean.RecordDataBean;
+import core.service.CommitDataService;
 
 /**
  * Servlet implementation class CommitServlet
@@ -30,7 +34,7 @@ public class CommitServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		response.setContentType("text/html;charset=utf-8");
 		//POST请求设置request乱码
 		request.setCharacterEncoding("UTF-8");
 		String type="学生";
@@ -52,13 +56,24 @@ public class CommitServlet extends HttpServlet {
 		String touchqueezhen="0";
 		String inschool=request.getParameter("status");
 		
-		
 		RecordDataBean recorddatabean=new RecordDataBean(type, uuid, userid, username, collegename, classname, phone, slocationcode, slocation, locationcode, location, xlocationcode, xlocation, fever, symptomids, diagnosis, touchqueezhen, inschool);
-		String jsonRecorddataben=JSON.toJSONString(recorddatabean);
-		System.out.print(jsonRecorddataben);
+//System.out.println(recorddatabean);
+		
+		
+		
 		//向提交接口提交数据
-		//(jsonRecorddataben,"http://ihealth.hq.gench.edu.cn/api/GDaily/add");
+		//(http://ihealth.hq.gench.edu.cn/api/GDaily/add");
+		
+		
+		
 		//若成功提交 则插入数据到数据库的record中
+		CommitDataService.UpdateCommitData(recorddatabean);
+		if(recorddatabean.getDbIDCode()==503) {
+			response.getWriter().print("<script>alert(\"数据库出错了\");window.location.href= \"commit.jsp\";</script>");
+		}
+		else {
+			response.getWriter().print("<script>alert(\"插入数据库成功\");window.location.href= \"studentindex.jsp\";</script>");
+		}
 	}
 
 	/**
