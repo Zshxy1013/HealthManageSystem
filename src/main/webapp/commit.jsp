@@ -22,7 +22,7 @@
         <label for="name">姓名:</label>
         <input type="text"  value="${user.stuName}" disabled/><br>
         <label for="mobile">手机号:</label>
-        <input type="text" class="form-control" id="mobile" name="mobile" value="${user.stuTelephone}"/><br>
+        <input type="text" class="form-control" id="mobile" name="mobile" onblur="checkPhone()" value="${user.stuTelephone}" /><span id="isPhone" style="display:none;color:#FF0000">请输入正确格式的手机号</span><br>
         <label for="collegename">学院：</label>
 		<input  value="${user.stuMajor}"disabled><br>
 		<label for="classname">班级：</label>
@@ -50,7 +50,7 @@
         <option>新冠类似症状</option>
         </select>
         <br><div class="Result"></div>
-        <button type="submit" class="btn btn-primary btn-block" >提交打卡</button>
+        <button type="submit" class="btn btn-primary btn-block" onclick="return isEmpty()">提交打卡</button>
 
 	
 
@@ -65,6 +65,25 @@ function inschool(statusCode){
 	else{
 		leo.style.display=''
 	}
+}
+
+function isEmpty(){
+   alert("请输入正确手机格式")
+   return checkPhone()
+}
+
+function checkPhone(){
+	var mobile=document.getElementById("mobile").value.trim();
+	var reg= /^[1]\d{10}$/;
+	var flag=reg.test(mobile);
+	if(flag){
+		document.getElementById("isPhone").style.display='none'
+	}
+	else{
+		document.getElementById("isPhone").style.display=''
+	}
+	
+	return flag;
 }
 
 </script>

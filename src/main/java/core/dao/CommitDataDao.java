@@ -14,7 +14,7 @@ public class CommitDataDao {
 			recorddatabean.setDbIDCode(503);
 			return ;
 		}
-		String sql = "INSERT INTO `ihealthManage`.`record` (`type`, `uuid`, `userid`, `username`, `collegename`, `classname`, `phone`, `slocationcode`, `slocation`, `locationcode`, `location`, `xlocationcode`, `xlocation`, `fever`, `symptomids`, `diagnosis`, `touchquezhen`, `inschool`) VALUES ('?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?')";
+		String sql = "INSERT INTO `ihealthManage`.`record` (`type`, `uuid`, `userid`, `username`, `collegename`, `classname`, `phone`, `slocationcode`, `slocation`, `locationcode`, `location`, `xlocationcode`, `xlocation`, `fever`, `symptomids`, `diagnosis`, `touchquezhen`, `inschool`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, recorddatabean.getType());
@@ -35,7 +35,7 @@ public class CommitDataDao {
 			ps.setString(16, recorddatabean.getDiagnosis());
 			ps.setString(17, recorddatabean.getTouchquezhen());
 			ps.setString(18, recorddatabean.getInschool());
-			ps.execute();
+			ps.executeUpdate();
 			conn.close();
 			ps.close();
 		} catch (SQLException e) {
