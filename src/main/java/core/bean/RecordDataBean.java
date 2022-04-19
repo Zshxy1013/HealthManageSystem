@@ -20,6 +20,7 @@ public class RecordDataBean {
 	private String diagnosis;
 	private String touchquezhen;
 	private String inschool;
+
 	public RecordDataBean(String type, String uuid, String userid, String username, String collegename,
 			String classname, String phone, String slocationcode, String slocation, String locationcode,
 			String location, String xlocationcode, String xlocation, String fever, String symptomids, String diagnosis,
@@ -44,120 +45,159 @@ public class RecordDataBean {
 		this.touchquezhen = touchquezhen;
 		this.inschool = inschool;
 	}
+
 	public String getType() {
 		return type;
 	}
+
 	public void setType(String type) {
 		this.type = type;
 	}
+
 	public String getUuid() {
 		return uuid;
 	}
+
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
+
 	public String getUserid() {
 		return userid;
 	}
+
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
+
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String getCollegename() {
 		return collegename;
 	}
+
 	public void setCollegename(String collegename) {
 		this.collegename = collegename;
 	}
+
 	public String getClassname() {
 		return classname;
 	}
+
 	public void setClassname(String classname) {
 		this.classname = classname;
 	}
+
 	public String getPhone() {
 		return phone;
 	}
+
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
 	public String getSlocationcode() {
 		return slocationcode;
 	}
+
 	public void setSlocationcode(String slocationcode) {
 		this.slocationcode = slocationcode;
 	}
+
 	public String getSlocation() {
 		return slocation;
 	}
+
 	public void setSlocation(String slocation) {
 		this.slocation = slocation;
 	}
+
 	public String getLocationcode() {
 		return locationcode;
 	}
+
 	public void setLocationcode(String locationcode) {
 		this.locationcode = locationcode;
 	}
+
 	public String getLocation() {
 		return location;
 	}
+
 	public void setLocation(String location) {
 		this.location = location;
 	}
+
 	public String getXlocationcode() {
 		return xlocationcode;
 	}
+
 	public void setXlocationcode(String xlocationcode) {
 		this.xlocationcode = xlocationcode;
 	}
+
 	public String getXlocation() {
 		return xlocation;
 	}
+
 	public void setXlocation(String xlocation) {
 		this.xlocation = xlocation;
 	}
+
 	public String getFever() {
 		return fever;
 	}
+
 	public void setFever(String fever) {
 		this.fever = fever;
 	}
+
 	public String getSymptomids() {
 		return symptomids;
 	}
+
 	public void setSymptomids(String symptomids) {
 		this.symptomids = symptomids;
 	}
+
 	public String getDiagnosis() {
 		return diagnosis;
 	}
+
 	public void setDiagnosis(String diagnosis) {
 		this.diagnosis = diagnosis;
 	}
+
 	public String getTouchquezhen() {
 		return touchquezhen;
 	}
+
 	public void setTouchquezhen(String touchquezhen) {
 		this.touchquezhen = touchquezhen;
 	}
+
 	public String getInschool() {
 		return inschool;
 	}
+
 	public void setInschool(String inschool) {
 		this.inschool = inschool;
 	}
+
 	public int getDbIDCode() {
 		return dbIDCode;
 	}
+
 	public void setDbIDCode(int dbIDCode) {
 		this.dbIDCode = dbIDCode;
 	}
+
 	@Override
 	public String toString() {
 		return "RecordDataBean [dbIDCode=" + dbIDCode + ", type=" + type + ", uuid=" + uuid + ", userid=" + userid
@@ -168,8 +208,4 @@ public class RecordDataBean {
 				+ ", touchquezhen=" + touchquezhen + ", inschool=" + inschool + "]";
 	}
 
-	
-	
-	
-	
 }

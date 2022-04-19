@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,8 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>welcome${user.stuName} 	<a href="logout">退出</a></h2>
-	当前时间:<div id="time"></div>
+	<h2>
+		welcome${user.stuName} <a href="logout">退出</a>
+	</h2>
+	当前时间:
+	<div id="time"></div>
 	<button id="selectall">查询所有学生打卡记录</button>
 	<button id="escape">查看请假</button>
 </body>
@@ -18,4 +21,4 @@ setInterval(function(){
 	 time.innerHTML = new Date().toLocaleString()+ ' 星期' + '日一二三四五六'.charAt(new Date().getDay());
 },1000)
 </script>
-</html>	
+</html>

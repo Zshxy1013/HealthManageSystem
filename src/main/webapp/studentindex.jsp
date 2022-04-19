@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,8 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>welcome${user.stuName} 	<a href="logout">退出</a></h2>
-	当前时间:<div id="time"></div>
+	<h2>
+		welcome${user.stuName} <a href="logout">退出</a>
+	</h2>
+	当前时间:
+	<div id="time"></div>
 	<button id="check" onclick="commit()">每日健康反馈</button>
 	<button id="selectall">查询个人打卡记录</button>
 	<button id="escape">请假</button>
@@ -24,4 +27,4 @@ function commit(){
 	window.location.href="commit.jsp";
 }
 </script>
-</html>	
+</html>

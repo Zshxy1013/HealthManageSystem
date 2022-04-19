@@ -1,7 +1,10 @@
 package core.service;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
@@ -9,6 +12,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 import com.alibaba.fastjson.JSONObject;
 
@@ -107,7 +113,7 @@ public class GenchPlatformAuth {
 				if (httpURLConnection.getResponseCode() != 302) {
 					// 模拟登录失败
 					return -1;
-				} 
+				}
 				System.out.println("[Log] Auth.casAuthInterface->cookieTry Success");
 				this.genchInformationSystemUrl = httpURLConnection.getHeaderField("Location");
 			}
@@ -118,12 +124,12 @@ public class GenchPlatformAuth {
 		}
 		return 1;
 	}
-	
+
 	public void genchInformationLogin() {
 		this.getApiResponse(this.genchInformationSystemUrl);
 		System.out.println("[Log] Auth.genchInfoLoginInterface->cookieTry Success");
 	}
-	
+
 	public void checkiHealthCookieAvailable() {
 		String url = "http://ihealth.hq.gench.edu.cn/api/login/clearSession";
 		// 查找是否存在Cookie缓存
@@ -131,15 +137,16 @@ public class GenchPlatformAuth {
 		// 如果存在Cookie缓存，那么直接试图使用Cookie获取请求
 		if (cookieBean.getStatusCode() == 200) {
 			String res = getApiResponse(url, cookieBean.getSsohqCookie());
-			// 
-			if(res.indexOf("\"suc\":false") != -1) {
+			//
+			if (res.indexOf("\"suc\":false") != -1) {
 				// Cookie已经失效
 				cookieBean.setCookieValidStatus(-1);
 			}
-			
+
 			// 建桥i健康防爬虫及DDOS检测，一般会在晚上8点左右启用，8点10分左右结束，只对ssohq来访的用户起效
 			// 这种防爬策略的启用也和页面访问压力有关系，在服务器后端压力很大的时候也会不定期启用，具体的页面样式可以参考下面
-			// <meta http-equiv="refresh" content="0;url=http://ihealth.hq.gench.edu.cn/api/login/clearSession?cbaimohdjmglfkng">
+			// <meta http-equiv="refresh"
+			// content="0;url=http://ihealth.hq.gench.edu.cn/api/login/clearSession?cbaimohdjmglfkng">
 			if (res.indexOf("0;url=") != -1) {
 				// 提取跳转的URL
 				url = res.split("0;url=")[1].split("\">")[0];
@@ -153,7 +160,7 @@ public class GenchPlatformAuth {
 			cookieBean.setCookieValidStatus(-2);
 		}
 	}
-	
+
 	public int iHealthLogin() {
 		checkiHealthCookieAvailable();
 		if (cookieBean.getCookieValidStatus() == 0) {
@@ -162,7 +169,7 @@ public class GenchPlatformAuth {
 			System.out.println("[Log] ssohq_703 Cache Cookie is Available. Nothing to do.");
 			return 0;
 		}
-		
+
 		System.out.println("[Log] ssohq_703 Cache Cookie is Unavailable. Try to Get A New One.");
 		// 调用信息门户的登录模块，登录cas，准备工作
 		if (this.webAuth() == -1) {
@@ -171,7 +178,8 @@ public class GenchPlatformAuth {
 		}
 		// 开始登录建桥后勤系统（i健康PC入口都是通过建桥后勤系统登录的）
 		try {
-			// 访问跳转接口，后勤系统收到i健康的登录请求后会Set-Cookie ssohq_jump_703，这个Cookie在统一身份认证cas平台通过后会被ssohq_703正式替代
+			// 访问跳转接口，后勤系统收到i健康的登录请求后会Set-Cookie
+			// ssohq_jump_703，这个Cookie在统一身份认证cas平台通过后会被ssohq_703正式替代
 			String loginURL = "https://ssohq.gench.edu.cn/sso/step?url=https%3A%2F%2Fihealth.hq.gench.edu.cn%2Fmp%2Findex";
 			HttpURLConnection httpURLConnection = (HttpURLConnection) (new URL(loginURL).openConnection());
 			httpURLConnection.setRequestProperty("Host", "ssohq.gench.edu.cn");
@@ -183,9 +191,9 @@ public class GenchPlatformAuth {
 			httpURLConnection.connect();
 			httpURLConnection.getInputStream();
 			System.out.println("[Log] Auth.ssohq->getCookie(ssohq_jump_703) Success");
-			
+
 			String cookieVal = httpURLConnection.getHeaderField("Set-Cookie");
-			
+
 			// 后勤登录接口，申请要登录后勤系统的Ticket，并302跳转到统一身份认证cas平台
 			loginURL = "https://ssohq.gench.edu.cn/cas/login";
 			httpURLConnection = (HttpURLConnection) (new URL(loginURL).openConnection());
@@ -207,8 +215,9 @@ public class GenchPlatformAuth {
 			httpURLConnection.setRequestProperty(headerAgent, headerAgentArg);
 			httpURLConnection.connect();
 			httpURLConnection.disconnect();
-			
-			// 后勤系统登录成功，并且根据已经被cas平台认证的ssohq_jump_703，赋予正式的ssohq_703 Cookie，后续iHealth系统只需要ssohq_703
+
+			// 后勤系统登录成功，并且根据已经被cas平台认证的ssohq_jump_703，赋予正式的ssohq_703
+			// Cookie，后续iHealth系统只需要ssohq_703
 			loginURL = httpURLConnection.getHeaderField("Location");
 			httpURLConnection = (HttpURLConnection) (new URL(loginURL).openConnection());
 			httpURLConnection.setInstanceFollowRedirects(false);
@@ -230,7 +239,7 @@ public class GenchPlatformAuth {
 			System.out.println("[Log] Auth.ssohq->getCookie(ssohq_703) Success");
 			System.out.println("[Log] Auth.iHealth->cookieTry Success");
 			httpURLConnection.disconnect();
-			
+
 			// 将cookie缓存
 			cookieBean.setSsohqCookie(cookieVal);
 			CookieCacheDao.setCookie(cookieBean);
@@ -241,8 +250,8 @@ public class GenchPlatformAuth {
 			return -1;
 		}
 	}
-	
-	private String getApiResponse(String apiUrl, String cookieVal){
+
+	private String getApiResponse(String apiUrl, String cookieVal) {
 		byte[] buffer;
 		byte[] all;
 		String res = null;
@@ -261,7 +270,7 @@ public class GenchPlatformAuth {
 			httpURLConnection.setRequestProperty(headerAgent, headerAgentArg);
 			httpURLConnection.connect();
 			httpURLConnection.disconnect();
-	
+
 			if (httpURLConnection.getResponseCode() == 200) {
 				InputStream inputStream = httpURLConnection.getInputStream();
 				buffer = new byte[1024];
@@ -293,8 +302,8 @@ public class GenchPlatformAuth {
 		}
 		return res;
 	}
-	
-	private String getApiResponse(String apiUrl){
+
+	private String getApiResponse(String apiUrl) {
 		byte[] buffer;
 		byte[] all;
 		String res = null;
@@ -313,7 +322,7 @@ public class GenchPlatformAuth {
 			httpURLConnection.setRequestProperty(headerAgent, headerAgentArg);
 			httpURLConnection.connect();
 			httpURLConnection.disconnect();
-	
+
 			if (httpURLConnection.getResponseCode() == 200) {
 				InputStream inputStream = httpURLConnection.getInputStream();
 				buffer = new byte[1024];
@@ -345,12 +354,121 @@ public class GenchPlatformAuth {
 		}
 		return res;
 	}
+	/**
+	*
+	* @param httpUrl  请求的url
+	* @param param  form表单的参数（key,value形式）
+	* @return
+	*/
+    public static String doPostForm(String httpUrl, Map<String, String> param) {
+    	
+        HttpURLConnection connection = null;
+        InputStream is = null;
+        OutputStream os = null;
+        BufferedReader br = null;
+        String result = null;
+        try {
+            URL url = new URL(httpUrl);
+            // 通过远程url连接对象打开连接
+            connection = (HttpURLConnection) url.openConnection();
+            // 设置连接请求方式
+            connection.setRequestMethod("POST");
+            // 设置连接主机服务器超时时间：15000毫秒
+            connection.setConnectTimeout(15000);
+            // 设置读取主机服务器返回数据超时时间：60000毫秒
+            connection.setReadTimeout(60000);
 
-	public void getStuData(){
+            // 默认值为：false，当向远程服务器传送数据/写数据时，需要设置为true
+            connection.setDoOutput(true);
+            // 默认值为：true，当前向远程服务读取数据时，设置为true，该参数可有可无
+            connection.setDoInput(true);
+            // 设置传入参数的格式:请求参数应该是 name1=value1&name2=value2 的形式。
+            connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            // 设置鉴权信息：Authorization: Bearer da3efcbf-0845-4fe3-8aba-ee040be542c0
+            //connection.setRequestProperty("Authorization", "Bearer da3efcbf-0845-4fe3-8aba-ee040be542c0");
+            // 通过连接对象获取一个输出流
+            os = connection.getOutputStream();
+            // 通过输出流对象将参数写出去/传输出去,它是通过字节数组写出的(form表单形式的参数实质也是key,value值的拼接，类似于get请求参数的拼接)
+            os.write(createLinkString(param).getBytes());
+            // 通过连接对象获取一个输入流，向远程读取
+            if (connection.getResponseCode() == 200) {
+
+                is = connection.getInputStream();
+                // 对输入流对象进行包装:charset根据工作项目组的要求来设置
+                br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+
+                StringBuffer sbf = new StringBuffer();
+                String temp = null;
+                // 循环遍历一行一行读取数据
+                while ((temp = br.readLine()) != null) {
+                    sbf.append(temp);
+                    sbf.append("\r\n");
+                }
+                result = sbf.toString();
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            // 关闭资源
+            if (null != br) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (null != os) {
+                try {
+                    os.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (null != is) {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            // 断开与远程地址url的连接
+            connection.disconnect();
+        }
+        return result;
+    }
+    
+    
+    /**
+     * 把数组所有元素排序，并按照“参数=参数值”的模式用“&”字符拼接成字符串
+     * @param params 需要排序并参与字符拼接的参数组
+     * @return 拼接后字符串
+     */
+    public static String createLinkString(Map<String, String> params) {
+
+        List<String> keys = new ArrayList<String>(params.keySet());
+        Collections.sort(keys);
+
+        StringBuilder prestr = new StringBuilder();
+        for (int i = 0; i < keys.size(); i++) {
+            String key = keys.get(i);
+            String value = params.get(key);
+            if (i == keys.size() - 1) {// 拼接时，不包括最后一个&字符
+                prestr.append(key).append("=").append(value);
+            } else {
+                prestr.append(key).append("=").append(value).append("&");
+            }
+        }
+
+        return prestr.toString();
+    }
+    
+	public void getStuData() {
 		String url = "http://ihealth.hq.gench.edu.cn/api/login/clearSession";
 		JSONObject jsonObject = JSONObject.parseObject(this.getApiResponse(url));
 		jsonObject = jsonObject.getJSONObject("data").getJSONObject("userInfo");
-		//uuid
+		// uuid
 		uDataBean.setStuUuid(jsonObject.getString("uuid"));
 		// 学生姓名
 		uDataBean.setStuName(jsonObject.getString("username"));
@@ -374,10 +492,11 @@ public class GenchPlatformAuth {
 
 	public static void main(String args[]) {
 		UserDataBean uDataBean = new UserDataBean("1922557", "wyw20082009");
-		
+
 		GenchPlatformAuth auth = new GenchPlatformAuth(uDataBean);
-		int loginStatus =  auth.iHealthLogin();
-		if (loginStatus == -1) return;
+		int loginStatus = auth.iHealthLogin();
+		if (loginStatus == -1)
+			return;
 		auth.getStuData();
 		uDataBean.debugPrintObject();
 	}

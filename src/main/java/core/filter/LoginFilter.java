@@ -24,50 +24,49 @@ public class LoginFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		// place your code here
-		
-		HttpServletRequest req=(HttpServletRequest) request;
-		HttpServletResponse res=(HttpServletResponse) response;
-		
-		
-		String[] urls= {"login.jsp","login"};
-		
-		//获取当前的url
+
+		HttpServletRequest req = (HttpServletRequest) request;
+		HttpServletResponse res = (HttpServletResponse) response;
+
+		String[] urls = { "login.jsp", "login" };
+
+		// 获取当前的url
 		String url = req.getRequestURL().toString();
-		
-		//遍历数组 如果url包含数组内容 则不进行拦截
-		for(String u:urls) {
-			if(url.contains(u)) {
+
+		// 遍历数组 如果url包含数组内容 则不进行拦截
+		for (String u : urls) {
+			if (url.contains(u)) {
 				chain.doFilter(request, response);
-				//若不加return，则会继续执行下去，登陆会进行2遍，注册界面在未登录情况下也无法进入。
-			return;	
+				// 若不加return，则会继续执行下去，登陆会进行2遍，注册界面在未登录情况下也无法进入。
+				return;
 			}
 		}
-		
-		//获取登陆成功的session
+
+		// 获取登陆成功的session
 		HttpSession session = req.getSession();
-		UserDataBean user=(UserDataBean) session.getAttribute("user");
-		
-		//若获取到session 则不拦截 否则进行拦截
-		if(user !=null) {
+		UserDataBean user = (UserDataBean) session.getAttribute("user");
+
+		// 若获取到session 则不拦截 否则进行拦截
+		if (user != null) {
 			chain.doFilter(request, response);
-		}else {
+		} else {
 //			req.getRequestDispatcher("login.jsp").forward(req, response);
 			res.setContentType("text/html; charset=utf-8");
 			res.getWriter().print("<script>alert(\"请先登录\");window.location.href = \"login.jsp\";</script>");
-			//res.sendRedirect("login.jsp");
+			// res.sendRedirect("login.jsp");
 		}
 	}
 
-
-    /**
-     * Default constructor. 
-     */
-    public LoginFilter() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor.
+	 */
+	public LoginFilter() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -76,7 +75,6 @@ public class LoginFilter implements Filter {
 		// TODO Auto-generated method stub
 	}
 
-	
 	/**
 	 * @see Filter#init(FilterConfig)
 	 */

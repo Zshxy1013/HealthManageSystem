@@ -12,7 +12,7 @@ public class CommitDataDao {
 		Connection conn = DBHelp.getConn();
 		if (conn == null) {
 			recorddatabean.setDbIDCode(503);
-			return ;
+			return;
 		}
 		String sql = "INSERT INTO `ihealthManage`.`record` (`type`, `uuid`, `userid`, `username`, `collegename`, `classname`, `phone`, `slocationcode`, `slocation`, `locationcode`, `location`, `xlocationcode`, `xlocation`, `fever`, `symptomids`, `diagnosis`, `touchquezhen`, `inschool`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
@@ -40,7 +40,7 @@ public class CommitDataDao {
 			ps.close();
 		} catch (SQLException e) {
 			recorddatabean.setDbIDCode(503);
-			return ;
+			return;
 		}
 	}
 }

@@ -5,18 +5,18 @@ public class CookieBean {
 	int cookieValidStatus;
 	private String staffID;
 	private String ssohqCookie;
-	
+
 	public CookieBean(String staffID) {
 		super();
 		this.staffID = staffID;
 	}
-	
+
 	public CookieBean(String staffID, String ssohqCookie) {
 		super();
 		this.staffID = staffID;
 		this.ssohqCookie = ssohqCookie;
 	}
-	
+
 	public String getStaffID() {
 		return staffID;
 	}
@@ -48,5 +48,5 @@ public class CookieBean {
 	public void setCookieValidStatus(int cookieValidStatus) {
 		this.cookieValidStatus = cookieValidStatus;
 	}
-	
+
 }

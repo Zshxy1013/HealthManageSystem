@@ -7,13 +7,13 @@ import java.sql.ResultSet;
 import core.bean.CookieBean;
 import core.util.DBHelp;
 
-public class CookieCacheDao {	
+public class CookieCacheDao {
 	public static void findCookie(CookieBean cookieBean) {
 		String sql = "select * from cookies  where staffID = ?";
 		Connection conn = DBHelp.getConn();
 		if (conn == null) {
 			cookieBean.setStatusCode(503);
-			return ;
+			return;
 		}
 		try {
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -22,23 +22,23 @@ public class CookieCacheDao {
 			if (rs.next()) {
 				cookieBean.setStatusCode(200);
 				cookieBean.setSsohqCookie(rs.getString("ssohq_703"));
-				//System.out.println(rs.getString("ssohq_703"));
+				// System.out.println(rs.getString("ssohq_703"));
 			}
 			ps.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e);
 			cookieBean.setStatusCode(500);
-		}		
+		}
 	}
-	
+
 	public static void setCookie(CookieBean cookieBean) {
 		if (cookieBean.getStatusCode() != 200) {
 			String sql = "INSERT INTO `ihealthManage`.`cookies` (`staffID`, `ssohq_703`) VALUES (?, ?)";
 			Connection conn = DBHelp.getConn();
 			if (conn == null) {
 				cookieBean.setStatusCode(503);
-				return ;
+				return;
 			}
 			try {
 				PreparedStatement ps = conn.prepareStatement(sql);
@@ -69,10 +69,10 @@ public class CookieCacheDao {
 			}
 		}
 	}
-	
+
 	public static void main(String args[]) {
 		CookieBean cookieBean = new CookieBean("1922557");
 		findCookie(cookieBean);
 	}
-	
+
 }
