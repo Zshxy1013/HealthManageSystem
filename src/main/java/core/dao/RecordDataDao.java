@@ -113,6 +113,25 @@ public class RecordDataDao {
 		}
 	}
 
-	
+	public static void DeleteRecordData(RecordDataBean recordDataBean) {
+		Connection conn = DBHelp.getConn();
+		if (conn == null) {
+			recordDataBean.setDbIDCode(503);
+			return;
+		}
+		String sql = "DELETE FROM `ihealthManage`.`record` WHERE  `id`=?";
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, recordDataBean.getId());
+			ps.executeUpdate();
+			conn.close();
+			ps.close();
+		} catch (SQLException e) {
+			recordDataBean.setDbIDCode(503);
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
 }

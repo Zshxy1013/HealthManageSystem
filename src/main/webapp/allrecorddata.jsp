@@ -35,7 +35,7 @@
         <td>${recordData.xlocation}</td>
         <td>${recordData.inschool}</td>
         <td>${recordData.timestamp}</td>
-       <td><button>删除</button></td>
+       <td><button onclick="deleteRecordData(${recordData.id})">删除</button></td>
     </tr>
     
     </c:forEach>
@@ -48,5 +48,24 @@
 			</c:forEach>
 	<a href="recordpage?curPage=${PageUtils.nextPage}">下一页</a>
 </body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script> 
+
+<script>
+
+<!-->利用axious对删除servlet发送请求 <-->
+function deleteRecordData(id){
+	axios({
+		method:"get",
+		url:"http://localhost:8080/healthManageSystem/delete?id="+id,
+		
+	}).then(function (resp){
+		if(resp.data == "success"){
+			location.href ="recordpage?curPage="+${PageUtils.currentPage}
+		}
+	})
+}
+
+
+</script>
 
 </html>

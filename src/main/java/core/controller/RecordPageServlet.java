@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import core.bean.RecordListBean;
 import core.service.SelectRecordData;
@@ -32,6 +33,7 @@ public class RecordPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		//按完查看button之后一开始curPage是null
 		String currentPage=request.getParameter("curPage");
 	
 		RecordListBean recordDataList=new RecordListBean();

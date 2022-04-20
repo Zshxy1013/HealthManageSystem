@@ -8,4 +8,5 @@ public class SelectRecordData {
 	public static void selectRecordData(RecordListBean recordDataList, PageUtils pageUtils) {
 		RecordDataDao.SelectRecordData(recordDataList,pageUtils);
 	}
+	
 }
