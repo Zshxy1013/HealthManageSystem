@@ -31,16 +31,8 @@ public class UserDataBean {
 	public UserDataBean(String stuSchoolID, String stuPasswd) {
 		this.stuSchoolID = stuSchoolID;
 		this.stuPasswd = stuPasswd;
-//		this.updateData();
 	}
 
-//	private void updateData() {
-//		// Demo
-//		this.setStuName("沈嘉乐");
-//		this.setStuSex("M");
-//		this.setStuTelephone("13918062552");
-//		// 请在数据库里拿取这些信息
-//	}
 
 	public int getDbIDCode() {
 		return dbIDCode;
@@ -162,16 +154,4 @@ public class UserDataBean {
 		this.counsellorPhone = counsellorPhone;
 	}
 
-	public void debugPrintObject() {
-		System.out.println("数据库操作状态码：" + this.dbIDCode + "\n" + "数据序号「仅Select状态下有效」：" + this.dbIDCode + "\n" + "『学生信息 』"
-				+ "\n" + "学生uid：" + this.stuUuid + "\n" + "学生学号：" + this.stuSchoolID + "\n" + "学生姓名：" + this.stuName
-				+ "\n" + "学生专业：" + this.stuMajor + "\n" + "学生班级：" + this.stuClass + "\n" + "学生性别：" + this.stuSex + "\n"
-				+ "学生密码：" + this.stuPasswd + "\n" + "学生手机号：" + this.stuTelephone + "\n" + "学生身份证：" + this.stuIDCard
-				+ "\n");
-	}
-
-	public static void main(String args[]) {
-		UserDataBean userData = new UserDataBean("1922518", "leo123");
-		userData.debugPrintObject();
-	}
 }

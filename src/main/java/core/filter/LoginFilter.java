@@ -54,7 +54,7 @@
 //		if (user != null) {
 //			chain.doFilter(request, response);
 //		} else {
-////			req.getRequestDispatcher("login.jsp").forward(req, response);
+//			req.getRequestDispatcher("login.jsp").forward(req, response);
 //			res.setContentType("text/html; charset=utf-8");
 //			res.getWriter().print("<script>alert(\"请先登录\");window.location.href = \"login.jsp\";</script>");
 //			// res.sendRedirect("login.jsp");

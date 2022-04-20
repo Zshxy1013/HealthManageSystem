@@ -1,7 +1,5 @@
 package core.dao;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import core.bean.CookieBean;
 import core.bean.RecordDataBean;
 import core.bean.RecordListBean;
 import core.util.DBHelp;
@@ -70,12 +67,13 @@ public class RecordDataDao {
 				count = rs.getInt(1);
 			}
 			pageUtils.setTotalCount(count);
+			pageUtils.Init();
 
 			ps.close();
 			rs.close();
 			if (pageUtils.getTotalCount() != 0) {
 				// 将每一条详细数据添加到list中
-				sql = "SELECT * FROM `ihealthManage`.`record` LIMIT ?,?";
+				sql = "SELECT * FROM `ihealthManage`.`record` LIMIT ?,?"; 
 				ps = conn.prepareStatement(sql);
 				ps.setInt(1, pageUtils.getStartIndex());
 				ps.setInt(2, pageUtils.getPageSize());
@@ -106,8 +104,7 @@ public class RecordDataDao {
 			} else {
 				list = null;
 			}
-
-			System.out.println(list + "---" + pageUtils.getTotalCount());
+			recordDataList.setRecordDataList(list);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -115,8 +112,6 @@ public class RecordDataDao {
 		}
 	}
 
-	public static void main(String args[]) {
-		SelectRecordData(new RecordListBean(), new PageUtils(5, null));
-	}
+	
 
 }

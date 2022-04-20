@@ -489,17 +489,8 @@ public class GenchPlatformAuth {
 		// 辅导员工号
 		uDataBean.setCounsellorID(jsonObject.getString("teacherid"));
 		// 辅导员姓名
+		uDataBean.setCounsellorName(jsonObject.getString("teachername"));
 		System.out.println("[Log] Auth.iHealth->getStudentInformation Success");
 	}
 
-	public static void main(String args[]) {
-		UserDataBean uDataBean = new UserDataBean("1922557", "wyw20082009");
-
-		GenchPlatformAuth auth = new GenchPlatformAuth(uDataBean);
-		int loginStatus = auth.iHealthLogin();
-		if (loginStatus == -1)
-			return;
-		auth.getStuData();
-		uDataBean.debugPrintObject();
-	}
 }

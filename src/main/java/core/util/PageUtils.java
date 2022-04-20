@@ -12,6 +12,10 @@ public class PageUtils {
 	public PageUtils(int pageSize, String currentPage) {
 		this.pageSize = pageSize;
 		initCurrentPage(currentPage);
+
+	}
+	
+	public void Init() {
 		initStartIndex();
 		initTotalPages();
 		initPrePage();

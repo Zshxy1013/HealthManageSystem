@@ -7,10 +7,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import core.bean.RecordListBean;
+import core.service.SelectRecordData;
+import core.util.PageUtils;
+
 /**
  * Servlet implementation class RecordPageServlet
  */
-@WebServlet("/RecordPageServlet")
+@WebServlet("/recordpage")
 public class RecordPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -28,8 +32,16 @@ public class RecordPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String currentPage=request.getParameter("curPage");
+	
+		RecordListBean recordDataList=new RecordListBean();
+		PageUtils pageUtils=new PageUtils(1,currentPage);
+		
+		SelectRecordData.selectRecordData(recordDataList,pageUtils);
+		
+		request.setAttribute("RecordListBean", recordDataList);
+		request.setAttribute("PageUtils", pageUtils);
+		request.getRequestDispatcher("allrecorddata.jsp").forward(request, response);
 	}
 
 	/**
