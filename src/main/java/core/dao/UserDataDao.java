@@ -42,6 +42,7 @@ public class UserDataDao {
 			} else {
 				// 关闭之前的查询，防止内存泄漏
 				ps.close();
+				rs.close();
 
 				// 插入学生的信息
 				sql = "INSERT INTO `ihealthManage`.`users` (`stuSchoolID`, `stuUuid`, `stuName`, `stuPasswd`, `stuSex`, `stuMajor`, `stuClass`, `stuTelephone`, `stuIDCard`, `stuAddress`, `counsellorID`, `counsellorName`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";

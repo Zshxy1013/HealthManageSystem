@@ -1,11 +1,11 @@
 package core.service;
 
 import core.bean.RecordDataBean;
-import core.dao.CommitDataDao;
+import core.dao.RecordDataDao;
 
 public class CommitDataService {
 	public static void UpdateCommitData(RecordDataBean recorddatabean) {
-		CommitDataDao.InsertCommitData(recorddatabean);
+		RecordDataDao.InsertCommitData(recorddatabean);
 	}
 
 }
