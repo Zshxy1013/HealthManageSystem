@@ -24,7 +24,7 @@
     </tr>
     <c:forEach var="recordData" items="${RecordListBean.recordDataList}">
 
-    <tr>
+    <tr id="${recordData.id}">
         <td>${recordData.type}</td>
         <td>${recordData.userid}</td>
         <td>${recordData.username}</td>
@@ -60,7 +60,7 @@ function deleteRecordData(id){
 		
 	}).then(function (resp){
 		if(resp.data == "success"){
-			location.href ="recordpage?curPage="+${PageUtils.currentPage}
+			document.getElementById(id).style.display='none';
 		}
 	})
 }
