@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:forEach var="items" items=#{}
+
 </body>
 </html>

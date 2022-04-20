@@ -66,12 +66,12 @@ public class CommitServlet extends HttpServlet {
 		String diagnosis = "0";
 		String touchquezhen = "0";
 		String inschool = request.getParameter("status");
-		Date date = new Date();//获得系统时间. 
+		Date date = new Date();// 获得系统时间.
 		String nowTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
-		Timestamp timestamp = Timestamp.valueOf(nowTime);//把时间转换 
+		Timestamp timestamp = Timestamp.valueOf(nowTime);// 把时间转换
 		RecordDataBean recorddatabean = new RecordDataBean(type, uuid, userid, username, collegename, classname, phone,
 				slocationcode, slocation, locationcode, location, xlocationcode, xlocation, fever, symptomids,
-				diagnosis, touchquezhen, inschool,timestamp);
+				diagnosis, touchquezhen, inschool, timestamp);
 
 		// 向提交接口提交数据
 		String url = "http://ihealth.hq.gench.edu.cn/api/GDaily/add";

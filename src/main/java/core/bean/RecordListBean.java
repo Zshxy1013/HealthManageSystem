@@ -9,9 +9,9 @@ public class RecordListBean {
 	public RecordListBean(ArrayList<RecordDataBean> recordDataList) {
 		this.recordDataList = recordDataList;
 	}
-	
+
 	public RecordListBean() {
-	
+
 	}
 
 	public ArrayList<RecordDataBean> getRecordDataList() {
@@ -21,12 +21,10 @@ public class RecordListBean {
 	public void setRecordDataList(ArrayList<RecordDataBean> recordDataList) {
 		this.recordDataList = recordDataList;
 	}
-	
 
 	@Override
 	public String toString() {
 		return "RecordListBean [recordDataList=" + recordDataList + "]";
 	}
-	
-	
+
 }

@@ -58,53 +58,57 @@ public class RecordDataDao {
 		if (conn == null) {
 			return;
 		}
-		
+
 		String sql = "SELECT COUNT(*) FROM `ihealthManage`.`record`";
 		try {
-			//获取总共的记录
+			// 获取总共的记录
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			int count = 0;
+			ArrayList<RecordDataBean> list = null;
 			if (rs.next()) {
 				count = rs.getInt(1);
 			}
 			pageUtils.setTotalCount(count);
-			
+
 			ps.close();
 			rs.close();
-
-			//将每一条详细数据添加到list中
-			sql = "SELECT * FROM `ihealthManage`.`record` LIMIT ?,?";
-			ps = conn.prepareStatement(sql);
-			ps.setInt(1, pageUtils.getStartIndex());
-			ps.setInt(2, pageUtils.getPageSize());
-			rs = ps.executeQuery();
-			ArrayList<RecordDataBean> list = new ArrayList<RecordDataBean>();
-			while (rs.next()) {
-				String type = rs.getString("type");
-				String userid = rs.getString("userid");
-				String username = rs.getString("username");
-				String collegename = rs.getString("collegename");
-				String classname = rs.getString("classname");
-				String phone = rs.getString("collegename");
-				String slocation = rs.getString("slocation");
-				String location = rs.getString("location");
-				String xlocation = rs.getString("xlocation");
-				String _inschool = rs.getString("inschool");
-				String inschool = null;
-				Timestamp timestamp = rs.getTimestamp("timestamp");
-				if (("1").equals(_inschool)) {
-					inschool = "在校";
-				} else {
-					inschool = "不在校";
+			if (pageUtils.getTotalCount() != 0) {
+				// 将每一条详细数据添加到list中
+				sql = "SELECT * FROM `ihealthManage`.`record` LIMIT ?,?";
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, pageUtils.getStartIndex());
+				ps.setInt(2, pageUtils.getPageSize());
+				rs = ps.executeQuery();
+				list = new ArrayList<RecordDataBean>();
+				while (rs.next()) {
+					String type = rs.getString("type");
+					String userid = rs.getString("userid");
+					String username = rs.getString("username");
+					String collegename = rs.getString("collegename");
+					String classname = rs.getString("classname");
+					String phone = rs.getString("collegename");
+					String slocation = rs.getString("slocation");
+					String location = rs.getString("location");
+					String xlocation = rs.getString("xlocation");
+					String _inschool = rs.getString("inschool");
+					String inschool = null;
+					Timestamp timestamp = rs.getTimestamp("timestamp");
+					if (("1").equals(_inschool)) {
+						inschool = "在校";
+					} else {
+						inschool = "不在校";
+					}
+					RecordDataBean databean = new RecordDataBean(type, userid, username, collegename, classname, phone,
+							slocation, location, xlocation, inschool, timestamp);
+					list.add(databean);
 				}
-				RecordDataBean databean = new RecordDataBean(type, userid, username, collegename, classname, phone,
-						slocation, location, xlocation, inschool, timestamp);
-				list.add(databean);
+			} else {
+				list = null;
 			}
-			
+
 			System.out.println(list + "---" + pageUtils.getTotalCount());
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -112,7 +116,7 @@ public class RecordDataDao {
 	}
 
 	public static void main(String args[]) {
-		SelectRecordData(new RecordListBean(),new PageUtils(5,null));
+		SelectRecordData(new RecordListBean(), new PageUtils(5, null));
 	}
 
 }
