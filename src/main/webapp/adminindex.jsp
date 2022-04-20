@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h2>
-		welcome${user.stuName} <a href="logout">退出</a>
+		welcome ${admin.adminID} <a href="logout">退出</a>
 	</h2>
 	当前时间:
 	<div id="time"></div>

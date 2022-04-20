@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import core.bean.AdminBean;
 import core.bean.UserDataBean;
+import core.dao.UserDataDao;
 import core.service.GenchPlatformAuth;
 import core.service.UserDataService;
 
@@ -50,8 +52,7 @@ public class LoginServlet extends HttpServlet {
 			UserDataService.updateUserData(genchPlatformAuth, uData);
 			// 数据库连接失败
 			if (uData.getDbOperateStatusCode() == 503) {
-				response.getWriter().print("<script>alert(\"数据库连接失败\")</script>");
-				return;
+				response.getWriter().print("<script>alert(\"数据库连接失败\");window.location.href = \"login.jsp\";</script>");
 			}
 
 			response.getWriter().print("<script>alert(\"登陆成功\")</script>");
@@ -64,9 +65,26 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect("studentindex.jsp");
 
 		} else {
+			AdminBean aData=new AdminBean(stuID,stuPwd);
+			UserDataDao.checkAdminData(aData);
+			if(aData.getDbIDCode()==503) {
+				response.getWriter().print("<script>alert(\"数据库连接失败\");window.location.href = \"login.jsp\";</script>");
+			
+			}
+			else if(aData.getDbIDCode()==200) {
+				response.getWriter().print("<script>alert(\"登陆成功\")</script>");
+
+				// 添加session
+				HttpSession session = request.getSession();
+				session.setAttribute("admin", aData);
+
+				// 跳转回主页
+				response.sendRedirect("adminindex.jsp");
+			}
+			else {
 			// 登录失败
 			response.getWriter().print("<script>alert(\"用户名或密码错误\");window.location.href = \"login.jsp\";</script>");
-
+			}
 		}
 	}
 

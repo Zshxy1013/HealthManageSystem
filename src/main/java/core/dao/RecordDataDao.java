@@ -80,6 +80,7 @@ public class RecordDataDao {
 				rs = ps.executeQuery();
 				list = new ArrayList<RecordDataBean>();
 				while (rs.next()) {
+					int id=rs.getInt("id");
 					String type = rs.getString("type");
 					String userid = rs.getString("userid");
 					String username = rs.getString("username");
@@ -97,7 +98,7 @@ public class RecordDataDao {
 					} else {
 						inschool = "不在校";
 					}
-					RecordDataBean databean = new RecordDataBean(type, userid, username, collegename, classname, phone,
+					RecordDataBean databean = new RecordDataBean(id,type, userid, username, collegename, classname, phone,
 							slocation, location, xlocation, inschool, timestamp);
 					list.add(databean);
 				}

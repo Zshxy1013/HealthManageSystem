@@ -20,6 +20,7 @@
         <th>区</th>
         <th>状态</th>
         <th>打卡时间</th>
+        <th>操作</th>
     </tr>
     <c:forEach var="recordData" items="${RecordListBean.recordDataList}">
 
@@ -34,7 +35,7 @@
         <td>${recordData.xlocation}</td>
         <td>${recordData.inschool}</td>
         <td>${recordData.timestamp}</td>
-       
+       <td><button>删除</button></td>
     </tr>
     
     </c:forEach>
@@ -47,4 +48,5 @@
 			</c:forEach>
 	<a href="recordpage?curPage=${PageUtils.nextPage}">下一页</a>
 </body>
+
 </html>

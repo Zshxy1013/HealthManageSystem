@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class RecordDataBean {
 	int dbIDCode;
+	private int id;
 	private String type;
 	private String uuid;
 	private String userid;
@@ -54,9 +55,9 @@ public class RecordDataBean {
 		this.timestamp = timestamp;
 	}
 
-	public RecordDataBean(String type, String userid, String username, String collegename, String classname,
+	public RecordDataBean(int id,String type, String userid, String username, String collegename, String classname,
 			String phone, String slocation, String location, String xlocation, String inschool, Timestamp timestamp) {
-		super();
+		this.id=id;
 		this.type = type;
 
 		this.userid = userid;
@@ -234,14 +235,25 @@ public class RecordDataBean {
 		this.timestamp = timestamp;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
-		return "RecordDataBean [dbIDCode=" + dbIDCode + ", type=" + type + ", uuid=" + uuid + ", userid=" + userid
-				+ ", username=" + username + ", collegename=" + collegename + ", classname=" + classname + ", phone="
-				+ phone + ", slocationcode=" + slocationcode + ", slocation=" + slocation + ", locationcode="
-				+ locationcode + ", location=" + location + ", xlocationcode=" + xlocationcode + ", xlocation="
-				+ xlocation + ", fever=" + fever + ", symptomids=" + symptomids + ", diagnosis=" + diagnosis
-				+ ", touchquezhen=" + touchquezhen + ", inschool=" + inschool + ", timestamp=" + timestamp + "]";
+		return "RecordDataBean [dbIDCode=" + dbIDCode + ", id=" + id + ", type=" + type + ", uuid=" + uuid + ", userid="
+				+ userid + ", username=" + username + ", collegename=" + collegename + ", classname=" + classname
+				+ ", phone=" + phone + ", slocationcode=" + slocationcode + ", slocation=" + slocation
+				+ ", locationcode=" + locationcode + ", location=" + location + ", xlocationcode=" + xlocationcode
+				+ ", xlocation=" + xlocation + ", fever=" + fever + ", symptomids=" + symptomids + ", diagnosis="
+				+ diagnosis + ", touchquezhen=" + touchquezhen + ", inschool=" + inschool + ", timestamp=" + timestamp
+				+ "]";
 	}
+
+	
 
 }

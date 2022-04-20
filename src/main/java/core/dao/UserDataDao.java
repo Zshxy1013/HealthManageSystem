@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import core.bean.AdminBean;
 import core.bean.UserDataBean;
 import core.service.GenchPlatformAuth;
 import core.util.DBHelp;
@@ -29,6 +30,7 @@ public class UserDataDao {
 				if (udata.getStuPasswd().equals(rs.getString("stuPasswd"))) {
 					// 与数据库的匹配，不需要做什么事情
 					System.out.println("密码已经是最新");
+					//为了使session成功添加到页面
 					getUserData(udata, rs);
 				} else {
 					// 与数据库不匹配，更新数据库的密码
@@ -111,9 +113,30 @@ public class UserDataDao {
 
 	}
 
-	public static void main(String args[]) {
-		UserDataBean uData = new UserDataBean("1922557", "wyw20082009");
-		GenchPlatformAuth genchPlatformAuth = new GenchPlatformAuth(uData);
-		checkUserData(genchPlatformAuth, uData);
+	public static void checkAdminData(AdminBean aDataBean) {
+		// TODO Auto-generated method stub
+		Connection conn = DBHelp.getConn();
+		if (conn == null) {
+			aDataBean.setDbIDCode(503);
+			return;
+		}
+		String sql = "SELECT * FROM `ihealthManage`.`admin` WHERE staffID=? and passwd=?";
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, aDataBean.getAdminID());
+			ps.setString(2, aDataBean.getAdminPasswd());
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {// 登陆信息正确
+				aDataBean.setDbIDCode(200);
+		} 
+			else {
+				aDataBean.setDbIDCode(404);
+			}
+
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			aDataBean.setDbIDCode(503);
+			e.printStackTrace();
+		}
 	}
 }
