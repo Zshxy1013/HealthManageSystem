@@ -31,7 +31,12 @@ public class DeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html;charset=utf-8");
-		int id = Integer.parseInt(request.getParameter("id"));
+		String _id = request.getParameter("id");
+		if(_id==null || _id.equals("")) {
+			response.getWriter().print("<script>alert(\"非法访问\");window.location.href = \"recordpage\";</script>");
+		}
+		else {
+		int id = Integer.parseInt(_id);
 		RecordDataBean recordDataBean=new RecordDataBean();
 		recordDataBean.setId(id);
 		
@@ -42,6 +47,7 @@ public class DeleteServlet extends HttpServlet {
 		else {
 		response.getWriter().print("success");
 		}
+	}
 	}
 
 	/**
