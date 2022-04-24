@@ -37,7 +37,7 @@ public class RecordPageServlet extends HttpServlet {
 		String currentPage=request.getParameter("curPage");
 	
 		RecordListBean recordDataList=new RecordListBean();
-		PageUtils pageUtils=new PageUtils(2,currentPage);
+		PageUtils pageUtils=new PageUtils(10,currentPage);
 		
 		SelectRecordData.selectRecordData(recordDataList,pageUtils);
 		

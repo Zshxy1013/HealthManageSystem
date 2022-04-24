@@ -13,12 +13,18 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 import core.bean.CookieBean;
+import core.bean.LeaveBean;
+import core.bean.LeaveListBean;
 import core.bean.UserDataBean;
 import core.dao.CookieCacheDao;
 
@@ -493,4 +499,23 @@ public class GenchPlatformAuth {
 		System.out.println("[Log] Auth.iHealth->getStudentInformation Success");
 	}
 
+	//从学校请假接口获取数据
+	public LeaveListBean getLeaveData(String i) {
+		String url = "http://ihealth.hq.gench.edu.cn/api/LAskleaveAp/pagebyme";
+		Map<String, String> map = new HashMap<>();
+		map.put("page", i);
+		map.put("size", "3");
+
+		String formResult = GenchPlatformAuth.doPostForm(url, map);
+		return(JSON.parseObject(formResult, LeaveListBean.class));
+	}
+	
+	public static void main(String args[]) {
+		UserDataBean uDataBean = new UserDataBean("1922538", "Zs165301");
+		
+		GenchPlatformAuth auth = new GenchPlatformAuth(uDataBean);
+		auth.iHealthLogin();
+		
+		System.out.println(auth.getLeaveData("1"));
+	}
 }

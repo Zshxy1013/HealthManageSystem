@@ -14,7 +14,7 @@
 	<div id="time"></div>
 	<button id="check" onclick="commit()">每日健康反馈</button>
 	<button id="selectall">查询个人打卡记录</button>
-	<button id="escape">请假</button>
+	<button id="escape" onclick="leave()">请假</button>
 	<button id="escape">查看出校码</button>
 </body>
 <script>
@@ -25,6 +25,9 @@ setInterval(function(){
 
 function commit(){
 	window.location.href="commit.jsp";
+}
+function leave(){
+	location.href="leave?curPage=1";
 }
 </script>
 </html>

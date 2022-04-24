@@ -55,4 +55,3 @@ function stuPwdEmpty(){
 function returnStudentIndex(){
     location.href="login.jsp";
 }
-

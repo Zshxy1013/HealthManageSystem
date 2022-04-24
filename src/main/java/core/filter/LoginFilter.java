@@ -42,7 +42,6 @@ public class LoginFilter implements Filter {
 		for (String u : urls) {
 			if (url.contains(u)) {
 				chain.doFilter(request, response);
-				// 若不加return，则会继续执行下去，登陆会进行2遍，注册界面在未登录情况下也无法进入。
 				return;
 			}
 		}

@@ -21,6 +21,7 @@ public class UserDataDao {
 		}
 		String sql = "select * from users where stuSchoolID = ?";
 		try {
+			genchPlatformAuth.iHealthLogin();
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, udata.getStuSchoolID());
 			ResultSet rs = ps.executeQuery();
@@ -48,8 +49,6 @@ public class UserDataDao {
 
 				// 插入学生的信息
 				sql = "INSERT INTO `ihealthManage`.`users` (`stuSchoolID`, `stuUuid`, `stuName`, `stuPasswd`, `stuSex`, `stuMajor`, `stuClass`, `stuTelephone`, `stuIDCard`, `stuAddress`, `counsellorID`, `counsellorName`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-				// 登陆i健康
-				genchPlatformAuth.iHealthLogin();
 				// 取用户数据都封装在这个方法中了
 				genchPlatformAuth.getStuData();
 

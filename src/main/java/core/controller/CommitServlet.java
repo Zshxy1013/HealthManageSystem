@@ -99,10 +99,8 @@ public class CommitServlet extends HttpServlet {
 		UserDataBean uDataBean = (UserDataBean) session.getAttribute("user");
 		uDataBean = new UserDataBean(uDataBean.getStuSchoolID(), uDataBean.getStuPasswd());
 
-		GenchPlatformAuth auth = new GenchPlatformAuth(uDataBean);
-		auth.webAuth();
-		auth.iHealthLogin();
 		String formResult = GenchPlatformAuth.doPostForm(url, map);
+		//把字符串转为json
 		JSONObject jsonObject = JSONObject.parseObject(formResult);
 		// {"suc":true,"msg":"添加成功","emsg":null,"code":100,"data":"","ct":1650373756}
 		String flag = jsonObject.getString("msg");
@@ -116,6 +114,9 @@ public class CommitServlet extends HttpServlet {
 				response.getWriter()
 						.print("<script>alert(\"打卡成功\");window.location.href= \"studentindex.jsp\";</script>");
 			}
+		}
+		else {
+			response.getWriter().print("<script>alert(\"打卡系统出错了\");window.location.href= \"commit.jsp\";</script>");
 		}
 	}
 
