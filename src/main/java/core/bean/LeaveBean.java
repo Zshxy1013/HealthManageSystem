@@ -415,7 +415,7 @@ public class LeaveBean {
 
 	@Override
 	public String toString() {
-		return "LeaveBean [id=" + id + ", ticketid=" + ticketid + ", userid=" + userid + ", username=" + username
+		return "LeaveBean [id=" +"\n"+ id + ", ticketid=" + ticketid + ", userid=" + userid + ", username=" + username
 				+ ", classid=" + classid + ", classname=" + classname + ", majorid=" + majorid + ", majorname="
 				+ majorname + ", collegeid=" + collegeid + ", collegename=" + collegename + ", teachername="
 				+ teachername + ", teacherphone=" + teacherphone + ", linkname=" + linkname + ", linkphone=" + linkphone

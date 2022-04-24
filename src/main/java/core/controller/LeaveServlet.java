@@ -31,13 +31,11 @@ public class LeaveServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 学生查看自己的请假记录
+		// 学生查看自己的请假记录	
 		response.setContentType("text/html;charset=utf-8");
 		String curPage = request.getParameter("curPage");
-		if(curPage==null || curPage.equals("")) {
-			response.getWriter().print("<script>alert(\"非法访问\");window.location.href = \"studentindex.jsp\";</script>");
-		}
-		else {
+		String type=request.getParameter("type");
+	try {
 		HttpSession session = request.getSession();
 		UserDataBean uDataBean = (UserDataBean) session.getAttribute("user");
 		uDataBean = new UserDataBean(uDataBean.getStuSchoolID(), uDataBean.getStuPasswd());
@@ -46,10 +44,33 @@ public class LeaveServlet extends HttpServlet {
 		auth.iHealthLogin();
 		
 		LeaveListBean leavelistbean = auth.getLeaveData(curPage);
-		request.setAttribute("curPage", curPage);
+		leavelistbean.setCurrentPage(Integer.parseInt(curPage));
+		
+		int lastpage=(int)(leavelistbean.getTotal()/3);
+		
+		leavelistbean.getRecords().get(0).setId(0);
+		leavelistbean.getRecords().get(1).setId(1);
+		leavelistbean.getRecords().get(2).setId(2);
+		request.setAttribute("LastPage", lastpage);
 		request.setAttribute("LeaveListBean", leavelistbean);
+		if(type.equals("1")) {
+		
 		request.getRequestDispatcher("checkleave.jsp").forward(request, response);
 		}
+		else if(type.equals("2")) {
+		String _id = request.getParameter("id");
+		int id=Integer.parseInt(_id);
+		request.setAttribute("id", id);
+			request.getRequestDispatcher("checkmoreleave.jsp").forward(request, response);
+		}
+		else {
+			response.getWriter().print("<script>alert(\"非法访问\");window.location.href = \"studentindex.jsp\";</script>");
+		}
+		
+	} catch (Exception e) {
+		response.getWriter().print("<script>alert(\"非法访问\");window.location.href = \"studentindex.jsp\";</script>");
+	}
+	
 	
 		
 		

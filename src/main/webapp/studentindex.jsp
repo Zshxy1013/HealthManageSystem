@@ -27,7 +27,7 @@ function commit(){
 	window.location.href="commit.jsp";
 }
 function leave(){
-	location.href="leave?curPage=1";
+	location.href="leave?curPage=1&type=1";
 }
 </script>
 </html>

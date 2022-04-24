@@ -22,7 +22,7 @@ setInterval(function(){
 },1000)
 
 function selectall(){
-	window.location.href="recordpage"
+	window.location.href="recordpage?curPage=1"
 }
 
 </script>

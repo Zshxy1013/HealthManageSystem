@@ -15,7 +15,7 @@
 <div>
 离校时间:${record.outtime}
 <br>
-出校时间:${record.intime}
+返校时间:${record.intime}
 </div>
 <div>
 是否离沪:<c:if test="${record.shanghai==1}">否</c:if>
@@ -30,22 +30,33 @@
 <div>
 申请时间:${record.cdt}
 </div>
-<button onclick="moredata()">详情</button>
+<button onclick="moredata(${LeaveListBean.currentPage},${record.id})">详情</button>
 </c:forEach>
 
 <div>
-<c:if test="${curPage == 1}">
-<a href="leave?curPage=1">上一页</a>
+<a href="leave?curPage=1&type=1">第一页</a>
+<c:if test="${LeaveListBean.currentPage == 1}">
+<a href="leave?curPage=1&type=1">上一页</a>
 </c:if>
-<c:if test="${curPage != 1}">
-<a href="leave?curPage=${curPage-1}">上一页</a>
+<c:if test="${LeaveListBean.currentPage != 1}">
+<a href="leave?curPage=${LeaveListBean.currentPage-1}&type=1">上一页</a>
 </c:if>
-<a href="leave?curPage=${curPage+1}">下一页</a>
+
+
+<c:if test="${LeaveListBean.currentPage == LastPage}">
+<a href="leave?curPage=${LastPage}&type=1">下一页</a>
+</c:if>
+<c:if test="${LeaveListBean.currentPage != LastPage}">
+<a href="leave?curPage=${LeaveListBean.currentPage+1}&type=1">下一页</a>
+</c:if>
+<a href="leave?curPage=${LastPage}&type=1">最后一页</a>
+
+
 </div>
 </body>
 <script>
-function moredata(){
-	location.href=""
+function moredata(currentPage,id){
+	location.href="leave?curPage="+currentPage+"&type=2&id="+id
 }
 </script>
 </html>

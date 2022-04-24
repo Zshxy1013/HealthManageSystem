@@ -41,12 +41,14 @@
     </c:forEach>
 
 </table>
+<a href="recordpage?curPage=1">第一页</a>
 		<a href="recordpage?curPage=${PageUtils.prePage}">上一页</a>
 			<c:forEach var="i" begin="1" end="${PageUtils.totalPages}">
 
 				<a  href="recordpage?curPage=${i}">${i}</a>
 			</c:forEach>
 	<a href="recordpage?curPage=${PageUtils.nextPage}">下一页</a>
+	<a href="recordpage?curPage=${PageUtils.totalPages}">最后一页</a>
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script> 
 

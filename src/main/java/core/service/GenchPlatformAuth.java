@@ -516,6 +516,6 @@ public class GenchPlatformAuth {
 		GenchPlatformAuth auth = new GenchPlatformAuth(uDataBean);
 		auth.iHealthLogin();
 		
-		System.out.println(auth.getLeaveData("1"));
+		System.out.println(auth.getLeaveData("2"));
 	}
 }
