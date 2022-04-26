@@ -5,10 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>请假详情</title>
+<link rel="shortcut icon" href="https://cdn.nisekoo.com/ihealth.ico">
 <style type="text/css">
 #height{
  margin-left: 80px;
+}
+#photo{
+width:150px;
+
 }
 </style>
 </head>
@@ -48,6 +53,14 @@
 总时长:${LeaveListBean.records[id].duration}</div>
 <div>
 请假事由:${LeaveListBean.records[id].remarks}</div>
+<div>
+<c:if test="${LeaveListBean.records[id].img.length()!=0}">
+证明材料:<img id="photo" src="https://cdn2.gench.edu.cn/cdn3/api/img/${LeaveListBean.records[id].img}">
+</c:if>
+<c:if test="${LeaveListBean.records[id].img.length()==0}">
+证明材料:无
+</c:if>
+</div>
 <div>
 发布人-${LeaveListBean.records[id].username}(提交请假申请)
 </div>

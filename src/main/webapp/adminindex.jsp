@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>老师主页</title>
+<link rel="shortcut icon" href="https://cdn.nisekoo.com/ihealth.ico">
 </head>
 <body>
 	<h2>

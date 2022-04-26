@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>请假</title>
+<link rel="shortcut icon" href="https://cdn.nisekoo.com/ihealth.ico">
 </head>
 <body>
 <c:forEach var="record" items="${LeaveListBean.records}">
@@ -35,21 +36,13 @@
 
 <div>
 <a href="leave?curPage=1&type=1">第一页</a>
-<c:if test="${LeaveListBean.currentPage == 1}">
-<a href="leave?curPage=1&type=1">上一页</a>
-</c:if>
-<c:if test="${LeaveListBean.currentPage != 1}">
-<a href="leave?curPage=${LeaveListBean.currentPage-1}&type=1">上一页</a>
-</c:if>
+		<a href="leave?curPage=${PageUtils.prePage}&type=1">上一页</a>
+			<c:forEach var="i" begin="1" end="${PageUtils.totalPages}">
 
-
-<c:if test="${LeaveListBean.currentPage == LastPage}">
-<a href="leave?curPage=${LastPage}&type=1">下一页</a>
-</c:if>
-<c:if test="${LeaveListBean.currentPage != LastPage}">
-<a href="leave?curPage=${LeaveListBean.currentPage+1}&type=1">下一页</a>
-</c:if>
-<a href="leave?curPage=${LastPage}&type=1">最后一页</a>
+				<a  href="leave?curPage=${i}&type=1">${i}</a>
+			</c:forEach>
+	<a href="leave?curPage=${PageUtils.nextPage}&type=1">下一页</a>
+	<a href="leave?curPage=${PageUtils.totalPages}&type=1">最后一页</a>
 
 
 </div>

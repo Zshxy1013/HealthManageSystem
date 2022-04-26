@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>学生打卡记录</title>
+<link rel="shortcut icon" href="https://cdn.nisekoo.com/ihealth.ico">
 </head>
 <body>
 <table border="1">

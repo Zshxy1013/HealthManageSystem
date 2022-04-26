@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>用户登录</title>
+<link rel="shortcut icon" href="https://cdn.nisekoo.com/ihealth.ico">
 <style>
 h2 {
 	text-align: center;

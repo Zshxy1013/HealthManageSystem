@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import core.bean.LeaveListBean;
 import core.bean.UserDataBean;
 import core.service.GenchPlatformAuth;
+import core.util.PageUtils;
 
 /**
  * Servlet implementation class LeaveServlet
@@ -46,12 +47,17 @@ public class LeaveServlet extends HttpServlet {
 		LeaveListBean leavelistbean = auth.getLeaveData(curPage);
 		leavelistbean.setCurrentPage(Integer.parseInt(curPage));
 		
-		int lastpage=(int)(leavelistbean.getTotal()/3);
+
 		
 		leavelistbean.getRecords().get(0).setId(0);
 		leavelistbean.getRecords().get(1).setId(1);
 		leavelistbean.getRecords().get(2).setId(2);
-		request.setAttribute("LastPage", lastpage);
+
+		PageUtils pageutils=new PageUtils(3, curPage);
+		pageutils.setTotalCount(leavelistbean.getTotal());
+		pageutils.Init();
+		
+		request.setAttribute("PageUtils", pageutils);
 		request.setAttribute("LeaveListBean", leavelistbean);
 		if(type.equals("1")) {
 		
