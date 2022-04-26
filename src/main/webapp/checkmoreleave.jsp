@@ -8,11 +8,13 @@
 <title>请假详情</title>
 <link rel="shortcut icon" href="https://cdn.nisekoo.com/ihealth.ico">
 <style type="text/css">
+
 #height{
  margin-left: 80px;
 }
 #photo{
 width:150px;
+
 
 }
 </style>

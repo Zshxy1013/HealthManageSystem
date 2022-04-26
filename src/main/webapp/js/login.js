@@ -32,26 +32,26 @@ function isEmpty() {
 
 function stuIDEmpty(){
     var stuID = document.getElementById("stuID")
-     var stuID_err = document.getElementById("stuID_err");
      if(stuID.value.length==0){
-         stuID_err.style.display='';
+			stuID.style.border='1px solid';
+         	stuID.style.borderColor='deeppink';
      }
      else{
-         stuID_err.style.display='none';
+         stuID.style='';
      }
 }
 
 function stuPwdEmpty(){
-        var stuPwd_err = document.getElementById("stuPwd_err");
     var stuPwd = document.getElementById("stuPwd")
      if(stuPwd.value.length==0){
-         stuPwd_err.style.display='';
+		stuPwd.style.border='1px solid';
+     	stuPwd.style.borderColor='deeppink';
      }
      else{
-          stuPwd_err.style.display='none';
+          stuPwd.style='';
      }
 }
 
-function returnStudentIndex(){
-    location.href="login.jsp";
+function returnStudentIndex() {
+	window.location.href="login.jsp"
 }

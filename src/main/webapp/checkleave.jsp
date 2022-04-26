@@ -6,10 +6,27 @@
 <head>
 <meta charset="UTF-8">
 <title>请假</title>
+<style type="text/css">
+  		#border{
+  		border:2px #66CCFF solid;
+  		margin:5px;
+          }
+       a{
+        font: bold 11px Arial;
+  text-decoration: none;
+  background-color: #66CCFF;
+  color: #333333;
+  padding: 2px 6px 2px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;}
+</style>
 <link rel="shortcut icon" href="https://cdn.nisekoo.com/ihealth.ico">
 </head>
 <body>
 <c:forEach var="record" items="${LeaveListBean.records}">
+<div id="border">
 <div>
 单号:${record.ticketid}
 </div>
@@ -32,6 +49,7 @@
 申请时间:${record.cdt}
 </div>
 <button onclick="moredata(${LeaveListBean.currentPage},${record.id})">详情</button>
+</div>
 </c:forEach>
 
 <div>

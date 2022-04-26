@@ -48,10 +48,17 @@ public class LeaveServlet extends HttpServlet {
 		leavelistbean.setCurrentPage(Integer.parseInt(curPage));
 		
 
-		
+		if(leavelistbean.getRecords().size()==1) {
+		leavelistbean.getRecords().get(0).setId(0);}
+		else if(leavelistbean.getRecords().size()==2) {
 		leavelistbean.getRecords().get(0).setId(0);
 		leavelistbean.getRecords().get(1).setId(1);
-		leavelistbean.getRecords().get(2).setId(2);
+		}
+		else {
+				leavelistbean.getRecords().get(0).setId(0);
+				leavelistbean.getRecords().get(1).setId(1);
+				leavelistbean.getRecords().get(2).setId(2);
+		}
 
 		PageUtils pageutils=new PageUtils(3, curPage);
 		pageutils.setTotalCount(leavelistbean.getTotal());
