@@ -61,13 +61,18 @@
 			</c:forEach>
 	<a href="leave?curPage=${PageUtils.nextPage}&type=1">下一页</a>
 	<a href="leave?curPage=${PageUtils.totalPages}&type=1">最后一页</a>
-
-
+</div>
+<div>
+<button onclick="leave()">我要请假</button>
 </div>
 </body>
 <script>
+function leave(){
+	location.href="leave.jsp";
+}
+
 function moredata(currentPage,id){
-	location.href="leave?curPage="+currentPage+"&type=2&id="+id
+	location.href="leave?curPage="+currentPage+"&type=2&id="+id;
 }
 </script>
 </html>

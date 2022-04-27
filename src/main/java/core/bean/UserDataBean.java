@@ -12,7 +12,8 @@ public class UserDataBean {
 	 * 学生数据信息相关 stuSchoolID 学生学号 stuName 学生姓名 stuPasswd 学生密码 stuTelephone 学生手机号码
 	 * stuSex 学生性别 === 以下为数据库演示部分不获取，使用FakeData生成的假数据 === stuIDCard 学生身份证 stuAddress
 	 * 学生家庭住址 parentName 家长姓名 parentPhone 家长电话 counsellorID 辅导员工号 counsellorName
-	 * 辅导员姓名 counsellorPhone 辅导员电话
+	 * 辅导员姓名 counsellorPhone 辅导员电话 stuCollege 学生学院 stuCollegeid 学生学院id stuClassid 学生班级id
+	 * stuMajorid 学生专业id
 	 ***/
 	private String stuSchoolID;
 	private String stuUuid;
@@ -27,10 +28,66 @@ public class UserDataBean {
 	private String counsellorID;
 	private String counsellorName;
 	private String counsellorPhone;
+	private String stuCollege;
+	private String stuCollegeid;
+	private String stuMajorid;
+	private String stuClassid;
+	private String stuClassname;
+	
 
 	public UserDataBean(String stuSchoolID, String stuPasswd) {
 		this.stuSchoolID = stuSchoolID;
 		this.stuPasswd = stuPasswd;
+	}
+
+
+	public String getStuClassname() {
+		return stuClassname;
+	}
+
+
+	public void setStuClassname(String stuClassname) {
+		this.stuClassname = stuClassname;
+	}
+
+
+	public String getStuCollege() {
+		return stuCollege;
+	}
+
+
+	public void setStuCollege(String stuCollege) {
+		this.stuCollege = stuCollege;
+	}
+
+
+	public String getStuCollegeid() {
+		return stuCollegeid;
+	}
+
+
+	public void setStuCollegeid(String stuCollegeid) {
+		this.stuCollegeid = stuCollegeid;
+	}
+
+
+	public String getStuMajorid() {
+		return stuMajorid;
+	}
+
+
+	public void setStuMajorid(String stuMajorid) {
+		this.stuMajorid = stuMajorid;
+	}
+
+
+	public String getStuClassid() {
+		return stuClassid;
+	}
+
+
+	public void setStuClassid(String stuClassid) {
+		this.stuClassid = stuClassid;
 	}
 
 
@@ -153,5 +210,20 @@ public class UserDataBean {
 	public void setCounsellorPhone(String counsellorPhone) {
 		this.counsellorPhone = counsellorPhone;
 	}
+
+
+	@Override
+	public String toString() {
+		return "UserDataBean [dbIDCode=" + dbIDCode + ", dbOperateStatusCode=" + dbOperateStatusCode + ", stuSchoolID="
+				+ stuSchoolID + ", stuUuid=" + stuUuid + ", stuName=" + stuName + ", stuPasswd=" + stuPasswd
+				+ ", stuClass=" + stuClass + ", stuMajor=" + stuMajor + ", stuTelephone=" + stuTelephone + ", stuSex="
+				+ stuSex + ", stuIDCard=" + stuIDCard + ", stuAddress=" + stuAddress + ", counsellorID=" + counsellorID
+				+ ", counsellorName=" + counsellorName + ", counsellorPhone=" + counsellorPhone + ", stuCollege="
+				+ stuCollege + ", stuCollegeid=" + stuCollegeid + ", stuMajorid=" + stuMajorid + ", stuClassid="
+				+ stuClassid + "]";
+	}
+
+
+	
 
 }

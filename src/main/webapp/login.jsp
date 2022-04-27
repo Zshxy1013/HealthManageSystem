@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width， initial-scale=1" />
 <meta charset="UTF-8">
 <title>用户登录</title>
 <link rel="shortcut icon" href="https://cdn.nisekoo.com/ihealth.ico">

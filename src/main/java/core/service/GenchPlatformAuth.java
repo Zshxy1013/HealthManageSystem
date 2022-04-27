@@ -11,19 +11,15 @@ import java.net.CookiePolicy;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpSession;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-
 import core.bean.CookieBean;
-import core.bean.LeaveBean;
 import core.bean.LeaveListBean;
 import core.bean.UserDataBean;
 import core.dao.CookieCacheDao;
@@ -390,20 +386,24 @@ public class GenchPlatformAuth {
 			// 默认值为：true，当前向远程服务读取数据时，设置为true，该参数可有可无
 			connection.setDoInput(true);
 			// 设置传入参数的格式:请求参数应该是 name1=value1&name2=value2 的形式。
-			connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=utf-8");
 			// 设置鉴权信息：Authorization: Bearer da3efcbf-0845-4fe3-8aba-ee040be542c0
 			// connection.setRequestProperty("Authorization", "Bearer
 			// da3efcbf-0845-4fe3-8aba-ee040be542c0");
 			// 通过连接对象获取一个输出流
 			os = connection.getOutputStream();
+	
+			
 			// 通过输出流对象将参数写出去/传输出去,它是通过字节数组写出的(form表单形式的参数实质也是key,value值的拼接，类似于get请求参数的拼接)
 			os.write(createLinkString(param).getBytes());
+			
+	
 			// 通过连接对象获取一个输入流，向远程读取
 			if (connection.getResponseCode() == 200) {
 
 				is = connection.getInputStream();
 				// 对输入流对象进行包装:charset根据工作项目组的要求来设置
-				br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+				br = new BufferedReader(new InputStreamReader(is,"utf-8"));
 
 				StringBuffer sbf = new StringBuffer();
 				String temp = null;
@@ -490,12 +490,22 @@ public class GenchPlatformAuth {
 		uDataBean.setStuSex(jsonObject.getString("gender"));
 		// 学生班级
 		uDataBean.setStuClass(jsonObject.getString("classname"));
-		// 学生专业 字符串使用split时，对于 ( , | 需要使用 \\| , \\(
-		uDataBean.setStuMajor(jsonObject.getString("majorname").split("\\（")[0]);
+		// 学生专业 
+		uDataBean.setStuMajor(jsonObject.getString("majorname"));
 		// 辅导员工号
 		uDataBean.setCounsellorID(jsonObject.getString("teacherid"));
 		// 辅导员姓名
 		uDataBean.setCounsellorName(jsonObject.getString("teachername"));
+		// 辅导员手机
+		uDataBean.setCounsellorPhone(jsonObject.getString("teacherphone"));
+		// 学生学院id
+		uDataBean.setStuCollegeid(jsonObject.getString("collegeid"));
+		// 学生专业id
+		uDataBean.setStuMajorid(jsonObject.getString("majorid"));
+		// 学生学院
+		uDataBean.setStuCollege(jsonObject.getString("collegename"));
+		// 学生班级id
+		uDataBean.setStuClassid(jsonObject.getString("classid"));
 		System.out.println("[Log] Auth.iHealth->getStudentInformation Success");
 	}
 
@@ -514,8 +524,11 @@ public class GenchPlatformAuth {
 		UserDataBean uDataBean = new UserDataBean("1922538", "Zs165301");
 		
 		GenchPlatformAuth auth = new GenchPlatformAuth(uDataBean);
-		auth.iHealthLogin();
 		
-		System.out.println(auth.getLeaveData("2"));
+		auth.iHealthLogin();
+		System.out.println(auth.getLeaveData("1"));
+		
+		
+	
 	}
 }

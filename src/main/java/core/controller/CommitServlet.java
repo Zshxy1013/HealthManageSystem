@@ -47,13 +47,14 @@ public class CommitServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
 		// POST请求设置request乱码
-		request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("utf-8");
 		String type = "学生";
 		String uuid = request.getParameter("uuid");
 		String userid = request.getParameter("uid");
 		String username = request.getParameter("name");
 		String phone = request.getParameter("mobile");
-		String collegename = request.getParameter("collegename");
+		//字符串使用split时，对于 ( , | 需要使用 \\| , \\(
+		String collegename = request.getParameter("collegename").split("\\（")[0];
 		String classname = request.getParameter("classname");
 		String slocationcode = "310000";
 		String slocation = request.getParameter("city");
@@ -75,6 +76,7 @@ public class CommitServlet extends HttpServlet {
 
 		// 向提交接口提交数据
 		String url = "http://ihealth.hq.gench.edu.cn/api/GDaily/add";
+	//String url="https://httpbin.org/post";
 		Map<String, String> map = new HashMap<>();
 		map.put("type", "学生");
 		map.put("uuid", uuid);
@@ -95,10 +97,6 @@ public class CommitServlet extends HttpServlet {
 		map.put("touchquezhen", touchquezhen);
 		map.put("inschool", inschool);
 
-		HttpSession session = request.getSession();
-		UserDataBean uDataBean = (UserDataBean) session.getAttribute("user");
-		uDataBean = new UserDataBean(uDataBean.getStuSchoolID(), uDataBean.getStuPasswd());
-
 		String formResult = GenchPlatformAuth.doPostForm(url, map);
 		//把字符串转为json
 		JSONObject jsonObject = JSONObject.parseObject(formResult);
@@ -113,10 +111,12 @@ public class CommitServlet extends HttpServlet {
 			} else {
 				response.getWriter()
 						.print("<script>alert(\"打卡成功\");window.location.href= \"studentindex.jsp\";</script>");
+		
 			}
 		}
 		else {
 			response.getWriter().print("<script>alert(\"打卡系统出错了\");window.location.href= \"commit.jsp\";</script>");
+			
 		}
 	}
 

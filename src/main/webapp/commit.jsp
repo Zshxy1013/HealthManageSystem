@@ -59,22 +59,22 @@
 															value="${user.stuClass}" />
 														<div class="row gtr-uniform">
 															<div class="col-6 col-12-xsmall">
-																<input type="text" name="demo-name" id="demo-name" value="${user.stuSchoolID}" placeholder="学号" disabled/>
+																<input type="text" name="uid" id="uid" value="${user.stuSchoolID}" placeholder="学号" disabled/>
 															</div>
 															<div class="col-6 col-12-xsmall">
-																<input type="text" name="demo-email" id="demo-email" value="${user.stuName}" placeholder="姓名" disabled/>
+																<input type="text" name="name" id="name" value="${user.stuName}" placeholder="姓名" disabled/>
 															</div>
 															<div class="col-6 col-12-xsmall">
-																<input type="text" name="mobile" id="demo-email" value="${user.stuTelephone}" placeholder="手机号" />
+																<input type="text" name="mobile" id="mobile" value="${user.stuTelephone}" placeholder="手机号" />
 															</div>
 															<div class="col-6 col-12-xsmall">
-																<input type="text" name="demo-email" id="demo-email" value="${user.stuMajor}" placeholder="学院" disabled/>
+																<input type="text" name="collegename" id="collegename" value="${user.stuMajor}" placeholder="学院" disabled/>
 															</div>
 															<div class="col-6 col-12-xsmall">
-																<input type="text" name="demo-email" id="demo-email" value="${user.stuClass}" placeholder="班级" disabled/>
+																<input type="text" name="classname" id="classname" value="${user.stuClass}" placeholder="班级" disabled/>
 															</div>
 															<div class="col-6 col-12-xsmall">
-																<input type="text" name="demo-email" id="demo-email" value="${user.counsellorName}${user.counsellorID}" placeholder="辅导员信息" disabled/>
+																<input type="text" name="information" id="information" value="${user.counsellorName}${user.counsellorID}" placeholder="辅导员信息" disabled/>
 															</div>
 															
 															<!-- Break -->
@@ -124,11 +124,11 @@
 					<footer id="footer">
 						<div class="inner">
 							<ul class="icons">
-								<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
-								<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
-								<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
-								<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-								<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+								<li><a href="https://twitter.com/firexiyi" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="https://facebook.com/firexiyi" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+								<li><a href="https://www.instagram.com/firexiyi/" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+								<li><a href="https://github.com/sjlleo/" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+					
 							</ul>
 							<ul class="copyright">
 								<li>&copy; 建桥系统</li>
@@ -146,27 +146,6 @@
 					else{
 						leo.style.display=''
 					}
-				}
-				
-				function isEmpty(){
-					if (checkPhone()==false){
-				   alert("请输入正确手机格式")
-					}
-				   return checkPhone()
-				}
-				
-				function checkPhone(){
-					var mobile=document.getElementById("mobile").value.trim();
-					var reg= /^[1]\d{10}$/;
-					var flag=reg.test(mobile);
-					if(flag){
-						document.getElementById("isPhone").style.display='none'
-					}
-					else{
-						document.getElementById("isPhone").style.display=''
-					}
-					
-					return flag;
 				}
 			
 			</script>

@@ -48,7 +48,7 @@ public class UserDataDao {
 				rs.close();
 
 				// 插入学生的信息
-				sql = "INSERT INTO `ihealthManage`.`users` (`stuSchoolID`, `stuUuid`, `stuName`, `stuPasswd`, `stuSex`, `stuMajor`, `stuClass`, `stuTelephone`, `stuIDCard`, `stuAddress`, `counsellorID`, `counsellorName`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+				sql = "INSERT INTO `ihealthManage`.`users` (`stuSchoolID`, `stuUuid`, `stuName`, `stuPasswd`, `stuSex`, `stuCollege`, `stuCollegeid`, `stuMajorid`, `stuMajor`, `stuClassid`, `stuClass`, `stuTelephone`, `stuIDCard`, `stuAddress`, `counsellorID`, `counsellorName`,`counsellorPhone`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				// 取用户数据都封装在这个方法中了
 				genchPlatformAuth.getStuData();
 
@@ -65,20 +65,30 @@ public class UserDataDao {
 				ps.setString(4, udata.getStuPasswd());
 				// 学生性别
 				ps.setString(5, udata.getStuSex());
+				// 学生学院
+				ps.setString(6, udata.getStuCollege());
+				// 学生学院id
+				ps.setString(7, udata.getStuCollegeid());
+				// 学生专业id
+				ps.setString(8, udata.getStuMajorid());
 				// 学生专业
-				ps.setString(6, udata.getStuMajor());
+				ps.setString(9, udata.getStuMajor());
+				// 学生班级id
+				ps.setString(10, udata.getStuClassid());
 				// 学生班级
-				ps.setString(7, udata.getStuClass());
+				ps.setString(11, udata.getStuClass());
 				// 学生电话
-				ps.setString(8, udata.getStuTelephone());
+				ps.setString(12, udata.getStuTelephone());
 				// 学生身份证
-				ps.setString(9, udata.getStuIDCard());
+				ps.setString(13, udata.getStuIDCard());
 				// 学生家庭住址
-				ps.setString(10, udata.getStuAddress());
+				ps.setString(14, udata.getStuAddress());
 				// 辅导员工号
-				ps.setString(11, udata.getCounsellorID());
+				ps.setString(15, udata.getCounsellorID());
 				// 辅导员姓名
-				ps.setString(12, udata.getCounsellorName());
+				ps.setString(16, udata.getCounsellorName());
+				// 辅导员手机
+				ps.setString(17, udata.getCounsellorPhone());
 				ps.executeUpdate();
 				System.out.println("插入成功");
 
@@ -98,13 +108,18 @@ public class UserDataDao {
 			udata.setStuName(rs.getString(4));
 			udata.setStuPasswd(rs.getString(5));
 			udata.setStuSex(rs.getString(6));
-			udata.setStuMajor(rs.getString(7));
-			udata.setStuClass(rs.getString(8));
-			udata.setStuTelephone(rs.getString(9));
-			udata.setStuIDCard(rs.getString(10));
-			udata.setStuAddress(rs.getString(11));
-			udata.setCounsellorID(rs.getString(12));
-			udata.setCounsellorName(rs.getString(13));
+			udata.setStuCollege(rs.getString(7));
+			udata.setStuCollegeid(rs.getString(8));
+			udata.setStuMajorid(rs.getString(9));
+			udata.setStuMajor(rs.getString(10));
+			udata.setStuClassid(rs.getString(11));
+			udata.setStuClass(rs.getString(12));
+			udata.setStuTelephone(rs.getString(13));
+			udata.setStuIDCard(rs.getString(14));
+			udata.setStuAddress(rs.getString(15));
+			udata.setCounsellorID(rs.getString(16));
+			udata.setCounsellorName(rs.getString(17));
+			udata.setCounsellorPhone(rs.getString(18));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

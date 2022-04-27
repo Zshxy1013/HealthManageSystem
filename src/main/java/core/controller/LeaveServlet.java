@@ -39,7 +39,6 @@ public class LeaveServlet extends HttpServlet {
 	try {
 		HttpSession session = request.getSession();
 		UserDataBean uDataBean = (UserDataBean) session.getAttribute("user");
-		uDataBean = new UserDataBean(uDataBean.getStuSchoolID(), uDataBean.getStuPasswd());
 		
 		GenchPlatformAuth auth = new GenchPlatformAuth(uDataBean);
 		auth.iHealthLogin();
@@ -65,9 +64,9 @@ public class LeaveServlet extends HttpServlet {
 		pageutils.Init();
 		
 		request.setAttribute("PageUtils", pageutils);
-		request.setAttribute("LeaveListBean", leavelistbean);
-		if(type.equals("1")) {
+		session.setAttribute("LeaveListBean", leavelistbean);
 		
+		if(type.equals("1")) {
 		request.getRequestDispatcher("checkleave.jsp").forward(request, response);
 		}
 		else if(type.equals("2")) {
