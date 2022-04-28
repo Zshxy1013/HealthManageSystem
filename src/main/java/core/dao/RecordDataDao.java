@@ -73,14 +73,14 @@ public class RecordDataDao {
 			rs.close();
 			if (pageUtils.getTotalCount() != 0) {
 				// 将每一条详细数据添加到list中
-				sql = "SELECT * FROM `ihealthManage`.`record` LIMIT ?,?"; 
+				sql = "SELECT * FROM `ihealthManage`.`record` LIMIT ?,?";
 				ps = conn.prepareStatement(sql);
 				ps.setInt(1, pageUtils.getStartIndex());
 				ps.setInt(2, pageUtils.getPageSize());
 				rs = ps.executeQuery();
 				list = new ArrayList<RecordDataBean>();
 				while (rs.next()) {
-					int id=rs.getInt("id");
+					int id = rs.getInt("id");
 					String type = rs.getString("type");
 					String userid = rs.getString("userid");
 					String username = rs.getString("username");
@@ -98,8 +98,8 @@ public class RecordDataDao {
 					} else {
 						inschool = "不在校";
 					}
-					RecordDataBean databean = new RecordDataBean(id,type, userid, username, collegename, classname, phone,
-							slocation, location, xlocation, inschool, timestamp);
+					RecordDataBean databean = new RecordDataBean(id, type, userid, username, collegename, classname,
+							phone, slocation, location, xlocation, inschool, timestamp);
 					list.add(databean);
 				}
 			} else {
@@ -131,7 +131,7 @@ public class RecordDataDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }

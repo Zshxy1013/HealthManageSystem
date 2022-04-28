@@ -14,7 +14,7 @@ public class PageUtils {
 		initCurrentPage(currentPage);
 
 	}
-	
+
 	public void Init() {
 		initStartIndex();
 		initTotalPages();

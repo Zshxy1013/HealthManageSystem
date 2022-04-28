@@ -65,13 +65,12 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect("studentindex.jsp");
 
 		} else {
-			AdminBean aData=new AdminBean(stuID,stuPwd);
+			AdminBean aData = new AdminBean(stuID, stuPwd);
 			UserDataDao.checkAdminData(aData);
-			if(aData.getDbIDCode()==503) {
+			if (aData.getDbIDCode() == 503) {
 				response.getWriter().print("<script>alert(\"数据库连接失败\");window.location.href = \"login.jsp\";</script>");
-			
-			}
-			else if(aData.getDbIDCode()==200) {
+
+			} else if (aData.getDbIDCode() == 200) {
 				response.getWriter().print("<script>alert(\"登陆成功\")</script>");
 
 				// 添加session
@@ -80,12 +79,12 @@ public class LoginServlet extends HttpServlet {
 
 				// 跳转回主页
 				response.sendRedirect("adminindex.jsp");
-			}
-			else {
-			// 登录失败
+			} else {
+				// 登录失败
 
-			response.getWriter().print("<script>alert(\"用户名或密码错误\");window.location.href = \"login.jsp\";</script>");
-	
+				response.getWriter()
+						.print("<script>alert(\"用户名或密码错误\");window.location.href = \"login.jsp\";</script>");
+
 			}
 		}
 	}

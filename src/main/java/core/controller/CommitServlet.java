@@ -3,24 +3,17 @@ package core.controller;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-
 import core.bean.RecordDataBean;
-import core.bean.UserDataBean;
 import core.service.CommitDataService;
 import core.service.GenchPlatformAuth;
 
@@ -53,7 +46,7 @@ public class CommitServlet extends HttpServlet {
 		String userid = request.getParameter("uid");
 		String username = request.getParameter("name");
 		String phone = request.getParameter("mobile");
-		//字符串使用split时，对于 ( , | 需要使用 \\| , \\(
+		// 字符串使用split时，对于 ( , | 需要使用 \\| , \\(
 		String collegename = request.getParameter("collegename").split("\\（")[0];
 		String classname = request.getParameter("classname");
 		String slocationcode = "310000";
@@ -75,8 +68,8 @@ public class CommitServlet extends HttpServlet {
 				diagnosis, touchquezhen, inschool, timestamp);
 
 		// 向提交接口提交数据
-		String url = "http://ihealth.hq.gench.edu.cn/api/GDaily/add";
-	//String url="https://httpbin.org/post";
+		// String url = "http://ihealth.hq.gench.edu.cn/api/GDaily/add";
+		String url = "https://httpbin.org/post";
 		Map<String, String> map = new HashMap<>();
 		map.put("type", "学生");
 		map.put("uuid", uuid);
@@ -98,7 +91,7 @@ public class CommitServlet extends HttpServlet {
 		map.put("inschool", inschool);
 
 		String formResult = GenchPlatformAuth.doPostForm(url, map);
-		//把字符串转为json
+		// 把字符串转为json
 		JSONObject jsonObject = JSONObject.parseObject(formResult);
 		// {"suc":true,"msg":"添加成功","emsg":null,"code":100,"data":"","ct":1650373756}
 		String flag = jsonObject.getString("msg");
@@ -111,12 +104,11 @@ public class CommitServlet extends HttpServlet {
 			} else {
 				response.getWriter()
 						.print("<script>alert(\"打卡成功\");window.location.href= \"studentindex.jsp\";</script>");
-		
+
 			}
-		}
-		else {
+		} else {
 			response.getWriter().print("<script>alert(\"打卡系统出错了\");window.location.href= \"commit.jsp\";</script>");
-			
+
 		}
 	}
 

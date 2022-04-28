@@ -55,9 +55,9 @@ public class RecordDataBean {
 		this.timestamp = timestamp;
 	}
 
-	public RecordDataBean(int id,String type, String userid, String username, String collegename, String classname,
+	public RecordDataBean(int id, String type, String userid, String username, String collegename, String classname,
 			String phone, String slocation, String location, String xlocation, String inschool, Timestamp timestamp) {
-		this.id=id;
+		this.id = id;
 		this.type = type;
 
 		this.userid = userid;
@@ -253,7 +253,5 @@ public class RecordDataBean {
 				+ diagnosis + ", touchquezhen=" + touchquezhen + ", inschool=" + inschool + ", timestamp=" + timestamp
 				+ "]";
 	}
-
-	
 
 }

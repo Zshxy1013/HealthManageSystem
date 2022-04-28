@@ -34,20 +34,20 @@ public class RecordPageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
-		String currentPage=request.getParameter("curPage");
+		String currentPage = request.getParameter("curPage");
 		try {
-			RecordListBean recordDataList=new RecordListBean();
-			PageUtils pageUtils=new PageUtils(10,currentPage);
-			
-			SelectRecordData.selectRecordData(recordDataList,pageUtils);
-			
+			RecordListBean recordDataList = new RecordListBean();
+			PageUtils pageUtils = new PageUtils(10, currentPage);
+
+			SelectRecordData.selectRecordData(recordDataList, pageUtils);
+
 			request.setAttribute("RecordListBean", recordDataList);
 			request.setAttribute("PageUtils", pageUtils);
 			request.getRequestDispatcher("allrecorddata.jsp").forward(request, response);
 		} catch (Exception e) {
 			response.getWriter().print("<script>alert(\"非法访问\");window.location.href = \"adminindex.jsp\";</script>");
 		}
-	
+
 	}
 
 	/**

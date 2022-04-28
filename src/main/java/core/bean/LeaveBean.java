@@ -45,7 +45,7 @@ public class LeaveBean {
 	private int num;
 	private int bid;
 
-	public LeaveBean(long id,String userid, String username, String classid, String classname, String majorid,
+	public LeaveBean(long id, String userid, String username, String classid, String classname, String majorid,
 			String majorname, String collegeid, String collegename, String teachername, String teacherphone,
 			String linkname, String linkphone, Timestamp outtime, Timestamp intime, int typeid, String typename,
 			String remarks, String img, int status, int tstatus, int cstatus, int sstatus, int jstatus, Timestamp cdt,
@@ -415,7 +415,7 @@ public class LeaveBean {
 
 	@Override
 	public String toString() {
-		return "LeaveBean [id=" +"\n"+ id + ", ticketid=" + ticketid + ", userid=" + userid + ", username=" + username
+		return "LeaveBean [id=" + "\n" + id + ", ticketid=" + ticketid + ", userid=" + userid + ", username=" + username
 				+ ", classid=" + classid + ", classname=" + classname + ", majorid=" + majorid + ", majorname="
 				+ majorname + ", collegeid=" + collegeid + ", collegename=" + collegename + ", teachername="
 				+ teachername + ", teacherphone=" + teacherphone + ", linkname=" + linkname + ", linkphone=" + linkphone

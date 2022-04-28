@@ -31,7 +31,7 @@ public class UserDataDao {
 				if (udata.getStuPasswd().equals(rs.getString("stuPasswd"))) {
 					// 与数据库的匹配，不需要做什么事情
 					System.out.println("密码已经是最新");
-					//为了使session成功添加到页面
+					// 为了使session成功添加到页面
 					getUserData(udata, rs);
 				} else {
 					// 与数据库不匹配，更新数据库的密码
@@ -142,12 +142,11 @@ public class UserDataDao {
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {// 登陆信息正确
 				aDataBean.setDbIDCode(200);
-		} 
-			else {
+			} else {
 				aDataBean.setDbIDCode(404);
 			}
 
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			aDataBean.setDbIDCode(503);
 			e.printStackTrace();

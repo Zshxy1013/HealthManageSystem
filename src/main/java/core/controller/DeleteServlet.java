@@ -16,44 +16,47 @@ import core.service.DeleteDataService;
 @WebServlet("/delete")
 public class DeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DeleteServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public DeleteServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html;charset=utf-8");
 		String _id = request.getParameter("id");
-		if(_id==null || _id.equals("")) {
+		if (_id == null || _id.equals("")) {
 			response.getWriter().print("<script>alert(\"非法访问\");window.location.href = \"recordpage\";</script>");
+		} else {
+			int id = Integer.parseInt(_id);
+			RecordDataBean recordDataBean = new RecordDataBean();
+			recordDataBean.setId(id);
+
+			DeleteDataService.DeleteRecordData(recordDataBean);
+			if (recordDataBean.getDbIDCode() == 503) {
+				response.getWriter()
+						.print("<script>alert(\"数据库连接失败\");window.location.href = \"recordpage\";</script>");
+			} else {
+				response.getWriter().print("success");
+			}
 		}
-		else {
-		int id = Integer.parseInt(_id);
-		RecordDataBean recordDataBean=new RecordDataBean();
-		recordDataBean.setId(id);
-		
-		DeleteDataService.DeleteRecordData(recordDataBean);
-		if(recordDataBean.getDbIDCode()==503) {
-			response.getWriter().print("<script>alert(\"数据库连接失败\");window.location.href = \"recordpage\";</script>");
-		}
-		else {
-		response.getWriter().print("success");
-		}
-	}
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

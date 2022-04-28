@@ -49,10 +49,10 @@ public class LoginFilter implements Filter {
 		// 获取登陆成功的session
 		HttpSession session = req.getSession();
 		UserDataBean user = (UserDataBean) session.getAttribute("user");
-		AdminBean admin=(AdminBean) session.getAttribute("admin");
+		AdminBean admin = (AdminBean) session.getAttribute("admin");
 
 		// 若获取到session 则不拦截 否则进行拦截
-		if (user != null || admin!=null) {
+		if (user != null || admin != null) {
 			chain.doFilter(request, response);
 		} else {
 			req.getRequestDispatcher("login.jsp").forward(req, response);
