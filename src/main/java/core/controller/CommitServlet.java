@@ -68,8 +68,8 @@ public class CommitServlet extends HttpServlet {
 				diagnosis, touchquezhen, inschool, timestamp);
 
 		// 向提交接口提交数据
-		// String url = "http://ihealth.hq.gench.edu.cn/api/GDaily/add";
-		String url = "https://httpbin.org/post";
+		String url = "http://ihealth.hq.gench.edu.cn/api/GDaily/add";
+
 		Map<String, String> map = new HashMap<>();
 		map.put("type", "学生");
 		map.put("uuid", uuid);
@@ -108,7 +108,7 @@ public class CommitServlet extends HttpServlet {
 			}
 		} else {
 			response.getWriter().print("<script>alert(\"打卡系统出错了\");window.location.href= \"commit.jsp\";</script>");
-
+			System.out.println(formResult);
 		}
 	}
 

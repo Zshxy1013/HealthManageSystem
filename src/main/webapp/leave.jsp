@@ -110,10 +110,10 @@
 																联系方式<input type="text" name="linkphone" id="linkphone" value="${LeaveListBean.records[0].linkphone}" placeholder="联系方式" />
 															</div>
 															<div class="col-6 col-12-xsmall">
-																出校时间<input type="text" name="outtime" id="outtime"  placeholder="xxxx/xx/xx+xx:xx" />
+																出校时间<input type="text" name="outtime" id="outtime"  placeholder="xxxx/xx/xx xx:xx" />
 															</div>
 															<div class="col-6 col-12-xsmall">
-																返校时间<input type="text" name="intime" id="intime"  placeholder="xxxx/xx/xx+xx:xx" />
+																返校时间<input type="text" name="intime" id="intime"  placeholder="xxxx/xx/xx xx:xx" />
 															</div>
 													
 															<!-- Break -->

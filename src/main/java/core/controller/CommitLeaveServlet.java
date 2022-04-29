@@ -72,8 +72,8 @@ public class CommitLeaveServlet extends HttpServlet {
 		String locationcode = "310100";
 		String location = "上海市";
 
-		// String url = "http://ihealth.hq.gench.edu.cn/api/LAskleaveAp/add";
-		String url = "https://httpbin.org/post";
+		 String url = "http://ihealth.hq.gench.edu.cn/api/LAskleaveAp/add";
+
 		Map<String, String> map = new HashMap<>();
 		map.put("userid", userid);
 		map.put("username", username);
@@ -107,8 +107,13 @@ public class CommitLeaveServlet extends HttpServlet {
 
 		if ("提交成功".equals(flag)) {
 			response.getWriter().print("<script>alert(\"提交成功\");window.location.href= \"studentindex.jsp\";</script>");
+			
+		//插入数据库
+			
+			
+			
 		} else {
-			System.out.println(formResult);
+			response.getWriter().print("<script>alert(\"提交失败,请检查格式\");window.location.href= \"leave.jsp\";</script>");
 		}
 
 	}

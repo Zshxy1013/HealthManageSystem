@@ -43,8 +43,7 @@ public class LeaveServlet extends HttpServlet {
 			UserDataBean uDataBean = (UserDataBean) session.getAttribute("user");
 
 			GenchPlatformAuth auth = new GenchPlatformAuth(uDataBean);
-			auth.iHealthLogin();
-
+			
 			LeaveListBean leavelistbean = auth.getLeaveData(curPage);
 			leavelistbean.setCurrentPage(Integer.parseInt(curPage));
 

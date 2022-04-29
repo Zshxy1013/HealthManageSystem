@@ -5,12 +5,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.CookiePolicy;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -391,7 +393,6 @@ public class GenchPlatformAuth {
 			// da3efcbf-0845-4fe3-8aba-ee040be542c0");
 			// 通过连接对象获取一个输出流
 			os = connection.getOutputStream();
-
 			// 通过输出流对象将参数写出去/传输出去,它是通过字节数组写出的(form表单形式的参数实质也是key,value值的拼接，类似于get请求参数的拼接)
 			os.write(createLinkString(param).getBytes("UTF-8"));
 
@@ -460,9 +461,19 @@ public class GenchPlatformAuth {
 			String key = keys.get(i);
 			String value = params.get(key);
 			if (i == keys.size() - 1) {// 拼接时，不包括最后一个&字符
-				prestr.append(key).append("=").append(value);
+				try {
+					prestr.append(key).append("=").append(URLEncoder.encode(value, "UTF-8"));
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			} else {
-				prestr.append(key).append("=").append(value).append("&");
+				try {
+					prestr.append(key).append("=").append(URLEncoder.encode(value, "UTF-8")).append("&");
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 

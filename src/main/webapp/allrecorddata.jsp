@@ -70,7 +70,7 @@
 function deleteRecordData(id){
 	axios({
 		method:"get",
-		url:"http://localhost:8080/healthManageSystem/delete?id="+id,
+		url:"delete?id="+id,
 		
 	}).then(function (resp){
 		if(resp.data == "success"){
