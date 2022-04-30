@@ -117,16 +117,30 @@
 															</c:if>
 														</c:if>
 														<c:if test="${PageUtils.currentPage-5<1}">
-															<c:forEach var="i" begin="1" end="10">
-																<li>
-																<c:if test="${PageUtils.currentPage==i}">
-																	<a class="page active" href="leave?curPage=${i}&type=1">${i}</a>
-																</c:if>
-																<c:if test="${PageUtils.currentPage!=i}">
-																	<a class="page" href="leave?curPage=${i}&type=1">${i}</a>
-																</c:if>
-																</li>
-															</c:forEach>
+															<c:if test="${PageUtils.currentPage+9>PageUtils.totalPages}">
+																<c:forEach var="i" begin="1" end="${PageUtils.totalPages}">
+																	<li>
+																	<c:if test="${PageUtils.currentPage==i}">
+																		<a class="page active" href="leave?curPage=${i}&type=1">${i}</a>
+																	</c:if>
+																	<c:if test="${PageUtils.currentPage!=i}">
+																		<a class="page" href="leave?curPage=${i}&type=1">${i}</a>
+																	</c:if>
+																	</li>
+																</c:forEach>
+															</c:if>
+															<c:if test="${PageUtils.currentPage+9<=PageUtils.totalPages}">
+																<c:forEach var="i" begin="1" end="10">
+																	<li>
+																	<c:if test="${PageUtils.currentPage==i}">
+																		<a class="page active" href="leave?curPage=${i}&type=1">${i}</a>
+																	</c:if>
+																	<c:if test="${PageUtils.currentPage!=i}">
+																		<a class="page" href="leave?curPage=${i}&type=1">${i}</a>
+																	</c:if>
+																	</li>
+																</c:forEach>
+															</c:if>
 														</c:if>														
 														<c:if test="${PageUtils.currentPage < PageUtils.totalPages}">
 														<li><a href="leave?curPage=${PageUtils.nextPage}&type=1" class="button small">Next</a></li>
@@ -135,7 +149,9 @@
 														<li><a href="leave?curPage=${PageUtils.nextPage}&type=1" class="button small disabled">Next</a></li>
 														</c:if>
 													</ul>
+													<button>我要请假</button>
 													</div>
+										
 												</section>
 												
 											</div>

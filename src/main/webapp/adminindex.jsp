@@ -17,7 +17,7 @@
 
 				<!-- Header -->
 					<header id="header" class="alt">
-					<a href="studentindex.jsp" class="logo"><strong>建桥</strong> <span>疫情防控打卡管理系统</span></a>
+					<a href="adminindex.jsp" class="logo"><strong>建桥</strong> <span>疫情防控打卡管理系统</span></a>
 						<nav>
 							<a href="#menu">Menu</a>
 						</nav>

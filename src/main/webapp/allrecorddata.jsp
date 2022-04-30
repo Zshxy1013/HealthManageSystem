@@ -120,16 +120,30 @@
 															</c:if>
 														</c:if>
 														<c:if test="${PageUtils.currentPage-5<1}">
-															<c:forEach var="i" begin="1" end="10">
-																<li>
-																<c:if test="${PageUtils.currentPage==i}">
-																	<a class="page active" href="recordpage?curPage=${i}">${i}</a>
-																</c:if>
-																<c:if test="${PageUtils.currentPage!=i}">
-																	<a class="page" href="recordpage?curPage=${i}">${i}</a>
-																</c:if>
-																</li>
-															</c:forEach>
+															<c:if test="${PageUtils.currentPage+9>PageUtils.totalPages}">
+																<c:forEach var="i" begin="1" end="${PageUtils.totalPages}">
+																	<li>
+																	<c:if test="${PageUtils.currentPage==i}">
+																		<a class="page active" href="recordpage?curPage=${i}">${i}</a>
+																	</c:if>
+																	<c:if test="${PageUtils.currentPage!=i}">
+																		<a class="page" href="recordpage?curPage=${i}">${i}</a>
+																	</c:if>
+																	</li>
+																</c:forEach>
+															</c:if>
+															<c:if test="${PageUtils.currentPage+9<=PageUtils.totalPages}">
+																<c:forEach var="i" begin="1" end="10">
+																	<li>
+																	<c:if test="${PageUtils.currentPage==i}">
+																		<a class="page active" href="recordpage?curPage=${i}">${i}</a>
+																	</c:if>
+																	<c:if test="${PageUtils.currentPage!=i}">
+																		<a class="page" href="recordpage?curPage=${i}">${i}</a>
+																	</c:if>
+																	</li>
+																</c:forEach>
+															</c:if>
 														</c:if>														
 														<c:if test="${PageUtils.currentPage < PageUtils.totalPages}">
 														<li><a href="recordpage?curPage=${PageUtils.nextPage}" class="button small">Next</a></li>
