@@ -2,29 +2,123 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>老师主页</title>
-<link rel="shortcut icon" href="https://cdn.nisekoo.com/ihealth.ico">
-</head>
-<body>
-	<h2>
-		welcome ${admin.adminID} <a href="logout">退出</a>
-	</h2>
-	当前时间:
-	<div id="time"></div>
-	<button id="selectall" onclick="selectall()">查询所有学生打卡记录</button>
-	<button id="escape">查看请假</button>
-</body>
-<script>
-setInterval(function(){
-	var time=document.getElementById("time")
-	 time.innerHTML = new Date().toLocaleString()+ ' 星期' + '日一二三四五六'.charAt(new Date().getDay());
-},1000)
+	<head>
+		<title>老师主页</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="shortcut icon" href="https://cdn.nisekoo.com/ihealth.ico">
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
 
-function selectall(){
-	window.location.href="recordpage?curPage=1"
-}
+		<!-- Wrapper -->
+			<div id="wrapper">
 
-</script>
+				<!-- Header -->
+					<header id="header" class="alt">
+					<a href="studentindex.jsp" class="logo"><strong>建桥</strong> <span>疫情防控打卡管理系统</span></a>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<ul class="links">
+							<li><a href="studentindex.jsp">主页</a></li>
+							<li><a href="recordpage?curPage=1">查看学生打卡</a></li>
+							
+						</ul>
+						<ul class="actions stacked">
+							<li><a href="logout" class="button fit">Log Out</a></li>
+						</ul>
+					</nav>
+
+				<!-- Banner -->
+					<section id="banner" class="major">
+						<div class="inner">
+							<header class="major">
+								<h1>Hi ${admin.adminID}</h1>
+							</header>
+							<div class="content">
+								<p id="time"></p>
+							</div>
+						</div>
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- One -->
+							<section id="one" class="tiles">
+								<article>
+									<span class="image">
+										<img src="images/pic01.jpg" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="recordpage?curPage=1" class="link">查看学生打卡</a></h3>
+										<p>View student punch in records</p>
+									</header>
+								</article>
+								<article>
+									<span class="image">
+										<img src="images/pic02.jpg" alt="" />
+									</span>
+									<header class="major">
+										<h3><a href="" class="link">查看学生请假</a></h3>
+										<p>View student leave records</p>
+									</header>
+								</article>
+
+							</section>
+
+						<!-- Two -->
+							<section id="two">
+								<div class="inner">
+									<header class="major">
+										<h2>作者</h2>
+									</header>
+									<p>张顺 沈嘉乐 朱思远</p>
+								</div>
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<ul class="icons">
+								<li><a href="https://twitter.com/firexiyi" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="https://facebook.com/firexiyi" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+								<li><a href="https://www.instagram.com/firexiyi/" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+								<li><a href="https://github.com/sjlleo/" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+					
+							</ul>
+							<ul class="copyright">
+								<li>&copy; 建桥系统</li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+			<script>
+			setInterval(function(){
+				var time=document.getElementById("time")
+				 time.innerHTML = new Date().toLocaleString()+ ' 星期' + '日一二三四五六'.charAt(new Date().getDay());
+			},1000)
+			</script>
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
 </html>
+
+
+

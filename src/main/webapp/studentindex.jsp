@@ -27,9 +27,9 @@
 					<nav id="menu">
 						<ul class="links">
 							<li><a href="studentindex.jsp">主页</a></li>
+							<li><a href="commit.jsp">健康打卡</a></li>
 							<li><a href="leave?curPage=1&type=1">请假</a></li>
-							<!--li><a href="generic.html">Generic</a></li>
-							<li><a href="elements.html">Elements</a></li-->
+							
 						</ul>
 						<ul class="actions stacked">
 							<li><a href="logout" class="button fit">Log Out</a></li>
@@ -62,6 +62,7 @@
 									</span>
 									<header class="major">
 										<h3><a href="" class="link">查询个人打卡记录</a></h3>
+										<p>View personal declaration records</p>
 									</header>
 								</article>
 								<article>
@@ -70,7 +71,7 @@
 									</span>
 									<header class="major">
 										<h3><a href="leave?curPage=1&type=1" class="link">请假</a></h3>
-										<p>feugiat amet tempus</p>
+										<p>Ask for leave</p>
 									</header>
 								</article>
 								<article>
@@ -79,7 +80,7 @@
 									</span>
 									<header class="major">
 										<h3><a href="" class="link">查看出校码</a></h3>
-										<p>Lorem etiam nullam</p>
+										<p>View the calibration QR code</p>
 									</header>
 								</article>
 								<!--article>

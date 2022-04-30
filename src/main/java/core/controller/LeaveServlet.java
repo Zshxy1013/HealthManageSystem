@@ -43,7 +43,7 @@ public class LeaveServlet extends HttpServlet {
 			UserDataBean uDataBean = (UserDataBean) session.getAttribute("user");
 
 			GenchPlatformAuth auth = new GenchPlatformAuth(uDataBean);
-			
+			auth.iHealthLogin();
 			LeaveListBean leavelistbean = auth.getLeaveData(curPage);
 			leavelistbean.setCurrentPage(Integer.parseInt(curPage));
 
@@ -73,6 +73,7 @@ public class LeaveServlet extends HttpServlet {
 				request.setAttribute("id", id);
 				request.getRequestDispatcher("checkmoreleave.jsp").forward(request, response);
 			} else {
+				System.out.println("error1");
 				response.getWriter()
 						.print("<script>alert(\"非法访问\");window.location.href = \"studentindex.jsp\";</script>");
 			}

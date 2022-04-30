@@ -8,7 +8,7 @@
 <title>Return</title>
 <script type="text/javascript" src="js/login.js"></script>
 </head>
-<body onload="returnStudentIndex()">
+<body onload="returnLogin()">
 
 </body>
 </html>

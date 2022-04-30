@@ -33,7 +33,7 @@ public class LoginFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 
-		String[] urls = { "login.jsp", "login" };
+		String[] urls = {"index.jsp","","login.jsp", "login" };
 
 		// 获取当前的url
 		String url = req.getRequestURL().toString();
