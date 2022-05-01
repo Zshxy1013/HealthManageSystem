@@ -29,7 +29,7 @@
 							<li><a href="studentindex.jsp">主页</a></li>
 							<li><a href="commit.jsp">健康打卡</a></li>
 							<li><a href="leave?curPage=1&type=1">请假</a></li>
-							
+							<li><a href="sturecordpage?curPage=1">查看个人打卡记录</a>
 						</ul>
 						<ul class="actions stacked">
 							<li><a href="logout" class="button fit">Log Out</a></li>
@@ -61,7 +61,7 @@
 										<img src="images/pic01.jpg" alt="" />
 									</span>
 									<header class="major">
-										<h3><a href="" class="link">查询个人打卡记录</a></h3>
+										<h3><a href="sturecordpage?curPage=1" class="link">查询个人打卡记录</a></h3>
 										<p>View personal declaration records</p>
 									</header>
 								</article>

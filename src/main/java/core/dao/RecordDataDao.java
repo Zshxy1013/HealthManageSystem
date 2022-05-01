@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import core.bean.RecordDataBean;
 import core.bean.RecordListBean;
+import core.bean.UserDataBean;
 import core.util.DBHelp;
 import core.util.PageUtils;
 
@@ -132,6 +133,73 @@ public class RecordDataDao {
 			e.printStackTrace();
 		}
 
+	}
+
+	public static void SelectStuRecordData(UserDataBean uDataBean,RecordListBean recordDataList, PageUtils pageUtils) {
+		Connection conn = DBHelp.getConn();
+		if (conn == null) {
+			return;
+		}
+
+		String sql = "SELECT COUNT(*) FROM `ihealthManage`.`record` WHERE `userid`=?";
+		try {
+			// 获取总共的记录
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, uDataBean.getStuSchoolID());
+			ResultSet rs = ps.executeQuery();
+			int count = 0;
+			ArrayList<RecordDataBean> list = null;
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+			pageUtils.setTotalCount(count);
+			pageUtils.Init();
+
+			ps.close();
+			rs.close();
+			if (pageUtils.getTotalCount() != 0) {
+				// 将每一条详细数据添加到list中
+				sql = "SELECT * FROM `ihealthManage`.`record` WHERE `userid`=? LIMIT ?,?";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, uDataBean.getStuSchoolID());
+				ps.setInt(2, pageUtils.getStartIndex());
+				ps.setInt(3, pageUtils.getPageSize());
+				
+				rs = ps.executeQuery();
+				list = new ArrayList<RecordDataBean>();
+				while (rs.next()) {
+					int id = rs.getInt("id");
+					String type = rs.getString("type");
+					String userid = rs.getString("userid");
+					String username = rs.getString("username");
+					String collegename = rs.getString("collegename");
+					String classname = rs.getString("classname");
+					String phone = rs.getString("collegename");
+					String slocation = rs.getString("slocation");
+					String location = rs.getString("location");
+					String xlocation = rs.getString("xlocation");
+					String _inschool = rs.getString("inschool");
+					String inschool = null;
+					Timestamp timestamp = rs.getTimestamp("timestamp");
+					if (("1").equals(_inschool)) {
+						inschool = "在校";
+					} else {
+						inschool = "不在校";
+					}
+					RecordDataBean databean = new RecordDataBean(id, type, userid, username, collegename, classname,
+							phone, slocation, location, xlocation, inschool, timestamp);
+					list.add(databean);
+				}
+			} else {
+				list = null;
+			}
+			recordDataList.setRecordDataList(list);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

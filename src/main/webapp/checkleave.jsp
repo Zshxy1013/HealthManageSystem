@@ -19,7 +19,7 @@
 
 				<!-- Header -->
 					<header id="header">
-						<a href="adminindex.jsp" class="logo"><strong>建桥</strong> <span>疫情防控打卡管理系统</span></a>
+						<a href="studentindex.jsp" class="logo"><strong>建桥</strong> <span>疫情防控打卡管理系统</span></a>
 						<nav>
 							<a href="#menu">Menu</a>
 						</nav>
@@ -31,6 +31,7 @@
 							<li><a href="studentindex.jsp">主页</a></li>
 							<li><a href="commit.jsp">健康打卡</a></li>
 							<li><a href="leave?curPage=1&type=1">请假</a></li>
+							<li><a href="sturecordpage?curPage=1">查看个人打卡记录</a>
 						</ul>
 						<ul class="actions stacked">
 							<li><a href="logout" class="button fit">Log Out</a></li>
@@ -45,7 +46,11 @@
 								<div class="inner">
 									<header class="major">
 										<h1>学生请假记录</h1>
+										<button onclick="leave()">我要请假</button>
+										
 									</header>
+																						
+									
 														<div class="table-wrapper">
 														<table>
 															<thead>
@@ -149,7 +154,6 @@
 														<li><a href="leave?curPage=${PageUtils.nextPage}&type=1" class="button small disabled">Next</a></li>
 														</c:if>
 													</ul>
-													<button>我要请假</button>
 													</div>
 										
 												</section>
