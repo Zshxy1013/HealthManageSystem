@@ -79,7 +79,7 @@
 										<img src="images/pic03.jpg" alt="" />
 									</span>
 									<header class="major">
-										<h3><a href="" class="link">查看出校码</a></h3>
+										<h3><a href="leaveQRCodePage" class="link">查看出校码</a></h3>
 										<p>View the calibration QR code</p>
 									</header>
 								</article>

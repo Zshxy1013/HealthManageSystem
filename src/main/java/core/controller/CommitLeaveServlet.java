@@ -1,6 +1,7 @@
 package core.controller;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONObject;
 
+import core.bean.LeaveBean;
 import core.service.GenchPlatformAuth;
+import core.service.LeaveDataService;
 
 /**
  * Servlet implementation class CommitLeave
@@ -99,12 +102,20 @@ public class CommitLeaveServlet extends HttpServlet {
 		map.put("slocation", slocation);
 		map.put("locationcode", locationcode);
 		map.put("location", location);
-		String formResult = GenchPlatformAuth.doPostForm(url, map);
+		
+		LeaveBean leave = new LeaveBean(userid, username, classid, classname, majorid, majorname,
+				collegeid, collegename, teachername, teacherphone, linkname,
+				linkphone, outtime, intime, typeid, typename, remarks,
+				img, teacherid, shanghai, slocationcode, slocation, locationcode,
+				location);
+		LeaveDataService.leaveDataSave(leave);
+		
+		//String formResult = GenchPlatformAuth.doPostForm(url, map);
 		// 把字符串转为json
-		JSONObject jsonObject = JSONObject.parseObject(formResult);
+		//JSONObject jsonObject = JSONObject.parseObject(formResult);
 		// {"suc":true,"msg":"添加成功","emsg":null,"code":100,"data":"","ct":1650373756}
-		String flag = jsonObject.getString("msg");
-
+		//String flag = jsonObject.getString("msg");
+		/*
 		if ("提交成功".equals(flag)) {
 			response.getWriter().print("<script>alert(\"提交成功\");window.location.href= \"studentindex.jsp\";</script>");
 			
@@ -115,7 +126,7 @@ public class CommitLeaveServlet extends HttpServlet {
 		} else {
 			response.getWriter().print("<script>alert(\"提交失败,请检查格式\");window.location.href= \"leave.jsp\";</script>");
 		}
-
+		 */
 	}
 
 	/**

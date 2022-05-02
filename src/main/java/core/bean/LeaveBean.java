@@ -45,6 +45,41 @@ public class LeaveBean {
 	private int num;
 	private int bid;
 
+	
+	
+	public LeaveBean(String userid, String username, String classid, String classname, String majorid, String majorname,
+			String collegeid, String collegename, String teachername, String teacherphone, String linkname,
+			String linkphone, String outtime, String intime, String typeid, String typename, String remarks,
+			String img, String teacherid, String shanghai, String slocationcode, String slocation, String locationcode,
+			String location) {
+		this.userid = userid;
+		this.username = username;
+		this.classid = classid;
+		this.classname = classname;
+		this.majorid = majorid;
+		this.majorname = majorname;
+		this.collegeid = collegeid;
+		this.collegename = collegename;
+		this.teachername = teachername;
+		this.teacherphone = teacherphone;
+		this.linkname = linkname;
+		this.linkphone = linkphone;
+		outtime = outtime.replace('/', '-') + ":00";
+		this.outtime = Timestamp.valueOf(outtime);
+		intime = intime.replace('/', '-') + ":00";
+		this.intime = Timestamp.valueOf(intime);
+		this.typeid = Integer.parseInt(typeid);
+		this.typename = typename;
+		this.remarks = remarks;
+		this.img = img;
+		this.teacherid = teacherid;
+		this.shanghai = Integer.parseInt(shanghai);
+		this.slocationcode = slocationcode;
+		this.slocation = slocation;
+		this.locationcode = locationcode;
+		this.location = location;
+	}
+
 	public LeaveBean(long id, String userid, String username, String classid, String classname, String majorid,
 			String majorname, String collegeid, String collegename, String teachername, String teacherphone,
 			String linkname, String linkphone, Timestamp outtime, Timestamp intime, int typeid, String typename,
