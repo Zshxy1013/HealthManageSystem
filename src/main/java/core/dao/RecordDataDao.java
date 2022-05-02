@@ -74,7 +74,7 @@ public class RecordDataDao {
 			rs.close();
 			if (pageUtils.getTotalCount() != 0) {
 				// 将每一条详细数据添加到list中
-				sql = "SELECT * FROM `ihealthManage`.`record` LIMIT ?,?";
+				sql = "SELECT * FROM `ihealthManage`.`record` order by `id` desc LIMIT ?,?";
 				ps = conn.prepareStatement(sql);
 				ps.setInt(1, pageUtils.getStartIndex());
 				ps.setInt(2, pageUtils.getPageSize());
@@ -159,7 +159,7 @@ public class RecordDataDao {
 			rs.close();
 			if (pageUtils.getTotalCount() != 0) {
 				// 将每一条详细数据添加到list中
-				sql = "SELECT * FROM `ihealthManage`.`record` WHERE `userid`=? LIMIT ?,?";
+				sql = "SELECT * FROM `ihealthManage`.`record` WHERE `userid`=? order by `id` desc LIMIT ?,?";
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, uDataBean.getStuSchoolID());
 				ps.setInt(2, pageUtils.getStartIndex());
