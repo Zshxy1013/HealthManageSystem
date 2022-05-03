@@ -9,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import core.bean.QRCodeData;
 import core.bean.UserDataBean;
 import core.service.GenchPlatformAuth;
+import core.service.LeaveDataService;
 
 /**
  * Servlet implementation class LeaveQRCodePage
@@ -33,7 +35,14 @@ public class LeaveQRCodePage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html;charset=utf-8");
-		response.sendRedirect("leaveQRCode.jsp");
+		HttpSession session = request.getSession();
+		UserDataBean uDataBean = (UserDataBean) session.getAttribute("user");
+		QRCodeData qrcode = new QRCodeData(uDataBean.getStuSchoolID());
+		qrcode.setStuName(uDataBean.getStuName());
+		LeaveDataService.leaveDataCheck(qrcode);
+		request.setAttribute("qrCode", qrcode);
+		request.getRequestDispatcher("leaveQRCode.jsp").forward(request, response);
+
 	}
 
 	/**

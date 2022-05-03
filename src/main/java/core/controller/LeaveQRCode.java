@@ -33,7 +33,7 @@ public class LeaveQRCode extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		byte[] qrCode = null;
-		String INFO = new String("出校码".getBytes("UTF-8"), "ISO-8859-1");
+		String INFO = new String("啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊".getBytes("UTF-8"), "ISO-8859-1");
         try {
             qrCode = QRCodeGenerator.getQRCodeImage(INFO, 360, 360);
         } catch (Exception e) {

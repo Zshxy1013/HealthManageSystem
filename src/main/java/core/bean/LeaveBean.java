@@ -128,6 +128,34 @@ public class LeaveBean {
 		this.bid = bid;
 	}
 
+	
+	public LeaveBean(long id, String userid,String username, String classname, String collegename, String teachername,
+			String teacherphone, String linkname, String linkphone, Timestamp outtime, Timestamp intime,
+			String typename, String remarks, String img, int status, int tstatus, Timestamp cdt, String duration,
+			int shanghai, String slocation, String location) {
+		this.id = id;
+		this.userid=userid;
+		this.username = username;
+		this.classname = classname;
+		this.collegename = collegename;
+		this.teachername = teachername;
+		this.teacherphone = teacherphone;
+		this.linkname = linkname;
+		this.linkphone = linkphone;
+		this.outtime = outtime;
+		this.intime = intime;
+		this.typename = typename;
+		this.remarks = remarks;
+		this.img = img;
+		this.status = status;
+		this.tstatus = tstatus;
+		this.cdt = cdt;
+		this.duration = duration;
+		this.shanghai = shanghai;
+		this.slocation = slocation;
+		this.location = location;
+	}
+
 	public long getTicketid() {
 		return ticketid;
 	}

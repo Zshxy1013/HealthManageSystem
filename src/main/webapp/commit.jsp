@@ -28,8 +28,10 @@
 						<ul class="links">
 							<li><a href="studentindex.jsp">主页</a></li>
 							<li><a href="commit.jsp">健康打卡</a></li>
-							<li><a href="leave?curPage=1&type=1">请假</a></li>
+							<li><a href="leave?curPage=1&type=1">真实请假</a></li>
 							<li><a href="sturecordpage?curPage=1">查看个人打卡记录</a>
+							<li><a href="fakeleave?curPage=1&type=1">假请假</a>
+							<li><a href="leaveQRCodePage">查看出校码</a>
 						</ul>
 						<ul class="actions stacked">
 							<li><a href="logout" class="button fit">Log Out</a></li>

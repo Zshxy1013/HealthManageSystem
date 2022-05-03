@@ -12,6 +12,10 @@ public class LeaveListBean {
 		this.records = records;
 	}
 
+	public LeaveListBean() {
+
+	}
+
 	public int getCurrentPage() {
 		return currentPage;
 	}

@@ -28,8 +28,10 @@
 						<ul class="links">
 							<li><a href="studentindex.jsp">主页</a></li>
 							<li><a href="commit.jsp">健康打卡</a></li>
-							<li><a href="leave?curPage=1&type=1">请假</a></li>
+							<li><a href="leave?curPage=1&type=1">真实请假</a></li>
 							<li><a href="sturecordpage?curPage=1">查看个人打卡记录</a>
+							<li><a href="fakeleave?curPage=1&type=1">假请假</a>
+							<li><a href="leaveQRCodePage">查看出校码</a>
 						</ul>
 						<ul class="actions stacked">
 							<li><a href="logout" class="button fit">Log Out</a></li>
@@ -70,7 +72,7 @@
 										<img src="images/pic02.jpg" alt="" />
 									</span>
 									<header class="major">
-										<h3><a href="leave?curPage=1&type=1" class="link">请假</a></h3>
+										<h3><a href="leave?curPage=1&type=1" class="link">真实请假</a></h3>
 										<p>Ask for leave</p>
 									</header>
 								</article>
@@ -83,15 +85,15 @@
 										<p>View the calibration QR code</p>
 									</header>
 								</article>
-								<!--article>
+								<article>
 									<span class="image">
 										<img src="images/pic04.jpg" alt="" />
 									</span>
 									<header class="major">
-										<h3><a href="landing.html" class="link">Ipsum</a></h3>
-										<p>Nisl sed aliquam</p>
+										<h3><a href="fakeleave?curPage=1&type=1" class="link">假请假</a></h3>
+										<p>Fake leave</p>
 									</header>
-								</article-->
+								</article>
 
 							</section>
 

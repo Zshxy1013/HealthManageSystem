@@ -67,67 +67,61 @@
 												<div class="row">
 														<div>
 															<ul class="alt">
-<li><b>学工号</b>：${LeaveListBean.records[id].userid}
+<li><b>学工号</b>：${leaveListBean.records[id].userid}
 </li>
-<li><b>姓名</b>：${LeaveListBean.records[id].username}</li>
+<li><b>姓名</b>：${leaveListBean.records[id].username}</li>
 <li><b>
-专业班级</b>：${LeaveListBean.records[id].classname}</li>
+专业班级</b>：${leaveListBean.records[id].classname}</li>
 <li><b>
-学院</b>：${LeaveListBean.records[id].collegename}</li>
+学院</b>：${leaveListBean.records[id].collegename}</li>
 <li><b>
-辅导员</b>：${LeaveListBean.records[id].teachername}</li>
+辅导员</b>：${leaveListBean.records[id].teachername}</li>
 <li><b>
-辅导员联系方式</b>：${LeaveListBean.records[id].teacherphone}</li>
+辅导员联系方式</b>：${leaveListBean.records[id].teacherphone}</li>
 <li><b>
-校外紧急联系人</b>：${LeaveListBean.records[id].linkname}</li>
+校外紧急联系人</b>：${leaveListBean.records[id].linkname}</li>
 <li><b>
-联系方式</b>：${LeaveListBean.records[id].linkphone}</li>
+联系方式</b>：${leaveListBean.records[id].linkphone}</li>
 <li><b>
-是否离沪</b>：<c:if test="${LeaveListBean.records[id].shanghai==1}">否</c:if>
-<c:if test="${LeaveListBean.records[id].shanghai!=1}">是</c:if>
-</li>
-<li><b>
-离沪目的地</b>：${LeaveListBean.records[id].slocation}   ${LeaveListBean.records[id].location}</li>
-<li><b>
-请假类型</b>：${LeaveListBean.records[id].typename}</li>
-<li><b>
-申请时间</b>：${LeaveListBean.records[id].cdt}</li>
-<li><b>
-离校时间</b>：${LeaveListBean.records[id].outtime}
+是否离沪</b>：<c:if test="${leaveListBean.records[id].shanghai==1}">否</c:if>
+<c:if test="${leaveListBean.records[id].shanghai!=1}">是</c:if>
 </li>
 <li><b>
-返校时间</b>：${LeaveListBean.records[id].intime}
+离沪目的地</b>：${leaveListBean.records[id].slocation}   ${leaveListBean.records[id].location}</li>
+<li><b>
+请假类型</b>：${leaveListBean.records[id].typename}</li>
+<li><b>
+申请时间</b>：${leaveListBean.records[id].cdt}</li>
+<li><b>
+离校时间</b>：${leaveListBean.records[id].outtime}
 </li>
 <li><b>
-总时长</b>：${LeaveListBean.records[id].duration}</li>
+返校时间</b>：${leaveListBean.records[id].intime}
+</li>
 <li><b>
-请假事由</b>：${LeaveListBean.records[id].remarks}</li>
-<c:if test="${LeaveListBean.records[id].img.length()!=0}">
+总时长</b>：${leaveListBean.records[id].duration}</li>
+<li><b>
+请假事由</b>：${leaveListBean.records[id].remarks}</li>
 
-<c:forEach items="${LeaveListBean.records[id].img.split(\",\")}" var="i">
-<img id="photo" src="https://cdn2.gench.edu.cn/cdn3/api/img/${i}">
-</c:forEach>
-</c:if>
-<c:if test="${LeaveListBean.records[id].img.length()==0}">
 证明材料:无
-</c:if>
+
 <hr>
 <li style="margin: auto;text-align:center;border-top:0;margin-top:50px"><b>
-发布人-${LeaveListBean.records[id].username}(提交请假申请)<br>↓<br></b>
+发布人-${leaveListBean.records[id].username}(提交请假申请)<br>↓<br></b>
 
 
 <b>
-<c:if test="${LeaveListBean.records[id].tstatus==1 && LeaveListBean.records[id].status!=0}">
-辅导员-${LeaveListBean.records[id].teachername}(审核中)
+<c:if test="${leaveListBean.records[id].tstatus==1 && LeaveListBean.records[id].status!=0}">
+辅导员-${leaveListBean.records[id].teachername}(审核中)
 </c:if>
-<c:if test="${LeaveListBean.records[id].tstatus==3}"> 	
-辅导员-${LeaveListBean.records[id].teachername}(拒绝)
+<c:if test="${leaveListBean.records[id].tstatus==3}"> 	
+辅导员-${leaveListBean.records[id].teachername}(拒绝)
 </c:if>
-<c:if test="${LeaveListBean.records[id].tstatus==2}">
-辅导员-${LeaveListBean.records[id].teachername}(同意)
+<c:if test="${leaveListBean.records[id].tstatus==2}">
+辅导员-${leaveListBean.records[id].teachername}(同意)
 </c:if>
-<c:if test="${LeaveListBean.records[id].status==0}">
-发布人-${LeaveListBean.records[id].username}(本人撤销)
+<c:if test="${leaveListBean.records[id].status==0}">
+发布人-${leaveListBean.records[id].username}(本人撤销)
 </c:if>
 </b>
 </li>

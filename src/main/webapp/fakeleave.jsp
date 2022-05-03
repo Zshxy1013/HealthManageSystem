@@ -49,7 +49,7 @@
 									</header>
 									<h3>信息</h3>
 
-													<form method="post" action="commitleave">
+													<form method="post" action="fakecommitleave">
 													
 														<div class="col-6 col-12-xsmall">
 																<input type="hidden" name="userid" id="userid" value="${user.stuSchoolID}" placeholder="学工号" />
@@ -106,10 +106,10 @@
 																辅导员联系方式<input type="text" name="teacherphone" id="teacherphone" value="${user.counsellorPhone}" placeholder="辅导员联系方式" disabled/>
 															</div>
 															<div class="col-6 col-12-xsmall">
-																校外紧急联系人<input type="text" name="linkname" id="linkname" value="${LeaveListBean.records[0].linkname}" placeholder="校外紧急联系人" />
+																校外紧急联系人<input type="text" name="linkname" id="linkname" value="${leaveListBean.records[0].linkname}" placeholder="校外紧急联系人" />
 															</div>
 															<div class="col-6 col-12-xsmall">
-																联系方式<input type="text" name="linkphone" id="linkphone" value="${LeaveListBean.records[0].linkphone}" placeholder="联系方式" />
+																联系方式<input type="text" name="linkphone" id="linkphone" value="${leaveListBean.records[0].linkphone}" placeholder="联系方式" />
 															</div>
 															<div class="col-6 col-12-xsmall">
 																出校时间<input type="text" name="outtime" id="outtime"  placeholder="xxxx/xx/xx xx:xx" />

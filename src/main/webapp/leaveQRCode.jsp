@@ -52,13 +52,20 @@
 							<div class="row">
 								<div>
 									<ul class="alt">
+										<c:if test="${qrCode.passStatus == true}">
 										<li><img src="LeaveQRCode"/></li>
-										<li><b>姓名：</b>${user.stuSchoolID} ${user.stuName}</li>
-										<li><b>今日通行权限：</b></li>
-										<li><b>今日通行时间：</b></li>
-										<li><b>本次通行开始时间：</b></li>
-										<li><b>本次通行结束时间：</b></li>
-										<li><b>允许通行/剩余通行：</b></li>
+										<li><b>姓名：</b>${qrCode.stuID} ${qrCode.stuName}</li>
+										<li><b>今日通行权限：</b>允许通行</li>
+										<li><b>今日通行时间：</b>${qrCode.todayPassTime}</li>
+										<li><b>本次通行开始时间：</b>${qrCode.passTimeStart}</li>
+										<li><b>本次通行结束时间：</b>${qrCode.passTimeEnd}</li>
+										<li style="color: #F5DA81;"><b>允许通行/剩余通行：</b>${qrCode.leftPassTimes}次/${qrCode.leftPassTimes}次</li>
+										<li style="color: #F5DA81;">请假时间内的通行次数（出入各算一次）<br>刷完后，将无法出入校，请谨慎使用<br>个人通行码，切勿交易或赠与他人</li>
+										</c:if>
+										<c:if test="${qrCode.passStatus == false}">
+										<li><b>姓名：</b>${qrCode.stuID} ${qrCode.stuName}</li>
+										<li><b>今日通行权限：</b>禁止通行</li>
+										</c:if>
 									</ul>
 								</div>
 							</div>
@@ -82,13 +89,14 @@
 			</footer>
 		</div>
 	</div>
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+	<!-- Scripts -->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script> 
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
 </body>
 </html>

@@ -1,9 +1,6 @@
 package core.controller;
 
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,23 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.alibaba.fastjson.JSONObject;
-
 import core.bean.LeaveBean;
-import core.service.GenchPlatformAuth;
+
 import core.service.LeaveDataService;
 
 /**
  * Servlet implementation class CommitLeave
  */
-@WebServlet("/commitleave")
-public class CommitLeaveServlet extends HttpServlet {
+@WebServlet("/fakecommitleave")
+public class FakeCommitLeaveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CommitLeaveServlet() {
+	public FakeCommitLeaveServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -75,46 +70,18 @@ public class CommitLeaveServlet extends HttpServlet {
 		String locationcode = "310100";
 		String location = "上海市";
 
-		 String url = "http://ihealth.hq.gench.edu.cn/api/LAskleaveAp/add";
-
-		Map<String, String> map = new HashMap<>();
-		map.put("userid", userid);
-		map.put("username", username);
-		map.put("collegename", collegename);
-		map.put("collegeid", collegeid);
-		map.put("classname", classname);
-		map.put("classid", classid);
-		map.put("majorname", majorname);
-		map.put("majorid", majorid);
-		map.put("teacherid", teacherid);
-		map.put("teachername", teachername);
-		map.put("teacherphone", teacherphone);
-		map.put("linkname", linkname);
-		map.put("linkphone", linkphone);
-		map.put("outtime", outtime);
-		map.put("intime", intime);
-		map.put("remarks", remarks);
-		map.put("typename", typename);
-		map.put("typeid", typeid);
-		map.put("img", img);
-		map.put("shanghai", shanghai);
-		map.put("slocationcode", slocationcode);
-		map.put("slocation", slocation);
-		map.put("locationcode", locationcode);
-		map.put("location", location);
-		
-		String formResult = GenchPlatformAuth.doPostForm(url, map);
-		// 把字符串转为json
-		JSONObject jsonObject = JSONObject.parseObject(formResult);
-		// {"suc":true,"msg":"添加成功","emsg":null,"code":100,"data":"","ct":1650373756}
-		String flag = jsonObject.getString("msg");
-		
-		if ("提交成功".equals(flag)) {
-			response.getWriter().print("<script>alert(\"提交成功\");window.location.href= \"studentindex.jsp\";</script>");
-		
-		} else {
-			response.getWriter().print("<script>alert(\"提交失败,请检查格式\");window.location.href= \"leave.jsp\";</script>");
-		}
+		LeaveBean leave = new LeaveBean(userid, username, classid, classname, majorid, majorname,
+				collegeid, collegename, teachername, teacherphone, linkname,
+				linkphone, outtime, intime, typeid, typename, remarks,
+				img, teacherid, shanghai, slocationcode, slocation, locationcode,
+				location);
+	
+			if(LeaveDataService.leaveDataSave(leave)==1) {
+				response.getWriter().print("<script>alert(\"提交成功\");window.location.href= \"studentindex.jsp\";</script>");
+			}
+			else {
+				response.getWriter().print("<script>alert(\"提交失败,请检查格式\");window.location.href= \"leave.jsp\";</script>");
+			}
 		 
 	}
 

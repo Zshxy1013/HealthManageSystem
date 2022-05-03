@@ -30,10 +30,8 @@
 						<ul class="links">
 							<li><a href="studentindex.jsp">主页</a></li>
 							<li><a href="commit.jsp">健康打卡</a></li>
-							<li><a href="leave?curPage=1&type=1">真实请假</a></li>
+							<li><a href="leave?curPage=1&type=1">请假</a></li>
 							<li><a href="sturecordpage?curPage=1">查看个人打卡记录</a>
-							<li><a href="fakeleave?curPage=1&type=1">假请假</a>
-							<li><a href="leaveQRCodePage">查看出校码</a>
 						</ul>
 						<ul class="actions stacked">
 							<li><a href="logout" class="button fit">Log Out</a></li>
@@ -67,9 +65,9 @@
 																</tr>
 															</thead>
 															<tbody>
-																    <c:forEach var="record" items="${LeaveListBean.records}">
+																    <c:forEach var="record" items="${leaveListBean.records}">
 																    <tr>
-																    	<td>${record.ticketid}</td>
+																    	<td>${record.id}</td>
 																        <td>${record.outtime}</td>
 																        <td>${record.intime}</td>
 																        <td><c:if test="${record.shanghai==1}">否</c:if><c:if test="${record.shanghai!=1}">是</c:if></td>
@@ -91,10 +89,10 @@
 
 													<ul class="pagination">
 														<c:if test="${PageUtils.currentPage > 1}">
-														<li><a href="leave?curPage=${PageUtils.prePage}&type=1" class="button small">Prev</a></li>
+														<li><a href="fakeleave?curPage=${PageUtils.prePage}&type=1" class="button small">Prev</a></li>
 														</c:if>
 														<c:if test="${PageUtils.currentPage == 1}">
-														<li><a href="leave?curPage=${PageUtils.prePage}&type=1" class="button small disabled">Prev</a></li>
+														<li><a href="fakeleave?curPage=${PageUtils.prePage}&type=1" class="button small disabled">Prev</a></li>
 														</c:if>
 														<!--li><span>&hellip;</span></li-->
 														<c:if test="${PageUtils.currentPage-5>=1}">
@@ -102,10 +100,10 @@
 																<c:forEach var="i" begin="${PageUtils.currentPage-4}" end="${PageUtils.currentPage+5}">
 																	<li>
 																	<c:if test="${PageUtils.currentPage==i}">
-																		<a class="page active" href="leave?curPage=${i}&type=1">${i}</a>
+																		<a class="page active" href="fakeleave?curPage=${i}&type=1">${i}</a>
 																	</c:if>
 																	<c:if test="${PageUtils.currentPage!=i}">
-																		<a class="page" href="leave?curPage=${i}&type=1">${i}</a>
+																		<a class="page" href="fakeleave?curPage=${i}&type=1">${i}</a>
 																	</c:if>																
 																	</li>
 																</c:forEach>
@@ -114,10 +112,10 @@
 																<c:forEach var="i" begin="${PageUtils.currentPage-4}" end="${PageUtils.totalPages}">
 																	<li>
 																	<c:if test="${PageUtils.currentPage==i}">
-																		<a class="page active" href="leave?curPage=${i}&type=1">${i}</a>
+																		<a class="page active" href="fakeleave?curPage=${i}&type=1">${i}</a>
 																	</c:if>
 																	<c:if test="${PageUtils.currentPage!=i}">
-																		<a class="page" href="leave?curPage=${i}&type=1">${i}</a>
+																		<a class="page" href="fakeleave?curPage=${i}&type=1">${i}</a>
 																	</c:if>																
 																	</li>
 																</c:forEach>
@@ -128,10 +126,10 @@
 																<c:forEach var="i" begin="1" end="${PageUtils.totalPages}">
 																	<li>
 																	<c:if test="${PageUtils.currentPage==i}">
-																		<a class="page active" href="leave?curPage=${i}&type=1">${i}</a>
+																		<a class="page active" href="fakeleave?curPage=${i}&type=1">${i}</a>
 																	</c:if>
 																	<c:if test="${PageUtils.currentPage!=i}">
-																		<a class="page" href="leave?curPage=${i}&type=1">${i}</a>
+																		<a class="page" href="fakeleave?curPage=${i}&type=1">${i}</a>
 																	</c:if>
 																	</li>
 																</c:forEach>
@@ -140,20 +138,20 @@
 																<c:forEach var="i" begin="1" end="10">
 																	<li>
 																	<c:if test="${PageUtils.currentPage==i}">
-																		<a class="page active" href="leave?curPage=${i}&type=1">${i}</a>
+																		<a class="page active" href="fakeleave?curPage=${i}&type=1">${i}</a>
 																	</c:if>
 																	<c:if test="${PageUtils.currentPage!=i}">
-																		<a class="page" href="leave?curPage=${i}&type=1">${i}</a>
+																		<a class="page" href="fakeleave?curPage=${i}&type=1">${i}</a>
 																	</c:if>
 																	</li>
 																</c:forEach>
 															</c:if>
 														</c:if>														
 														<c:if test="${PageUtils.currentPage < PageUtils.totalPages}">
-														<li><a href="leave?curPage=${PageUtils.nextPage}&type=1" class="button small">Next</a></li>
+														<li><a href="fakeleave?curPage=${PageUtils.nextPage}&type=1" class="button small">Next</a></li>
 														</c:if>
 														<c:if test="${PageUtils.currentPage == PageUtils.totalPages}">
-														<li><a href="leave?curPage=${PageUtils.nextPage}&type=1" class="button small disabled">Next</a></li>
+														<li><a href="fakeleave?curPage=${PageUtils.nextPage}&type=1" class="button small disabled">Next</a></li>
 														</c:if>
 													</ul>
 													</div>
@@ -186,11 +184,11 @@
 
 <script>
 function leave(){
-	location.href="leave.jsp";
+	location.href="fakeleave.jsp";
 }
 
 function moredata(currentPage,id){
-	location.href="leave?curPage="+currentPage+"&type=2&id="+id;
+	location.href="fakeleave?curPage="+currentPage+"&type=2&id="+id;
 }
 </script>
 

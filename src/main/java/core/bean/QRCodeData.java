@@ -3,6 +3,7 @@ package core.bean;
 import java.sql.Timestamp;
 
 public class QRCodeData {
+	private String stuID;
 	private String stuName;
 	private Boolean passStatus;
 	private Timestamp passTimeStart;
@@ -10,24 +11,27 @@ public class QRCodeData {
 	private String todayPassTime;
 	private int leftPassTimes;
 	
-	public QRCodeData(String stuName, Boolean passStatus, Timestamp passTimeStart, Timestamp passTimeEnd,
-			int leftPassTimes) {
+	public QRCodeData(String stuID) {
 		super();
-		this.stuName = stuName;
-		this.passStatus = passStatus;
-		this.passTimeStart = passTimeStart;
-		this.passTimeEnd = passTimeEnd;
-		this.todayPassTime = processTimeStatus(passTimeStart, passTimeEnd);
-		this.leftPassTimes = leftPassTimes;
+		this.stuID = stuID;
 	}
-	
+
 	@SuppressWarnings("deprecation")
-	public String processTimeStatus(Timestamp passTimeStart, Timestamp passTimeEnd) {
-		if (passTimeStart.getDay() == passTimeEnd.getDate() && passTimeStart.getMonth() == passTimeEnd.getMonth() && passTimeStart.getYear() == passTimeEnd.getYear())
-			return passTimeStart.getHours() + ":" + passTimeStart.getMinutes() + ":" + passTimeEnd.getHours() + ":" + passTimeEnd.getMinutes();
-		else return "全天";
+	public void processTimeStatus() {
+		if (passTimeStart.getDay() == passTimeEnd.getDay() && passTimeStart.getMonth() == passTimeEnd.getMonth() && passTimeStart.getYear() == passTimeEnd.getYear())
+			todayPassTime = String.format("%02d:%02d至%02d:%02d", passTimeStart.getHours(), passTimeStart.getMinutes(), passTimeEnd.getHours(), passTimeEnd.getMinutes());
+			//todayPassTime = passTimeStart.getHours() + ":" + passTimeStart.getMinutes() + "至" + passTimeEnd.getHours() + ":" + passTimeEnd.getMinutes();
+		else todayPassTime = "全天";
 	}
 	
+	public String getStuID() {
+		return stuID;
+	}
+
+	public void setStuID(String stuID) {
+		this.stuID = stuID;
+	}
+
 	public String getStuName() {
 		return stuName;
 	}
