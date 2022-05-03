@@ -47,8 +47,10 @@ public class FakeLeaveServlet extends HttpServlet {
 
 			LeaveDataService.selectStuLeaveData(uDataBean,leaveListBean, pageUtils);
 			leaveListBean.setCurrentPage(Integer.parseInt(currentPage));
+			if(leaveListBean.getRecords()!=null) {
 			for(int i=0;i<leaveListBean.getRecords().size();i++) {
 				leaveListBean.getRecords().get(i).setId(i);
+			}
 			}
 			session.setAttribute("leaveListBean", leaveListBean);
 			request.setAttribute("PageUtils", pageUtils);
