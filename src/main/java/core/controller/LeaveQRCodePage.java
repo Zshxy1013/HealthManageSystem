@@ -1,7 +1,7 @@
 package core.controller;
 
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -33,21 +33,7 @@ public class LeaveQRCodePage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html;charset=utf-8");
-		HttpSession session = request.getSession();
-		UserDataBean uDataBean = (UserDataBean) session.getAttribute("user");
-		GenchPlatformAuth auth = new GenchPlatformAuth(uDataBean);
-		auth.iHealthLogin();
-		auth.getStuData();
-		try {
-			request.setAttribute("uDataBean", uDataBean);
-			request.getRequestDispatcher("leaveQRCode.jsp").forward(request, response);
-		} catch (jakarta.servlet.ServletException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		response.sendRedirect("leaveQRCode.jsp");
 	}
 
 	/**

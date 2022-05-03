@@ -75,7 +75,7 @@ public class CommitLeaveServlet extends HttpServlet {
 		String locationcode = "310100";
 		String location = "上海市";
 
-		 String url = "http://ihealth.hq.gench.edu.cn/api/LAskleaveAp/add";
+		// String url = "http://ihealth.hq.gench.edu.cn/api/LAskleaveAp/add";
 
 		Map<String, String> map = new HashMap<>();
 		map.put("userid", userid);
@@ -108,25 +108,24 @@ public class CommitLeaveServlet extends HttpServlet {
 				linkphone, outtime, intime, typeid, typename, remarks,
 				img, teacherid, shanghai, slocationcode, slocation, locationcode,
 				location);
-		LeaveDataService.leaveDataSave(leave);
+	
 		
-		//String formResult = GenchPlatformAuth.doPostForm(url, map);
+	//	String formResult = GenchPlatformAuth.doPostForm(url, map);
 		// 把字符串转为json
-		//JSONObject jsonObject = JSONObject.parseObject(formResult);
+	//	JSONObject jsonObject = JSONObject.parseObject(formResult);
 		// {"suc":true,"msg":"添加成功","emsg":null,"code":100,"data":"","ct":1650373756}
-		//String flag = jsonObject.getString("msg");
-		/*
-		if ("提交成功".equals(flag)) {
-			response.getWriter().print("<script>alert(\"提交成功\");window.location.href= \"studentindex.jsp\";</script>");
+	//	String flag = jsonObject.getString("msg");
+		
+	//	if ("提交成功".equals(flag)) {
+	//		response.getWriter().print("<script>alert(\"提交成功\");window.location.href= \"studentindex.jsp\";</script>");
 			
 		//插入数据库
-			
-			
-			
-		} else {
-			response.getWriter().print("<script>alert(\"提交失败,请检查格式\");window.location.href= \"leave.jsp\";</script>");
-		}
-		 */
+			LeaveDataService.leaveDataSave(leave);
+		
+	//	} else {
+	//		response.getWriter().print("<script>alert(\"提交失败,请检查格式\");window.location.href= \"leave.jsp\";</script>");
+	//	}
+		 
 	}
 
 	/**

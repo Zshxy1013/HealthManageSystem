@@ -53,7 +53,7 @@
 								<div>
 									<ul class="alt">
 										<li><img src="LeaveQRCode"/></li>
-										<li><b>姓名：</b>${uDataBean.stuSchoolID} ${uDataBean.stuName}</li>
+										<li><b>姓名：</b>${user.stuSchoolID} ${user.stuName}</li>
 										<li><b>今日通行权限：</b></li>
 										<li><b>今日通行时间：</b></li>
 										<li><b>本次通行开始时间：</b></li>
@@ -82,5 +82,13 @@
 			</footer>
 		</div>
 	</div>
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
 </body>
 </html>

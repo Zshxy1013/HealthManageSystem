@@ -14,25 +14,6 @@ import com.google.zxing.qrcode.QRCodeWriter;
 public class QRCodeGenerator {
 
     /**
-     * 生成二维码，写到本地
-     *
-     * @param text     二维码需要包含的信息
-     * @param width    二维码宽度
-     * @param height   二维码高度
-     * @param filePath 图片保存路径
-     * @throws WriterException
-     * @throws IOException
-     */
-    private static void generateQRCodeImage(String text, int width, int height, String filePath) throws WriterException, IOException {
-        QRCodeWriter qrCodeWriter = new QRCodeWriter();
-        BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height);
-        Path path = FileSystems.getDefault().getPath(filePath);
-
-        MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
-
-    }
-
-    /**
      * 生成二维码，返回字节流
      *
      * @param text   二维码需要包含的信息
