@@ -70,18 +70,19 @@ public class FakeCommitLeaveServlet extends HttpServlet {
 		String locationcode = "310100";
 		String location = "上海市";
 
-		LeaveBean leave = new LeaveBean(userid, username, classid, classname, majorid, majorname,
-				collegeid, collegename, teachername, teacherphone, linkname,
-				linkphone, outtime, intime, typeid, typename, remarks,
-				img, teacherid, shanghai, slocationcode, slocation, locationcode,
-				location);
+		try {
+			LeaveBean leave = new LeaveBean(userid, username, classid, classname, majorid, majorname,
+					collegeid, collegename, teachername, teacherphone, linkname,
+					linkphone, outtime, intime, typeid, typename, remarks,
+					img, teacherid, shanghai, slocationcode, slocation, locationcode,
+					location);
+			LeaveDataService.leaveDataSave(leave);
+			response.getWriter().print("<script>alert(\"提交成功\");window.location.href= \"studentindex.jsp\";</script>");
+		} catch (Exception e) {
+			response.getWriter().print("<script>alert(\"提交失败,请检查格式\");window.location.href= \"fakeleave.jsp\";</script>");
+		}
 	
-			if(LeaveDataService.leaveDataSave(leave)==1) {
-				response.getWriter().print("<script>alert(\"提交成功\");window.location.href= \"studentindex.jsp\";</script>");
-			}
-			else {
-				response.getWriter().print("<script>alert(\"提交失败,请检查格式\");window.location.href= \"leave.jsp\";</script>");
-			}
+
 		 
 	}
 

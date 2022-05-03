@@ -9,8 +9,8 @@ import core.dao.LeaveDataDao;
 import core.util.PageUtils;
 
 public class LeaveDataService {
-	public static int leaveDataSave(LeaveBean leaveBean) {
-		return LeaveDataDao.saveLeaveData(leaveBean);
+	public static void leaveDataSave(LeaveBean leaveBean) {
+		LeaveDataDao.saveLeaveData(leaveBean);
 	}
 	public static void leaveDataCheck(QRCodeData qRCodeData) {
 		LeaveDataDao.checkLeaveData(qRCodeData);

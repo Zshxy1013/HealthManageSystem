@@ -37,10 +37,10 @@ public class LeaveDataDao {
         return 0;
     }
 
-	public static int saveLeaveData(LeaveBean leaveBean) {
+	public static void saveLeaveData(LeaveBean leaveBean) {
 		Connection conn = DBHelp.getConn();
 		if (conn == null) {
-			return -1;
+			return ;
 		}
 		String sql = "INSERT INTO `ihealthManage`.`leave` (`userid`, `username`, `classid`, `classname`, `majorid`, `majorname`, `collegeid`, `collegename`, `teachername`, `teacherphone`,`linkname`, `linkphone`, `outtime`, `intime`, `typeid`, `typename`, `remarks`, `img`, `teacherid`, `shanghai`, `slocationcode`, `slocation`, `locationcode`, `location`, `cdt`, `duration`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -78,10 +78,9 @@ public class LeaveDataDao {
 			ps.setString(26, String.valueOf(Date2TimeStamp(leaveBean.getIntime().toString(), leaveBean.getOuttime().toString(), "yyyy-MM-dd HH:mm:ss") / 3600));
 			ps.executeUpdate();
 			ps.close();
-			return 1;
+	
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return -1;
 		}
 	}
 	public static void selectStuLeaveData(UserDataBean uDataBean,LeaveListBean LeaveListData, PageUtils pageUtils) {
