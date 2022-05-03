@@ -38,7 +38,7 @@ public class FakeLeaveServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		String currentPage = request.getParameter("curPage");
 		String type = request.getParameter("type");
-		try {
+
 			HttpSession session = request.getSession();
 			UserDataBean uDataBean = (UserDataBean) session.getAttribute("user");
 			
@@ -64,10 +64,8 @@ public class FakeLeaveServlet extends HttpServlet {
 				request.getRequestDispatcher("fakecheckmoreleave.jsp").forward(request, response);
 			}
 			
-		} catch (Exception e) {
-			response.getWriter().print("<script>alert(\"非法访问\");window.location.href = \"studentindex.jsp\";</script>");
-		}
-	}
+		} 
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
