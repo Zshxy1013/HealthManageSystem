@@ -10,9 +10,9 @@ public class QRCodeData {
 	private Timestamp passTimeEnd;
 	private String todayPassTime;
 	private int leftPassTimes;
+	private int id;
 	
 	public QRCodeData(String stuID) {
-		super();
 		this.stuID = stuID;
 	}
 
@@ -24,6 +24,15 @@ public class QRCodeData {
 		else todayPassTime = "全天";
 	}
 	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getStuID() {
 		return stuID;
 	}

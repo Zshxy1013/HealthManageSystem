@@ -1,30 +1,25 @@
 package core.controller;
 
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpSession;
-
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import core.bean.QRCodeData;
-import core.bean.UserDataBean;
-import core.service.GenchPlatformAuth;
 import core.service.LeaveDataService;
 
 /**
- * Servlet implementation class LeaveQRCodePage
+ * Servlet implementation class Judge
  */
-@WebServlet("/leaveQRCodePage")
-public class LeaveQRCodePage extends HttpServlet {
+@WebServlet("/judge")
+public class Judge extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LeaveQRCodePage() {
+    public Judge() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,14 +29,11 @@ public class LeaveQRCodePage extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		response.setContentType("text/html;charset=utf-8");
-		HttpSession session = request.getSession();
-		UserDataBean uDataBean = (UserDataBean) session.getAttribute("user");
-		QRCodeData qrcode = new QRCodeData(uDataBean.getStuSchoolID());
-		qrcode.setStuName(uDataBean.getStuName());
-		LeaveDataService.leaveDataCheck(qrcode);
-		request.setAttribute("qrCode", qrcode);
-		request.getRequestDispatcher("leaveQRCode.jsp").forward(request, response);
+		LeaveDataService.updateLeaveDataForLeftTime(Integer.parseInt(request.getParameter("id")));
+		response.getWriter().print("<script>alert(\"提交成功\");window.location.href= \"login.jsp\";</script>");
+
 	}
 
 	/**

@@ -16,7 +16,29 @@ public class LeaveDataService {
 		LeaveDataDao.checkLeaveData(qRCodeData);
 	}
 	
+	public static void selectStuLeaveDataByTicketID(int ticketID, LeaveBean leaveBean) {
+		LeaveDataDao.selectStuLeaveDataByTicketID(ticketID, leaveBean);
+	}
+	
+	public static void updateLeaveDataForLeftTime(int ticketID) {
+		LeaveDataDao.updateLeaveDataForLeftTime(ticketID);
+	}
+	
 	public static void selectStuLeaveData(UserDataBean uDataBean,LeaveListBean leaveListBean, PageUtils pageUtils) {
 		LeaveDataDao.selectStuLeaveData(uDataBean,leaveListBean,pageUtils);
+	}
+	
+	public static void selectStuLeaveDataForTeacher(LeaveListBean leaveListBean, PageUtils pageUtils) {
+		// TODO Auto-generated method stub
+		LeaveDataDao.selectStuLeaveDataForTeacher(leaveListBean,pageUtils);
+	}
+	
+	public static void updateLeaveData(String stuID, int updateID) {
+		// TODO Auto-generated method stub
+		// updateID 
+		// 1 - 待审核
+		// 2 - 审核通过
+		// 3 - 审核拒绝
+		LeaveDataDao.updateLeaveData(stuID, updateID);
 	}
 }

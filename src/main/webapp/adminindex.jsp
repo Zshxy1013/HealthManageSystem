@@ -26,9 +26,9 @@
 				<!-- Menu -->
 					<nav id="menu">
 						<ul class="links">
-							<li><a href="studentindex.jsp">主页</a></li>
+							<li><a href="adminindex.jsp">主页</a></li>
 							<li><a href="recordpage?curPage=1">查看学生打卡</a></li>
-							
+							<li><a href="ManageStudentLeave">查看学生请假</a></li>
 						</ul>
 						<ul class="actions stacked">
 							<li><a href="logout" class="button fit">Log Out</a></li>
@@ -66,7 +66,7 @@
 										<img src="images/pic02.jpg" alt="" />
 									</span>
 									<header class="major">
-										<h3><a href="" class="link">查看学生请假</a></h3>
+										<h3><a href="ManageStudentLeave" class="link">查看学生请假</a></h3>
 										<p>View student leave records</p>
 									</header>
 								</article>

@@ -155,6 +155,11 @@ public class LeaveBean {
 		this.slocation = slocation;
 		this.location = location;
 	}
+	
+
+	public LeaveBean() {
+
+	}
 
 	public long getTicketid() {
 		return ticketid;

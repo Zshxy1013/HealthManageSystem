@@ -37,6 +37,54 @@ public class LeaveDataDao {
         return 0;
     }
 
+	public static void selectStuLeaveDataByTicketID(int ticketID, LeaveBean leaveBean) {
+		Connection conn = DBHelp.getConn();
+		if (conn == null) {
+			return;
+		}
+		String sql = "SELECT * FROM `ihealthManage`.`leave` WHERE `id`=?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, ticketID);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				leaveBean.setId(rs.getInt("id"));
+				leaveBean.setUserid(rs.getString("userid"));
+				leaveBean.setIntime(rs.getTimestamp("intime"));
+				leaveBean.setOuttime(rs.getTimestamp("outtime"));
+				leaveBean.setUsername(rs.getString("username"));
+				leaveBean.setClassname(rs.getString("classname"));
+				leaveBean.setCollegename(rs.getString("collegename"));
+			}
+			ps.close();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public  static void updateLeaveData(String userid, int updateID) {
+		Connection conn = DBHelp.getConn();
+		if (conn == null) {
+			return ;
+		}
+		String sql = "update `ihealthManage`.`leave` set tstatus = ? where `userid` = ?";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, updateID);
+			pstmt.setString(2, userid);
+			pstmt.executeUpdate();
+			pstmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public static void saveLeaveData(LeaveBean leaveBean) {
 		Connection conn = DBHelp.getConn();
 		if (conn == null) {
@@ -83,6 +131,8 @@ public class LeaveDataDao {
 			e.printStackTrace();
 		}
 	}
+	
+	
 	public static void selectStuLeaveData(UserDataBean uDataBean,LeaveListBean LeaveListData, PageUtils pageUtils) {
 		Connection conn = DBHelp.getConn();
 		if (conn == null) {
@@ -170,6 +220,7 @@ public class LeaveDataDao {
 				// 判断剩余次数是否为0
 				if (rs.getInt("leftTimes") != 0 && rs.getInt("tstatus") == 2) {
 					// 不为0代表此条出行次数还未用完，依旧有效
+					qrcode.setId(rs.getInt("id"));
 					qrcode.setStuID(rs.getString("userid"));
 					qrcode.setStuName(rs.getString("username"));
 					qrcode.setPassStatus(true);
@@ -188,4 +239,118 @@ public class LeaveDataDao {
 			e.printStackTrace();
 		}
     }
+
+	public static void selectStuLeaveDataForTeacher(LeaveListBean leaveListBean, PageUtils pageUtils) {
+		// TODO Auto-generated method stub
+		Connection conn = DBHelp.getConn();
+		if (conn == null) {
+			return;
+		}
+		String sql = "SELECT COUNT(*) FROM `ihealthManage`.`leave`";
+		try {
+			// 准备PS语句
+			PreparedStatement ps = conn.prepareStatement(sql);
+			// 执行查询
+			ResultSet rs = ps.executeQuery();
+			// 初始化总数 count
+			int count = 0;
+			// 初始化list
+			List<LeaveBean> list = null;
+			// 如果查询结果不为空
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+			// 获取结果数
+			pageUtils.setTotalCount(count);
+			// 初始化分页数据
+			pageUtils.Init();
+			ps.close();
+			rs.close();
+
+			if (count != 0) {
+				// 如果总数不为0，则查询分页数据
+				sql = "SELECT * FROM `ihealthManage`.`leave` ORDER BY `id` DESC LIMIT ?,?";
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, pageUtils.getStartIndex());
+				ps.setInt(2, pageUtils.getPageSize());
+				rs = ps.executeQuery();
+				// 初始化list
+				list = new ArrayList<LeaveBean>();
+				// 循环获取查询结果
+				while (rs.next()) {
+					int id = rs.getInt("id");
+					String userid=rs.getString("userid");
+					String username=rs.getString("username");
+					String classname=rs.getString("classname");
+					String collegename=rs.getString("collegename");
+					String teachername=rs.getString("teachername");
+					String teacherphone=rs.getString("teacherphone");
+					String linkname=rs.getString("linkname");
+					String linkphone=rs.getString("linkphone");
+					int shanghai=rs.getInt("shanghai");
+					String slocation=rs.getString("slocation");
+					String location=rs.getString("location");
+					String typename=rs.getString("typename");
+					Timestamp cdt=rs.getTimestamp("cdt");
+					Timestamp outtime=rs.getTimestamp("outtime");
+					Timestamp intime=rs.getTimestamp("intime");
+					String duration=rs.getString("duration");
+					String remarks=rs.getString("remarks");
+					String img=rs.getString("img");
+					int status=rs.getInt("status");
+					int tstatus=rs.getInt("tstatus");
+					list.add(new LeaveBean(id, userid, username, classname, collegename, teachername, teacherphone, linkname, 
+					linkphone, outtime, intime, typename, remarks, img, status, tstatus, cdt, duration, shanghai, slocation, location));
+				}
+			}  else {
+				list = null;
+			}
+			// 将leaveList存入leaveListBean
+			leaveListBean.setRecords(list);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public static void updateLeaveDataForLeftTime(int ticketID) {
+		// TODO Auto-generated method stub
+		Connection conn = DBHelp.getConn();
+		if (conn == null) {
+			return ;
+		}
+		// 获取剩余次数
+		int leftTimes = 0;
+		String sql = "SELECT `leftTimes` FROM `ihealthManage`.`leave` WHERE `id`=?";
+		PreparedStatement ps;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, ticketID);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				leftTimes = rs.getInt(1);
+			}
+			ps.close();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		
+		sql = "update `ihealthManage`.`leave` set leftTimes = ? where `id` = ?";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, leftTimes - 1);
+			pstmt.setInt(2, ticketID);
+			pstmt.executeUpdate();
+			pstmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

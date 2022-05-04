@@ -67,7 +67,7 @@
 																</tr>
 															</thead>
 															<tbody>
-																    <c:forEach var="record" items="${leaveListBean.records}">
+																    <c:forEach var="record" varStatus="varstatus" items="${leaveListBean.records}">
 																    <tr>
 																    	<td>${record.id}</td>
 																        <td>${record.outtime}</td>
@@ -81,7 +81,7 @@
 																        	<td>${record.remarks.substring(0,10)}...</td>
 																        </c:if>
 																        
-																        <td><button onclick="moredata(${LeaveListBean.currentPage},${record.id})">详情</button></td>
+																        <td><button onclick="moredata(${LeaveListBean.currentPage},${varstatus.index})">详情</button></td>
    																	 </tr>
    																	 </c:forEach>
 															</tbody>

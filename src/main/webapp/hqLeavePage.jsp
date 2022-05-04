@@ -5,7 +5,7 @@
 
 <html>
 	<head>
-		<title>出入校二维码</title>
+		<title>学生出入校审核</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="shortcut icon" href="https://cdn.nisekoo.com/ihealth.ico">
@@ -28,12 +28,6 @@
 	<!-- Menu -->
 		<nav id="menu">
 			<ul class="links">
-			<li><a href="studentindex.jsp">主页</a></li>
-							<li><a href="commit.jsp">健康打卡</a></li>
-							<li><a href="leave?curPage=1&type=1">真实请假</a></li>
-							<li><a href="sturecordpage?curPage=1">查看个人打卡记录</a>
-							<li><a href="fakeleave?curPage=1&type=1">假请假</a>
-							<li><a href="leaveQRCodePage">查看出校码</a>
 			</ul>
 			<ul class="actions stacked">
 				<li><a href="logout" class="button fit">Log Out</a></li>
@@ -47,7 +41,7 @@
 			<section id="one">
 				<div class="inner">
 					<header class="major">
-						<h1>学生出入校二维码</h1>
+						<h1>学生出入校审核</h1>
 					</header>
 					<div class="row gtr-200">
 						<div style="margin:auto">
@@ -55,20 +49,13 @@
 							<div class="row">
 								<div>
 									<ul class="alt">
-										<c:if test="${qrCode.passStatus == true}">
-										<li><img src="LeaveQRCode?ticketID=${qrCode.id}"/></li>
-										<li><b>姓名：</b>${qrCode.stuID} ${qrCode.stuName}</li>
+										<li><b>姓名：</b>${leaveBean.userid} ${leaveBean.username}</li>
 										<li><b>今日通行权限：</b>允许通行</li>
-										<li><b>今日通行时间：</b>${qrCode.todayPassTime}</li>
-										<li><b>本次通行开始时间：</b>${qrCode.passTimeStart}</li>
-										<li><b>本次通行结束时间：</b>${qrCode.passTimeEnd}</li>
-										<li style="color: #F5DA81;"><b>允许通行/剩余通行：</b>${qrCode.leftPassTimes}次/${qrCode.leftPassTimes}次</li>
-										<li style="color: #F5DA81;">请假时间内的通行次数（出入各算一次）<br>刷完后，将无法出入校，请谨慎使用<br>个人通行码，切勿交易或赠与他人</li>
-										</c:if>
-										<c:if test="${qrCode.passStatus == false}">
-										<li><b>姓名：</b>${qrCode.stuID} ${qrCode.stuName}</li>
-										<li><b>今日通行权限：</b>禁止通行</li>
-										</c:if>
+										<li><b>本次通行开始时间：</b>${leaveBean.outtime}</li>
+										<li><b>本次通行结束时间：</b>${leaveBean.intime}</li>
+                                        <li><button onclick="return judgeAgree()" style="box-shadow: inset 0 0 0 2px #ffffff; background-color: rgb(0, 128, 79);">允许</button>
+                                        	<button onclick="return judgeRefuse()" style="box-shadow: inset 0 0 0 2px #ffffff; background-color: red;">拒绝</button>
+                                        </li>
 									</ul>
 								</div>
 							</div>
@@ -93,6 +80,26 @@
 		</div>
 	</div>
 	<!-- Scripts -->
+    <script type="text/javascript">
+        function judgeAgree(){
+            var judge = confirm("确定允许吗？");
+            if(judge){
+                window.location.href = "judge?id=${leaveBean.id}";
+                return true;  
+            }else{
+                return false;
+            }
+        }
+        
+        function judgeRefuse(){
+            var judge = confirm("确定拒绝吗？");
+            if(judge){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    </script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script> 
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>
