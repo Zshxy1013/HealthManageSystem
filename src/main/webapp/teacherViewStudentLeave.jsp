@@ -87,18 +87,18 @@
                                             
                                             <!-- 未审批 -->
                                             <c:if test="${record.tstatus == 1}">
-                                            <td><button onclick="updateLeaveData(${record.userid}, 2)" style="box-shadow: inset 0 0 0 2px #ffffff; background-color: rgb(0, 128, 79);" onclick="accept(${LeaveListBean.currentPage},${record.id})">同意</button></td>
-                                            <td><button onclick="updateLeaveData(${record.userid}, 3)" style="box-shadow: inset 0 0 0 2px #ffffff; background-color: red;" onclick="reject(${LeaveListBean.currentPage},${record.id})">拒绝</button></td>
+                                            <td><button onclick="updateLeaveData(${record.id}, 2)" style="box-shadow: inset 0 0 0 2px #ffffff; background-color: rgb(0, 128, 79);" onclick="accept(${LeaveListBean.currentPage},${record.id})">同意</button></td>
+                                            <td><button onclick="updateLeaveData(${record.id}, 3)" style="box-shadow: inset 0 0 0 2px #ffffff; background-color: red;" onclick="reject(${LeaveListBean.currentPage},${record.id})">拒绝</button></td>
                                             </c:if>
                                             <!-- 通过 -->
                                             <c:if test="${record.tstatus == 2}">
                                             <td><button style="box-shadow: inset 0 0 0 2px #ffffff; background-color: rgb(0, 128, 79);" disabled>已同意</button></td>
-                                            <td><button onclick="updateLeaveData(${record.userid}, 1)" style="box-shadow: inset 0 0 0 2px #ffffff; background-color: rgb(156, 59, 135);">撤销</button></td>
+                                            <td><button onclick="updateLeaveData(${record.id}, 1)" style="box-shadow: inset 0 0 0 2px #ffffff; background-color: rgb(156, 59, 135);">撤销</button></td>
                                             </c:if>
                                             <!-- 拒绝 -->
                                             <c:if test="${record.tstatus == 3}">
-                                            <td><button style="box-shadow: inset 0 0 0 2px #ffffff; background-color: red;" disabled>拒绝</button></td>
-                                            <td><button onclick="updateLeaveData(${record.userid} ,1)" style="box-shadow: inset 0 0 0 2px #ffffff; background-color: rgb(156, 59, 135);">撤销</button></td>
+                                            <td><button style="box-shadow: inset 0 0 0 2px #ffffff; background-color: red;" disabled>已拒绝</button></td>
+                                            <td><button onclick="updateLeaveData(${record.id} ,1)" style="box-shadow: inset 0 0 0 2px #ffffff; background-color: rgb(156, 59, 135);">撤销</button></td>
                                             </c:if>
                                         </tr>
                                         </c:forEach>
@@ -202,8 +202,8 @@ function leave(){
 location.href="fakeleave.jsp";
 }
 
-function updateLeaveData(stuID ,updateType) {
-	location.href = "LeaveDataUpdate?updateType=" + updateType + "&stuID=" + stuID;
+function updateLeaveData(ticketID ,updateType) {
+	location.href = "LeaveDataUpdate?updateType=" + updateType + "&ticketID=" + ticketID;
 }
 
 function moredata(currentPage,id){

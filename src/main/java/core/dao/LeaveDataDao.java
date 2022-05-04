@@ -65,17 +65,17 @@ public class LeaveDataDao {
 		}
 	}
 
-	public  static void updateLeaveData(String userid, int updateID) {
+	public  static void updateLeaveData(String ticketID, int updateID) {
 		Connection conn = DBHelp.getConn();
 		if (conn == null) {
 			return ;
 		}
-		String sql = "update `ihealthManage`.`leave` set tstatus = ? where `userid` = ?";
+		String sql = "update `ihealthManage`.`leave` set tstatus = ? where `id` = ?";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, updateID);
-			pstmt.setString(2, userid);
+			pstmt.setInt(2, Integer.parseInt(ticketID));
 			pstmt.executeUpdate();
 			pstmt.close();
 			conn.close();

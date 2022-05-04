@@ -157,8 +157,8 @@ public class LeaveBean {
 	}
 	
 
-	public LeaveBean() {
-
+	public LeaveBean(int bid) {
+		this.bid = bid;
 	}
 
 	public long getTicketid() {

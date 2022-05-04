@@ -55,7 +55,6 @@ public class FakeLeaveServlet extends HttpServlet {
 				request.getRequestDispatcher("fakecheckleave.jsp").forward(request, response);
 			}
 			else if(type.equals("2")) {
-				System.out.println(leaveListBean);
 				String _id = request.getParameter("id");
 				int id = Integer.parseInt(_id);
 				request.setAttribute("id", id);

@@ -81,7 +81,7 @@
 																        	<td>${record.remarks.substring(0,10)}...</td>
 																        </c:if>
 																        
-																        <td><button onclick="moredata(${LeaveListBean.currentPage},${varstatus.index})">详情</button></td>
+																        <td><button onclick="moredata(${leaveListBean.currentPage},${varstatus.index})">详情</button></td>
    																	 </tr>
    																	 </c:forEach>
 															</tbody>

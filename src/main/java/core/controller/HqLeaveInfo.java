@@ -32,7 +32,7 @@ public class HqLeaveInfo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int ticketID = Integer.parseInt(request.getParameter("ticketID"));
-		LeaveBean leaveBean = new LeaveBean();
+		LeaveBean leaveBean = new LeaveBean(1);
 		LeaveDataService.selectStuLeaveDataByTicketID(ticketID, leaveBean);
 		request.setAttribute("leaveBean", leaveBean);
 		request.getRequestDispatcher("hqLeavePage.jsp").forward(request, response);

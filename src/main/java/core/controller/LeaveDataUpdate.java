@@ -33,10 +33,10 @@ public class LeaveDataUpdate extends HttpServlet {
 		
 		// 获取更新状态
 		int updateID = Integer.parseInt(request.getParameter("updateType"));
-		String stuID = request.getParameter("stuID");
+		String ticketID = request.getParameter("ticketID");
 		
 		// Service
-		LeaveDataService.updateLeaveData(stuID, updateID);
+		LeaveDataService.updateLeaveData(ticketID, updateID);
 		response.sendRedirect("ManageStudentLeave");
 	}
 

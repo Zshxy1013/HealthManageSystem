@@ -7,9 +7,11 @@ public class DBHelp {
 
 	public static Connection getConn() {
 		String DBDirverName = "com.mysql.jdbc.Driver";
-		String DBUrl = "jdbc:mysql://193.123.249.239:3306/ihealthManage";
+		String DBUrl = "jdbc:mysql://175.24.180.208:3306/ihealthmanage";
+//		String DBUrl = "jdbc:mysql://127.0.0.1:3306/ihealthManage";
 		String DBUser = "ihealthManage";
-		String DBPwd = "fbkpBpPjnD7Gc5WT";
+		String DBPwd = "pjpFXN7hCk4Bw5ft";
+//		String DBPwd = "DwbjTRFpiATaXk2N";
 		Connection connection = null;
 		try {
 			Class.forName(DBDirverName);

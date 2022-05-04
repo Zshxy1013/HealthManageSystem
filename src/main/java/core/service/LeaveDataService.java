@@ -33,12 +33,12 @@ public class LeaveDataService {
 		LeaveDataDao.selectStuLeaveDataForTeacher(leaveListBean,pageUtils);
 	}
 	
-	public static void updateLeaveData(String stuID, int updateID) {
+	public static void updateLeaveData(String ticketID, int updateID) {
 		// TODO Auto-generated method stub
 		// updateID 
 		// 1 - 待审核
 		// 2 - 审核通过
 		// 3 - 审核拒绝
-		LeaveDataDao.updateLeaveData(stuID, updateID);
+		LeaveDataDao.updateLeaveData(ticketID, updateID);
 	}
 }

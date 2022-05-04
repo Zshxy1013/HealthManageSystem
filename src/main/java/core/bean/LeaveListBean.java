@@ -9,6 +9,7 @@ public class LeaveListBean {
 	private List<LeaveBean> records;
 
 	public LeaveListBean(int total, List<LeaveBean> records) {
+		
 		this.total = total;
 		this.records = records;
 	}
@@ -28,7 +29,7 @@ public class LeaveListBean {
 	}
 
 	public LeaveListBean() {
-
+		
 	}
 
 	public int getCurrentPage() {

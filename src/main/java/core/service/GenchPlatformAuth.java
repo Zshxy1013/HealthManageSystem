@@ -525,6 +525,7 @@ public class GenchPlatformAuth {
 		map.put("size", "3");
 
 		String formResult = GenchPlatformAuth.doPostForm(url, map);
+		
 		return (JSON.parseObject(formResult, LeaveListBean.class));
 	}
 

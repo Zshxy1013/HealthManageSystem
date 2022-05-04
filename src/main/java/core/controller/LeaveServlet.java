@@ -46,6 +46,7 @@ public class LeaveServlet extends HttpServlet {
 			auth.iHealthLogin();
 			LeaveListBean leavelistbean = auth.getLeaveData(curPage);
 			leavelistbean.setCurrentPage(Integer.parseInt(curPage));
+			System.out.println(leavelistbean);
 
 			if (leavelistbean.getRecords().size() == 1) {
 				leavelistbean.getRecords().get(0).setId(0);
