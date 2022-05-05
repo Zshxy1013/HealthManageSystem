@@ -32,19 +32,24 @@ public class LoginFilter implements Filter {
 
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
+		
 
-		String[] urls = {"index.jsp","","login.jsp", "login" };
 
-		// 获取当前的url
+		String[] urls = {"index.jsp","login.jsp", "login","assets","images","js","hqLeaveInfo"};
+
+
 		String url = req.getRequestURL().toString();
+//		System.out.println(url);
 
 		// 遍历数组 如果url包含数组内容 则不进行拦截
 		for (String u : urls) {
-			if (url.contains(u)) {
-				chain.doFilter(request, response);
-				return;
-			}
+//			System.out.println(u);
+		if (url.contains(u)) {
+			chain.doFilter(request, response);
+			return;
 		}
+	}
+
 
 		// 获取登陆成功的session
 		HttpSession session = req.getSession();
@@ -59,6 +64,18 @@ public class LoginFilter implements Filter {
 			res.getWriter().print("<script>alert(\"请先登录\");window.location.href = \"login.jsp\";</script>");
 			// res.sendRedirect("login.jsp");
 		}
+	}
+
+	private boolean isContains(String container, String[] regx) {
+		boolean result = false;
+		for (int i = 0; i < regx.length; i++) {
+		String sdString=container.substring(container.lastIndexOf(".")+1);
+		if (sdString.equals(regx[i])) {
+		return true;
+		}
+		}
+		return result;
+	
 	}
 
 	/**

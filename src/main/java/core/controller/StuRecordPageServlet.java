@@ -48,7 +48,7 @@ public class StuRecordPageServlet extends HttpServlet {
 			request.setAttribute("PageUtils", pageUtils);
 			request.getRequestDispatcher("stuallrecorddata.jsp").forward(request, response);
 		} catch (Exception e) {
-			response.getWriter().print("<script>alert(\"非法访问\");window.location.href = \"adminindex.jsp\";</script>");
+			response.getWriter().print("<script>alert(\"非法访问\");window.location.href = \"studentindex.jsp\";</script>");
 		}
 
 	}

@@ -31,14 +31,14 @@ public class LeaveQRCode extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		response.setContentType("text/html;charset=utf-8");
 		byte[] qrCode = null;
 		String ticket = request.getParameter("ticketID");
 		String INFO = new String(("https://zs.nisekoo.com/hqLeaveInfo?ticketID="+ ticket).getBytes("UTF-8"), "ISO-8859-1");
         try {
             qrCode = QRCodeGenerator.getQRCodeImage(INFO, 360, 360);
         } catch (Exception e) {
-    
+        	response.getWriter().print("<script>alert(\"非法访问\");window.location.href= \"studentindex.jsp\";</script>");
         }
         response.getOutputStream().write(qrCode);
 	}
