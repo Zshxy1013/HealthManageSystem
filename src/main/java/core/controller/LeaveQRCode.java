@@ -34,7 +34,7 @@ public class LeaveQRCode extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		byte[] qrCode = null;
 		String ticket = request.getParameter("ticketID");
-		String INFO = new String(("https://zs.nisekoo.com/hqLeaveInfo?ticketID="+ ticket).getBytes("UTF-8"), "ISO-8859-1");
+		String INFO = new String(("https://www.firexiyi.com/hqLeaveInfo?ticketID="+ ticket).getBytes("UTF-8"), "ISO-8859-1");
         try {
             qrCode = QRCodeGenerator.getQRCodeImage(INFO, 360, 360);
         } catch (Exception e) {

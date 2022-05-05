@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width， initial-scale=1" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta charset="UTF-8">
 <title>用户登录</title>
 <link rel="shortcut icon" href="https://cdn.nisekoo.com/ihealth.ico">
-<link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>    
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>    
 <style>
 .form-bg{
     background: #00b4ef;

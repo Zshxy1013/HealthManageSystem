@@ -35,16 +35,37 @@ public class LoginFilter implements Filter {
 		
 
 
-		String[] urls = {"index.jsp","login.jsp", "login","assets","images","js","hqLeaveInfo"};
+		String[] urls = {"index.jsp","login.jsp", "login","hqLeaveInfo"};
+		String[] urlssource = {"js","sass","css","webfonts","images"};
 
-
-		String url = req.getRequestURL().toString();
-//		System.out.println(url);
-
-		// 遍历数组 如果url包含数组内容 则不进行拦截
+		String[] split = req.getRequestURI().split("/");
+//		/healthManageSystem/
+		if(split.length==2) {
+			chain.doFilter(request, response);
+			return;
+		}
+		
+		//放服务器上
+//		if(split.length==0) {
+//			chain.doFilter(request, response);
+//			return;
+//		}
+//System.out.println(req.getRequestURI()+"length="+split.length);
+		
+//		/healthManageSystem/login.jsp 
+//		/healthManageSystem/login
 		for (String u : urls) {
-//			System.out.println(u);
-		if (url.contains(u)) {
+		if (split[split.length-1].equals(u)||split[split.length-1].contains("hqLeaveInfo")||split[split.length-1].contains("judge")) {
+			chain.doFilter(request, response);
+			return;
+		}
+	}
+		
+//		/healthManageSystem/assets/css(js)(sass)(webfonts)/xxx.xx
+//		/healthManageSystem/images/xxx.xx
+//		/healthManageSystem/js/xxx.xx
+		for (String u : urlssource) {
+		if (split[split.length-2].equals(u)) {
 			chain.doFilter(request, response);
 			return;
 		}
@@ -66,17 +87,6 @@ public class LoginFilter implements Filter {
 		}
 	}
 
-	private boolean isContains(String container, String[] regx) {
-		boolean result = false;
-		for (int i = 0; i < regx.length; i++) {
-		String sdString=container.substring(container.lastIndexOf(".")+1);
-		if (sdString.equals(regx[i])) {
-		return true;
-		}
-		}
-		return result;
-	
-	}
 
 	/**
 	 * Default constructor.
